@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerMovement), typeof(PlayerAttack))]
 public class PlayerController : MonoBehaviour
 {
+    public Data PlayerData;
     private PlayerMovement movement;
     private PlayerAttack attack;
 

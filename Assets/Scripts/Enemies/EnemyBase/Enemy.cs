@@ -30,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void swichState(EnemyStae enemyStae)
+    protected void swichState(EnemyStae enemyStae)
     {
         if (enemyStae == this.enemyStae) return;
         this.enemyStae = enemyStae;

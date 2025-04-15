@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4818193836255287341}
   - component: {fileID: 3131042909017769447}
-  - component: {fileID: 4426310964488906939}
   - component: {fileID: 1133166081871788892}
   - component: {fileID: 1452197352324549357}
   - component: {fileID: 7866253060139493820}
   - component: {fileID: 8573445096378176600}
+  - component: {fileID: 8291920777841148990}
   m_Layer: 0
   m_Name: djinn-bandit-idle-00
   m_TagString: Untagged
@@ -89,27 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4426310964488906939
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6906863722393557198}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0784b7341d8be7a449b40cbad2b1f1ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1133166081871788892
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -211,3 +190,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataStat: {fileID: 11400000, guid: a4b330e7676ac904398964b445ff8222, type: 2}
   enemyStae: 0
+--- !u!95 &8291920777841148990
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906863722393557198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0784b7341d8be7a449b40cbad2b1f1ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
