@@ -5,10 +5,18 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
+    private MeleeAttack MeleeAttack;
+    private Data Data;
+    public void Initialize(Data data)
+    {
+        this.Data = data;
+    }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        MeleeAttack = GetComponent<MeleeAttack>();  
+
     }
 
     public void HandleAttackInput(InputAction.CallbackContext context)
@@ -16,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
         if (context.started)
         {
             animator.SetTrigger(AnimationStringList.Attack1);
+            MeleeAttack.meleeAttack(Data.Dame);
         }
     }
 }

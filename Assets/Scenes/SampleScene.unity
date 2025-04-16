@@ -4015,6 +4015,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1078881775122541672, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: PointA
+      value: 
+      objectReference: {fileID: 264234297}
+    - target: {fileID: 1078881775122541672, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: PointB
+      value: 
+      objectReference: {fileID: 1699351979}
+    - target: {fileID: 1078881775122541672, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1133166081871788892, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_Size.x
       value: 1.3370538
@@ -4082,6 +4094,10 @@ PrefabInstance:
     - target: {fileID: 6906863722393557198, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_Name
       value: Bandit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906863722393557198, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6906863722393557198, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_TagString

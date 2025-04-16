@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
         attack = GetComponent<PlayerAttack>();
     }
 
+    private void Start()
+    {
+        attack.Initialize(PlayerData);
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         movement.OnMove(context);

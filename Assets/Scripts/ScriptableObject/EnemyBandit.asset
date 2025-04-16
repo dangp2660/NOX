@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd364f67a2575c34e8d96ded0dd6f056, type: 3}
   m_Name: EnemyBandit
   m_EditorClassIdentifier: 
-  hp: 100
-  dame: 10
+  hp: 20
+  dame: 0
   defend: 20

@@ -7,8 +7,8 @@ public enum EnemyStae
 
 public abstract class Enemy : MonoBehaviour
 {
-
-    [SerializeField] private Data dataStat;
+    private Data DataStat;
+    
     [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
     private EnemyPatrol patrol;
     void Start()
@@ -21,11 +21,12 @@ public abstract class Enemy : MonoBehaviour
     {
         switch (enemyStae)
         {
-            case EnemyStae.Patrol:
-                patrol.enabled = true; break;
+            //case EnemyStae.Patrol:
+            //    patrol.enabled = true; break;
             case EnemyStae.Attack:
                 break;
             case EnemyStae.Die:
+                Debug.Log("Die");
                 break;
         }
     }
@@ -36,6 +37,15 @@ public abstract class Enemy : MonoBehaviour
         this.enemyStae = enemyStae;
     }
 
+    public virtual void TakeDame(float Dame)
+    {
+        
+        
+    }
     protected abstract void Attack();
+    public void SetData(Data data)
+    {
+        this.DataStat = data;
+    }
 
 }
