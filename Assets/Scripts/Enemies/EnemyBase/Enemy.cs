@@ -8,22 +8,26 @@ public enum EnemyStae
 public abstract class Enemy : MonoBehaviour
 {
     private Data DataStat;
+    private float currentHP;
     
     [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
-    private EnemyPatrol patrol;
+    [SerializeField] private EnemyPatrol patrol;
     void Start()
     {
         patrol = GetComponent<EnemyPatrol>();
+        currentHP = DataStat.Hp;
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected  void Update()
     {
         switch (enemyStae)
         {
-            //case EnemyStae.Patrol:
-            //    patrol.enabled = true; break;
+            case EnemyStae.Patrol:
+                patrol.enabled = true; break;
             case EnemyStae.Attack:
+                Debug.Log("State Attack");
+                patrol.enabled = false;
                 break;
             case EnemyStae.Die:
                 Debug.Log("Die");
@@ -37,12 +41,16 @@ public abstract class Enemy : MonoBehaviour
         this.enemyStae = enemyStae;
     }
 
-    public virtual void TakeDame(float Dame)
+    public  void TakeDame(float Dame)
     {
-        
-        
+        currentHP -= Dame;
+        if (currentHP <= 0)
+        {
+            swichState(EnemyStae.Die);
+        }
+
     }
-    protected abstract void Attack();
+    protected virtual void Attack() { }
     public void SetData(Data data)
     {
         this.DataStat = data;

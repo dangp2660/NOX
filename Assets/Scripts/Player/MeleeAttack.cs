@@ -8,7 +8,7 @@ public class MeleeAttack : MonoBehaviour
 
 
     // Cho phép override từ class con
-    public void meleeAttack(float dame)
+    public  void meleeAttack(float dame)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayer);
         foreach (Collider2D hit in hits)

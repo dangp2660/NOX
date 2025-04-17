@@ -285,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7, y: -5.84, z: -10.074017}
+  m_LocalPosition: {x: -7.64, y: -6.65, z: -10.074017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -601,7 +601,7 @@ Transform:
   m_GameObject: {fileID: 1295641550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7, y: -5.84, z: -10.074017}
+  m_LocalPosition: {x: -7.64, y: -6.65, z: -10.074017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4023,10 +4023,6 @@ PrefabInstance:
       propertyPath: PointB
       value: 
       objectReference: {fileID: 1699351979}
-    - target: {fileID: 1078881775122541672, guid: ff4aad62f2742564486ca0616773d585, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1133166081871788892, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_Size.x
       value: 1.3370538
@@ -4045,6 +4041,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133166081871788892, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252594880500679763, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: detectedCollider.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3919855161257461488, guid: ff4aad62f2742564486ca0616773d585, type: 3}
@@ -4091,6 +4091,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5558838550239294925, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.065
+      objectReference: {fileID: 0}
     - target: {fileID: 6906863722393557198, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_Name
       value: Bandit
@@ -4111,6 +4115,14 @@ PrefabInstance:
       propertyPath: PointB
       value: 
       objectReference: {fileID: 1699351979}
+    - target: {fileID: 8720449994524470172, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8068578633087397204}
+    - target: {fileID: 8720449994524470172, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: vision
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4250,11 +4262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8540780195287511189, guid: 92d9f349b87fa434aa8a901ba2327580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.7
+      value: -7.64
       objectReference: {fileID: 0}
     - target: {fileID: 8540780195287511189, guid: 92d9f349b87fa434aa8a901ba2327580, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.84
+      value: -6.65
       objectReference: {fileID: 0}
     - target: {fileID: 8540780195287511189, guid: 92d9f349b87fa434aa8a901ba2327580, type: 3}
       propertyPath: m_LocalPosition.z

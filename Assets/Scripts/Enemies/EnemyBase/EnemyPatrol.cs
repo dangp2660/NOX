@@ -12,6 +12,14 @@ public class EnemyPatrol : MonoBehaviour
     private bool isMoving = true;
     private bool isSwitching = false; // NEW: tránh gọi Coroutine nhiều lần
 
+    private bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStringList.Attack);
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,13 +43,19 @@ public class EnemyPatrol : MonoBehaviour
 
     private void MovePatrol()
     {
-        Vector2 direction = currentPoint.position - transform.position;
-        rb.velocity = new Vector2(Mathf.Sign(direction.x) * Speed, rb.velocity.y); // luôn chạy với tốc độ cố định
-
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && !isSwitching)
+        if(!CanMove)
         {
-            StartCoroutine(SwitchDirectionAfterDelay(1f));
+            Vector2 direction = currentPoint.position - transform.position;
+            rb.velocity = new Vector2(Mathf.Sign(direction.x) * Speed, rb.velocity.y); // luôn chạy với tốc độ cố định
+
+            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && !isSwitching)
+            {
+                StartCoroutine(SwitchDirectionAfterDelay(1f));
+            }
         }
+        else 
+            rb.velocity = Vector2.zero;
+        
     }
 
     private IEnumerator SwitchDirectionAfterDelay(float delay)
