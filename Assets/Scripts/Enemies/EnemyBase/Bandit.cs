@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bandit : Enemy
 {
     [SerializeField] Data Stats;
-    private Animator animator;
     [Header("Attack")]
     [SerializeField] private Transform AttackPoint;
     [SerializeField] protected LayerMask EnemyLayer;
@@ -24,14 +23,14 @@ public class Bandit : Enemy
         set
         {
             attack = value;
-            animator.SetBool(AnimationStringList.Attack, value);
+            ani.SetBool(AnimationStringList.Attack, value);
         }
     }
 
     private void Awake()
     {
 
-        animator = GetComponent<Animator>();
+        ani = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -44,15 +43,15 @@ public class Bandit : Enemy
     {
         base.Update();
         Attack = zone.detectedCollider.Count > 0;
-        if (Attack)
-        {
-            Collider2D[] hit = Physics2D.OverlapCircleAll(AttackPoint.position, attackRange, EnemyLayer);
-            foreach (Collider2D player in hit)
-            {
-                player.GetComponent<PlayerHealth>().TakeDamage(Stats.Dame);
-            }
-        }
+        
     }
-  
-   
+
+    private void OnDrawGizmosSelected()
+    {
+        if (AttackPoint == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(AttackPoint.position, attackRange);
+    }
+
+
 }
