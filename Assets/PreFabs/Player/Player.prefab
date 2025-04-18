@@ -108,10 +108,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 3
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: de4b47c9dd1904b4d9d567ed6301cf21, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -119,10 +119,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &2435576951901206305
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005494833, y: -0.17799395}
+  m_Offset: {x: -0.003443718, y: -0.18172622}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,7 +166,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0129285, y: 1.8546478}
+  m_Size: {x: 1.0171738, y: 1.8209338}
   m_EdgeRadius: 0
 --- !u!95 &8909739662620217860
 Animator:
@@ -309,9 +309,21 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: d0e0c23a-e4c3-41ce-b636-1b5deed8e9b3
-    m_ActionName: Player/Jump[/Keyboard/space]
+    m_ActionName: Player/Jump[/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5208516740581752177}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c1a96e14-18fd-402c-bf43-b334d195ac79
     m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
@@ -373,13 +385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bec9f60e47ab0745bcf14cc4c5b5fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 10
-  dashDuration: 0.2
-  dashCoolDown: 1
-  walkSpeed: 5
-  runSpeed: 8
-  jumpSpeed: 10
+  runSpeed: 5
+  jumpSpeed: 15
   airSpeed: 3
+  dashSpeed: 15
+  dashDuration: 0.2
+  dashCoolDown: 0.2
 --- !u!114 &5578246975811482741
 MonoBehaviour:
   m_ObjectHideFlags: 0

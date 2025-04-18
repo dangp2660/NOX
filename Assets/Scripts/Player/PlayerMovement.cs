@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +9,27 @@ public class PlayerMovement : MonoBehaviour
     
     
     private bool isMoving = false;
-    [SerializeField] private float runSpeed = 8f;
-    [SerializeField] private float jumpSpeed = 10f;
-    [SerializeField] private float airSpeed = 3f;
+    [Header("Speed move")]
+    [SerializeField] private float runSpeed = 5f;
+    [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float airSpeed = 7.5f;
+    [Header("Dash")]
+    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCoolDown = 0.5f;
+
+    private bool isDash = false;
+    private bool canDash = true;
+    private bool IsDash
+    {
+        get { return isDash; }
+        set
+        {
+            isDash = value;
+            animator.SetBool(AnimationStringList.isDash, value);
+
+        }
+    }
 
     private float currentWalkSpeed
     {
@@ -23,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
                     if (dt.IsGrounded)
                     {
                         return runSpeed;
-                     
                     }
                     else return airSpeed;
                 }
@@ -80,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (IsDash) return;
         Move();
         animator.SetFloat(AnimationStringList.yVelocity, rb.velocity.y);
     }
@@ -115,6 +134,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        Debug.Log(canDash);
 
+        if (canDash && CanMove)
+        {
+            StartCoroutine(Dashing());
+        }
+        
+    }
+
+    IEnumerator Dashing()
+    {
+
+        canDash = false;
+        IsDash = true;
+        float dashDirection = IsFacingRight ? 1 : -1;
+        rb.velocity = new Vector2(dashSpeed * dashDirection, rb.velocity.y);
+        yield return new WaitForSeconds(dashDuration);
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        IsDash = false;
+        yield return new WaitForSeconds(dashCoolDown);
+        canDash = true;
     }
 }
