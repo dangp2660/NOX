@@ -28,10 +28,7 @@ public class PlayerController : MonoBehaviour
         movement.OnMove(context);
     }
 
-    public void OnRun(InputAction.CallbackContext context)
-    {
-        movement.OnRun(context);
-    }
+   
 
     public void OnJump(InputAction.CallbackContext context)
     {
@@ -41,5 +38,10 @@ public class PlayerController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         attack.HandleAttackInput(context);
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        movement.OnDash(context);
     }
 }

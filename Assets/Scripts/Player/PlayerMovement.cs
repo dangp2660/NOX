@@ -1,11 +1,13 @@
+﻿using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(DirectionTouch))]
 public class PlayerMovement : MonoBehaviour
 {
+    
+    
     private bool isMoving = false;
-    [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private float jumpSpeed = 10f;
     [SerializeField] private float airSpeed = 3f;
@@ -20,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (dt.IsGrounded)
                     {
-                        if (IsRunning) return runSpeed;
-                        return walkSpeed;
+                        return runSpeed;
+                     
                     }
                     else return airSpeed;
                 }
@@ -41,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 moveInput;
-
-    private bool isRunning = false;
     private bool isFacingRight = true;
 
     private DirectionTouch dt;
@@ -57,15 +57,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsRunning
-    {
-        get => isRunning;
-        set
-        {
-            isRunning = value;
-            animator.SetBool(AnimationStringList.isRunning, value);
-        }
-    }
 
     private bool IsFacingRight
     {
@@ -113,14 +104,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(moveInput.x * currentWalkSpeed, rb.velocity.y);
     }
 
-    public void OnRun(InputAction.CallbackContext context)
-    {
-        if (context.started)
-            IsRunning = true;
-        else if (context.canceled)
-            IsRunning = false;
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started && dt.IsGrounded)
@@ -130,4 +113,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+
+    }
 }

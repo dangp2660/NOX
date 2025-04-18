@@ -291,19 +291,7 @@ MonoBehaviour:
     m_ActionId: e9701941-8e2b-44de-a82e-7962a2529ce8
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5208516740581752177}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnRun
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 8ca8c36f-38e9-4a87-b014-f72481514335
     m_ActionName: Player/Run[/Keyboard/leftShift]
   - m_PersistentCalls:
@@ -322,6 +310,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d0e0c23a-e4c3-41ce-b636-1b5deed8e9b3
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c1a96e14-18fd-402c-bf43-b334d195ac79
+    m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -381,6 +373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bec9f60e47ab0745bcf14cc4c5b5fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashSpeed: 10
+  dashDuration: 0.2
+  dashCoolDown: 1
   walkSpeed: 5
   runSpeed: 8
   jumpSpeed: 10
@@ -455,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82a7d855187372499f88632bcf1f051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollider: {fileID: 2435576951901206305}
 --- !u!1 &7281037309968310836
 GameObject:
   m_ObjectHideFlags: 0

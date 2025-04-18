@@ -5,10 +5,8 @@ using UnityEngine;
 public class DetectionZone : MonoBehaviour
 {
     public List<Collider2D> detectedCollider = new List<Collider2D>();
-    Collider2D collider;
     private void Awake()
     {
-        collider = GetComponent<Collider2D>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,5 +15,16 @@ public class DetectionZone : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         detectedCollider.Remove(collision);
+    }
+    private void Update()
+    {
+        for (int i = detectedCollider.Count - 1; i >= 0; i--)
+        {
+            var health = detectedCollider[i].GetComponent<PlayerHealth>();
+            if (health != null && !health.IsAlive())
+            {
+                detectedCollider.RemoveAt(i);
+            }
+        }
     }
 }

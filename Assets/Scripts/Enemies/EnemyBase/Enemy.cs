@@ -12,13 +12,12 @@ public abstract class Enemy : MonoBehaviour
     private Data DataStat;
     private float currentHP;
     protected Animator ani;
-    
+
     [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
     [SerializeField] private EnemyPatrol patrol;
     void Start()
     {
-        void Start()
-        {
+        
             ani = GetComponent<Animator>();
             patrol = GetComponent<EnemyPatrol>();
 
@@ -31,12 +30,12 @@ public abstract class Enemy : MonoBehaviour
                 Debug.LogWarning("DataStat chưa được gán! Dùng HP mặc định");
                 currentHP = 100; // hoặc bất kỳ giá trị mặc định nào
             }
-        }
+        
 
     }
 
     // Update is called once per frame
-    protected  void Update()
+    protected void Update()
     {
         switch (enemyStae)
         {
@@ -57,6 +56,7 @@ public abstract class Enemy : MonoBehaviour
     IEnumerator DelayDestroy()
     {
         yield return new WaitForSeconds(2f);
+        DestroyObject(gameObject);
     }
 
     protected void swichState(EnemyStae enemyStae)
@@ -65,7 +65,7 @@ public abstract class Enemy : MonoBehaviour
         this.enemyStae = enemyStae;
     }
 
-    public  void TakeDame(float Dame)
+    public void TakeDame(float Dame)
     {
         currentHP -= Dame;
         if (currentHP <= 0)
