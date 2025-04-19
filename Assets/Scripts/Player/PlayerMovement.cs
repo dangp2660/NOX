@@ -2,6 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(DirectionTouch))]
 public class PlayerMovement : MonoBehaviour
@@ -17,7 +18,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCoolDown = 0.5f;
+    [SerializeField] private GameObject GhostDash;
+    [SerializeField] private float GhostDelay;
 
+    private Coroutine DashGhost;
     private bool isDash = false;
     private bool canDash = true;
     private bool IsDash
@@ -139,21 +143,65 @@ public class PlayerMovement : MonoBehaviour
         if (canDash && CanMove)
         {
             StartCoroutine(Dashing());
+            dashEffect();
         }
         
     }
 
     IEnumerator Dashing()
     {
-
         canDash = false;
         IsDash = true;
+
         float dashDirection = IsFacingRight ? 1 : -1;
-        rb.velocity = new Vector2(dashSpeed * dashDirection, rb.velocity.y);
+
+        // Tắt trọng lực
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        // Dash ngang
+        rb.velocity = new Vector2(dashSpeed * dashDirection, 0f);
+
         yield return new WaitForSeconds(dashDuration);
-        rb.velocity = new Vector2(0, rb.velocity.y);
+
+        // Kết thúc dash: dừng lại và khôi phục trọng lực
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = originalGravity;
+
         IsDash = false;
+
         yield return new WaitForSeconds(dashCoolDown);
         canDash = true;
     }
+
+
+    private void dashEffect()
+    {
+        if (DashGhost != null)
+        {
+            StopCoroutine(DashGhost);
+        }
+        DashGhost = StartCoroutine(dashGhost());
+    }
+
+
+    IEnumerator dashGhost()
+    {
+        while (IsDash)
+        {
+            // Tạo ghost ở vị trí hiện tại
+            GameObject ghost = Instantiate(GhostDash, transform.position, transform.rotation);
+
+            // Cập nhật hướng ghost theo hướng nhân vật
+            Vector3 ghostScale = ghost.transform.localScale;
+            ghostScale.x = IsFacingRight ? Mathf.Abs(ghostScale.x) : -Mathf.Abs(ghostScale.x);
+            ghost.transform.localScale = ghostScale;
+
+            // Huỷ ghost sau 0.5 giây
+            Destroy(ghost, 0.5f);
+
+            yield return new WaitForSeconds(GhostDelay);
+        }
+    }
+
 }

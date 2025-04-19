@@ -391,6 +391,8 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 0.2
   dashCoolDown: 0.2
+  GhostDash: {fileID: 44759386470465263, guid: 52bf2e25a9e93644d8558804344b182e, type: 3}
+  GhostDelay: 0.05
 --- !u!114 &5578246975811482741
 MonoBehaviour:
   m_ObjectHideFlags: 0
