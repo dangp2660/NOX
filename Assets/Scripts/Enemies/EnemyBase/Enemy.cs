@@ -37,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        Debug.Log(currentHP);
         switch (enemyStae)
         {
             case EnemyStae.Patrol:
@@ -67,6 +68,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDame(float Dame)
     {
+        Debug.Log(currentHP);
         currentHP -= Dame;
         if (currentHP <= 0)
         {
@@ -78,6 +80,7 @@ public abstract class Enemy : MonoBehaviour
     public void SetData(Data data)
     {
         this.DataStat = data;
+        this.currentHP = data.Hp;
     }
 
 }

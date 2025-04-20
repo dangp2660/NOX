@@ -27,4 +27,12 @@ public class PlayerAttack : MonoBehaviour
             MeleeAttack.meleeAttack(Data.Dame);
         }
     }
+
+    public void HandleMagic(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStringList.MagicAttack);
+        }
+    }
 }

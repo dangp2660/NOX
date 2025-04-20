@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     {
         attack.HandleAttackInput(context);
     }
+    public void OnMagicAttack(InputAction.CallbackContext context)
+    {
+        attack.HandleMagic(context);
+    }
 
     public void OnDash(InputAction.CallbackContext context)
     {

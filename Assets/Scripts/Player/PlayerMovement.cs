@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private bool IsFacingRight
+    public bool IsFacingRight
     {
         get => isFacingRight;
         set
