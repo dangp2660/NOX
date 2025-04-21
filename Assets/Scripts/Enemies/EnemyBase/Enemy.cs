@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
             case EnemyStae.Patrol:
                 patrol.enabled = true; break;
             case EnemyStae.Attack:
-                Debug.Log("State Attack");
+                
                 patrol.enabled = false;
                 break;
             case EnemyStae.Die:

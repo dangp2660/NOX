@@ -1,32 +1,35 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
     public List<Collider2D> detectedCollider = new List<Collider2D>();
-    private Dictionary<Collider2D, Coroutine> removeTimers = new Dictionary<Collider2D, Coroutine>(); // To store coroutines for each collider
+    private Dictionary<Collider2D, Coroutine> removeTimers = new Dictionary<Collider2D, Coroutine>();
 
-    private void Awake()
-    {
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        detectedCollider.Add(collision);
+        if (!detectedCollider.Contains(collision))
+        {
+            detectedCollider.Add(collision);
+        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // If there is already a coroutine running for this collider, stop it.
+        // Nếu coroutine đang chạy -> dừng lại
         if (removeTimers.ContainsKey(collision))
         {
             StopCoroutine(removeTimers[collision]);
             removeTimers.Remove(collision);
         }
 
-        // Start a new coroutine to remove it after 1.2 seconds
-        Coroutine removeCoroutine = StartCoroutine(RemoveAfterDelay(collision));
+        // Chạy coroutine từ CoroutineRunner (luôn hoạt động)
+        Coroutine removeCoroutine = CoroutineRunner.instance.StartCoroutine(RemoveAfterDelay(collision));
         removeTimers.Add(collision, removeCoroutine);
     }
+
     private void Update()
     {
         for (int i = detectedCollider.Count - 1; i >= 0; i--)
@@ -43,10 +46,14 @@ public class DetectionZone : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7f);
 
-        // Only remove it if it has not already been removed
         if (detectedCollider.Contains(collider))
         {
             detectedCollider.Remove(collider);
+        }
+
+        if (removeTimers.ContainsKey(collider))
+        {
+            removeTimers.Remove(collider);
         }
     }
 }
