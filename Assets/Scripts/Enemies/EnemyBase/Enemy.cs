@@ -37,7 +37,6 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        Debug.Log(currentHP);
         switch (enemyStae)
         {
             case EnemyStae.Patrol:

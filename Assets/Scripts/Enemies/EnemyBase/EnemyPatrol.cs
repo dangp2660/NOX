@@ -29,6 +29,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void Update()
     {
+
         if (isMoving)
         {
             MovePatrol();
@@ -47,7 +48,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             Vector2 direction = currentPoint.position - transform.position;
             rb.velocity = new Vector2(Mathf.Sign(direction.x) * Speed, rb.velocity.y); // luôn chạy với tốc độ cố định
-
+            //Debug.Log(Vector2.Distance(transform.position, currentPoint.position));
             if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && !isSwitching)
             {
                 StartCoroutine(SwitchDirectionAfterDelay(1f));
