@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Speed move")]
     [SerializeField] private float runSpeed = 5f;
     [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float fallMuiltiple = 2.5f;
+    [SerializeField] private float lowMuiltiple = 2f;
     [SerializeField] private float airSpeed = 7.5f;
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 20f;
@@ -47,7 +49,10 @@ public class PlayerMovement : MonoBehaviour
                     {
                         return runSpeed;
                     }
-                    else return airSpeed;
+                    else
+                    {
+                        return airSpeed;
+                    }
                 }
             }
              return 0f;
@@ -102,9 +107,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
+       
+
         if (IsDash) return;
         Move();
         animator.SetFloat(AnimationStringList.yVelocity, rb.velocity.y);
+    }
+    private void FixedUpdate()
+    {
+        if (rb.velocity.y < 0)
+        {
+            // Rơi nhanh hơn
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMuiltiple - 1) * Time.fixedDeltaTime;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -129,7 +145,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && dt.IsGrounded)
+        
+         if (context.started && dt.IsGrounded)
         {
             animator.SetTrigger(AnimationStringList.Jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
