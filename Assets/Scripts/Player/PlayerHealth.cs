@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     private Data data;
     private Animator animator;
     private bool isDead = false; // ✅ Thêm biến này
-
+    private PlayerInput input;
     [SerializeField] Collider2D playerCollider;
 
     public float getHP()
@@ -16,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        input = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
     }
 
@@ -30,7 +32,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return; 
 
-        currentHP -= damage;
+        if(data.Defend < damage)
+        {
+            currentHP -= (damage - data.Defend);
+        } 
         Debug.Log("Player took " + damage + " damage. HP left: " + currentHP);
 
         if (currentHP <= 0)
@@ -44,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         animator.SetTrigger(AnimationStringList.Die);
         Debug.Log("Player died!");
-        // TODO: Add animation, game over logic, etc.
+        input.enabled = false;
     }
 
     public bool IsAlive() 

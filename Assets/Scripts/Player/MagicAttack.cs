@@ -17,6 +17,7 @@ public class MagicAttack : MonoBehaviour
         Vector3 spellScale = spell.transform.localScale;
         spellScale.x *= direction;
         spell.transform.localScale = spellScale;
+        Destroy(spell , 2.5f);
     }
 
 }

@@ -42,7 +42,6 @@ public abstract class Enemy : MonoBehaviour
             case EnemyStae.Patrol:
                 patrol.enabled = true; break;
             case EnemyStae.Attack:
-                
                 patrol.enabled = false;
                 break;
             case EnemyStae.Die:
@@ -56,7 +55,7 @@ public abstract class Enemy : MonoBehaviour
     IEnumerator DelayDestroy()
     {
         yield return new WaitForSeconds(2f);
-        DestroyObject(gameObject);
+        Destroy(gameObject);
     }
 
     protected void swichState(EnemyStae enemyStae)
@@ -68,7 +67,8 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDame(float Dame)
     {
         Debug.Log(currentHP);
-        currentHP -= Dame;
+        if(DataStat.Defend < Dame)
+            currentHP -= (Dame - DataStat.Defend);
         if (currentHP <= 0)
         {
             swichState(EnemyStae.Die);

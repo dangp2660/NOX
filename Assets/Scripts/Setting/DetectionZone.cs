@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
+    [SerializeField] private BoxCollider2D zone;
     public List<Collider2D> detectedCollider = new List<Collider2D>();
     private Dictionary<Collider2D, Coroutine> removeTimers = new Dictionary<Collider2D, Coroutine>();
 
+    private void Awake()
+    {
+        zone = GetComponent<BoxCollider2D>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!detectedCollider.Contains(collision))
