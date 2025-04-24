@@ -47,33 +47,17 @@ public abstract class Enemy : MonoBehaviour
             case EnemyStae.Die:
                 patrol.enabled = false;
                 ani.SetTrigger(AnimationStringList.Die);
-                StartCoroutine(DelayDestroy());
+                Destroy(gameObject, 2f);
                 break;
         }
     }
 
-    IEnumerator DelayDestroy()
-    {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
-    }
+
 
     protected void swichState(EnemyStae enemyStae)
     {
         if (enemyStae == this.enemyStae) return;
         this.enemyStae = enemyStae;
-    }
-
-    public void TakeDame(float Dame)
-    {
-        Debug.Log(currentHP);
-        if(DataStat.Defend < Dame)
-            currentHP -= (Dame - DataStat.Defend);
-        if (currentHP <= 0)
-        {
-            swichState(EnemyStae.Die);
-        }
-
     }
     protected virtual void Attack() { }
     public void SetData(Data data)

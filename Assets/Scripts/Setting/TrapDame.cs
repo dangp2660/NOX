@@ -18,10 +18,10 @@ public class TrapDame : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+        Damegeable playerHealth = collision.GetComponent<Damegeable>();
         if (playerHealth != null)
         {
-            playerHealth.TakeDamage(dame);
+            playerHealth.TakeDame(dame);
         }
     }
 }

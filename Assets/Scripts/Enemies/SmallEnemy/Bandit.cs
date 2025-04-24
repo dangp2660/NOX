@@ -39,8 +39,4 @@ public class Bandit : Enemy
         Attack = zone.detectedCollider.Count > 0;
 
     }
-
-   
-
-
 }

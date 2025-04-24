@@ -386,12 +386,12 @@ AnimatorStateMachine:
     - {fileID: 5242593902590663822}
     - {fileID: -3283071258593392612}
     - {fileID: -1708140839131801299}
-  - first: {fileID: -2134970478451949831}
-    second:
-    - {fileID: 7394943886988755403}
   - first: {fileID: -1015479547517008545}
     second:
     - {fileID: -208700964965497551}
+  - first: {fileID: -2134970478451949831}
+    second:
+    - {fileID: 7394943886988755403}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 320, y: 300, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
@@ -695,14 +695,14 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: yVelocity
-    m_Type: 1
+  - m_Name: Die
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Die
-    m_Type: 9
+  - m_Name: yVelocity
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

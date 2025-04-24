@@ -40,7 +40,7 @@ public class DetectionZone : MonoBehaviour
         for (int i = detectedCollider.Count - 1; i >= 0; i--)
         {
             var health = detectedCollider[i].GetComponent<PlayerHealth>();
-            if (health != null && !health.IsAlive())
+            if (health != null && !health.getIsAlive())
             {
                 detectedCollider.RemoveAt(i);
             }

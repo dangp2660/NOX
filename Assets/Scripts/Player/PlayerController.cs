@@ -1,26 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerMovement), typeof(PlayerAttack), typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour
 {
-    public Data PlayerData;
-
     private PlayerMovement movement;
-    private PlayerAttack attack;
-    private PlayerHealth health;
+    //private PlayerAttack attack;
 
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
-        attack = GetComponent<PlayerAttack>();
-        health = GetComponent<PlayerHealth>();
+        //attack = GetComponent<PlayerAttack>();
     }
 
     private void Start()
     {
-        attack.Initialize(PlayerData);
-        health.Initialize(PlayerData); // ← thêm dòng này
+        //attack.Initialize(PlayerData);
+       
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -37,11 +33,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        attack.HandleAttackInput(context);
+        //attack.HandleAttackInput(context);
     }
     public void OnMagicAttack(InputAction.CallbackContext context)
     {
-        attack.HandleMagic(context);
+        //attack.HandleMagic(context);
     }
 
     public void OnDash(InputAction.CallbackContext context)

@@ -28,13 +28,6 @@ public class Magictile : MonoBehaviour
     {
         if (hasHit) return; // tránh trúng nhiều lần
         hasHit = true;
-
-        Enemy health = collision.GetComponent<Enemy>();
-        if (health != null)
-        {
-            health.TakeDame(dame);
-        }
-
         // Dừng chuyển động và va chạm
         rb.velocity = Vector2.zero;
         col.enabled = false;
