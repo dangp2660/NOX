@@ -46,7 +46,6 @@ public abstract class Enemy : MonoBehaviour
                 break;
             case EnemyStae.Die:
                 patrol.enabled = false;
-                ani.SetTrigger(AnimationStringList.Die);
                 Destroy(gameObject, 2f);
                 break;
         }

@@ -41,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     private DirectionTouch dt;
 
+
+    public bool isAlive
+    {
+        get { return animator.GetBool(AnimationStringList.isAlive); }
+    }
+
     private bool IsMoving
     {
         get => isMoving;
@@ -140,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Kiểm tra tốc độ của Oy
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMuiltiple - 1) * Time.fixedDeltaTime;
@@ -153,10 +160,18 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+        if (isAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
+            SetFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
+        
     }
-
+    // kiểm tra quay đầu (flip)
     private void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !IsFacingRight)
@@ -172,24 +187,24 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && CanMove)
         {
-            jumpBufferCounter = jumpBufferTime;
-        }
-
-        if (context.canceled && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            animator.SetTrigger(AnimationStringList.Jump);
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
     }
+
 
     private void Jump()
     {
         animator.SetTrigger(AnimationStringList.Jump);
 
-        float horizontalBoost = moveInput.x * runSpeed * airSpeed; // hoặc * airSpeed nếu bạn muốn xa hơn khi ở trên không
-        rb.velocity = new Vector2(horizontalBoost, jumpSpeed);
+        // Lực đẩy ngang (horizontal boost) khi nhảy
+        float horizontalBoost = moveInput.x * runSpeed * airSpeed; // Điều chỉnh hệ số nếu cần
+        rb.velocity = new Vector2(horizontalBoost, jumpSpeed); // Cập nhật velocity với cả chiều dọc (jumpSpeed) và chiều ngang (horizontalBoost)
     }
+
+
 
 
     public void OnDash(InputAction.CallbackContext context)

@@ -14,10 +14,10 @@ internal class AnimationStringList
     internal static string Attack1 = "Attack1";
     internal static string Attack = "Attack";
     internal static string canMove = "canMove";
-    internal static string Die = "Die";
     internal static string isDash = "isDash";
     internal static string MagicAttack = "MagicAttack";
     internal static string Explode = "Explode";
+    internal static string isAlive = "isAlive";
 
     
 

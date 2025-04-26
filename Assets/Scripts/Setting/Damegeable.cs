@@ -1,63 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Damegeable : MonoBehaviour
+public class Damageable : MonoBehaviour
 {
-    [SerializeField] private Data Stats;
-    [SerializeField] private float DameRate = 0.2f;
+    private Animator animator;
+
+    [Header("Stats")]
+    [SerializeField] private Data stats; //dùng Data ScriptableObject đã có
+
     private float currentHealth;
-    private float currentAttack;
-    private bool isAlive = true;
-    private bool isInvincible = false;
-    public float CurrentHealth
+
+    [Header("State")]
+    [SerializeField] private bool isAlive = true;
+    [SerializeField] private bool isInvincible = false;
+    private float timeSinceHit = 0f;
+    public float invincibilityTime = 0.25f;
+
+    public bool IsAlive
     {
-        get
-        {
-            return currentHealth;
-        }
+        get => isAlive;
         set
         {
-            currentHealth = value;
-            if (currentHealth <= 0)
-            {
-                isAlive = false;
-                animator.SetBool(AnimationStringList.Die, true);
-            }
+            isAlive = value;
+            animator.SetBool(AnimationStringList.isAlive, value);
+            Debug.Log("IsAlive set " + value);
         }
     }
-    private Animator animator;
-    [SerializeField] private float timeScinceHit = 0;
-    [SerializeField] private float invincibilityTime = 0.25f;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        currentHealth = Stats.Hp;
-        currentAttack = Stats.Dame;
+        if (stats == null)
+        {
+            Debug.LogError("Stats (Data) chưa được gán!", this);
+        }
+
+        currentHealth = stats.Hp;
     }
+
     private void Update()
     {
         if (isInvincible)
         {
-            if(timeScinceHit > invincibilityTime)
+            timeSinceHit += Time.deltaTime;
+            if (timeSinceHit > invincibilityTime)
             {
                 isInvincible = false;
-                timeScinceHit = 0;
+                timeSinceHit = 0;
             }
-
-            timeScinceHit += Time.deltaTime;
         }
     }
 
-    public void TakeDame(float Dame)
+    public bool TakeDamage(float damage, float damageRate)
     {
-        if (!isAlive && isInvincible) return;
-        currentHealth -= (currentAttack *  DameRate);   
-        isInvincible = true;
+        if (IsAlive && !isInvincible)
+        {
+            CurrentHealth -= damage * damageRate;
+            isInvincible = true;
+            return true;
+        }
+        return false;
     }
-    public bool getIsAlive()
+
+    public float CurrentHealth
     {
-        return isAlive;
+        get => currentHealth;
+        set
+        {
+            currentHealth = Mathf.Max(0, value);
+            if (currentHealth <= 0)
+            {
+                IsAlive = false;
+            }
+        }
     }
 }
