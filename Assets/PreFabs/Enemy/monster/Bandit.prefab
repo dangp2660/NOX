@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackData: {fileID: 11400000, guid: a4b330e7676ac904398964b445ff8222, type: 2}
+  damageRate: 1
 --- !u!1 &1574526216103562837
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: a4b330e7676ac904398964b445ff8222, type: 2}
-  damageRate: 0.2
-  timeSinceHit: 0
+  isAlive: 1
+  isInvincible: 0
   invincibilityTime: 0.25

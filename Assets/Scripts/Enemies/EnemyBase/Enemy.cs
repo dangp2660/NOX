@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
             else
             {
                 Debug.LogWarning("DataStat chưa được gán! Dùng HP mặc định");
-                currentHP = 100; // hoặc bất kỳ giá trị mặc định nào
+                currentHP = 100;
             }
         
 

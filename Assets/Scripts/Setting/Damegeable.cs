@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour
     [SerializeField] private Data stats; //dùng Data ScriptableObject đã có
 
     private float currentHealth;
+    private float defend;
 
     [Header("State")]
     [SerializeField] private bool isAlive = true;
@@ -35,6 +36,7 @@ public class Damageable : MonoBehaviour
         }
 
         currentHealth = stats.Hp;
+        defend = stats.Defend;
     }
 
     private void Update()
@@ -48,13 +50,16 @@ public class Damageable : MonoBehaviour
                 timeSinceHit = 0;
             }
         }
+        
     }
 
     public bool TakeDamage(float damage, float damageRate)
     {
         if (IsAlive && !isInvincible)
         {
-            CurrentHealth -= damage * damageRate;
+            float totaldamage = damage * damageRate;
+            if (defend > totaldamage) CurrentHealth -= 1;
+            CurrentHealth -= (totaldamage - defend);
             isInvincible = true;
             return true;
         }

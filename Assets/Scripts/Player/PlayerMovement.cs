@@ -3,31 +3,34 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Yêu cầu các component bắt buộc phải có
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(DirectionTouch))]
 public class PlayerMovement : MonoBehaviour
 {
+    // Biến kiểm tra nhân vật có đang di chuyển không
     private bool isMoving = false;
 
     [Header("Speed move")]
-    [SerializeField] private float runSpeed = 5f;
-    [SerializeField] private float jumpSpeed = 5f;
-    [SerializeField] private float fallMuiltiple = 2.5f;
-    [SerializeField] private float lowMuiltiple = 2f;
-    [SerializeField] private float airSpeed = 7.5f;
-    [SerializeField] private float attackMove = 2f;
+    [SerializeField] private float runSpeed = 5f;         // Tốc độ chạy trên mặt đất
+    [SerializeField] private float jumpSpeed = 5f;        // Lực nhảy
+    [SerializeField] private float fallMuiltiple = 2.5f;  // Hệ số rơi nhanh hơn khi đang rơi
+    [SerializeField] private float airSpeed = 7.5f;       // Tốc độ di chuyển trên không
+    [SerializeField] private float attackMove = 0.8f;       // Lực đẩy khi tấn công
+    [SerializeField] private float horizontalBoost = 10f;
 
     [Header("Dash")]
-    [SerializeField] private float dashSpeed = 20f;
-    [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCoolDown = 0.5f;
-    [SerializeField] private GameObject GhostDash;
-    [SerializeField] private float GhostDelay;
+    [SerializeField] private float dashSpeed = 20f;       // Tốc độ dash
+    [SerializeField] private float dashDuration = 0.2f;   // Thời gian dash
+    [SerializeField] private float dashCoolDown = 0.5f;   // Thời gian hồi dash
+    [SerializeField] private GameObject GhostDash;        // Prefab bóng mờ khi dash
+    [SerializeField] private float GhostDelay;            // Khoảng thời gian spawn bóng mờ
 
     [Header("Jump Advance")]
-    [SerializeField] private float coyoteTime = 0.2f;
-    [SerializeField] private float jumpBufferTime = 0.2f;
-    [SerializeField] private bool allowDoubleJump = true;
+    [SerializeField] private float coyoteTime = 0.2f;     // Thời gian "lì" cho phép nhảy ngay sau khi rớt khỏi mặt đất
+    [SerializeField] private float jumpBufferTime = 0.2f; // Thời gian "đệm" nhảy khi bấm sớm
+    [SerializeField] private bool allowDoubleJump = true; // Có cho phép nhảy hai lần không
 
+    // Các biến nội bộ phục vụ dash, nhảy
     private Coroutine DashGhost;
     private bool isDash = false;
     private bool canDash = true;
@@ -35,18 +38,20 @@ public class PlayerMovement : MonoBehaviour
     private float jumpBufferCounter;
     private bool canDoubleJump = true;
 
+    // Các component
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 moveInput;
     private bool isFacingRight = true;
-    private DirectionTouch dt;
+    private DirectionTouch dt; // Kiểm tra va chạm (ground, wall)
 
-
+    // Trạng thái sống/chết
     public bool isAlive
     {
         get { return animator.GetBool(AnimationStringList.isAlive); }
     }
 
+    // Quản lý trạng thái di chuyển
     private bool IsMoving
     {
         get => isMoving;
@@ -57,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Quản lý hướng quay mặt nhân vật
     public bool IsFacingRight
     {
         get => isFacingRight;
@@ -70,8 +76,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Chỉ cho phép di chuyển nếu animation cho phép
     private bool CanMove => animator.GetBool(AnimationStringList.canMove);
 
+    // Tính tốc độ hiện tại dựa vào trạng thái
     private float currentWalkSpeed
     {
         get
@@ -81,19 +89,16 @@ public class PlayerMovement : MonoBehaviour
                 if (IsMoving && !dt.IsOnWall)
                 {
                     if (dt.IsGrounded)
-                    {
                         return runSpeed;
-                    }
                     else
-                    {
                         return airSpeed;
-                    }
                 }
             }
-            return 0f;
+            return isAlive? attackMove: 0;
         }
     }
 
+    // Quản lý trạng thái dash
     private bool IsDash
     {
         get => isDash;
@@ -106,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        // Lấy các component
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         dt = GetComponent<DirectionTouch>();
@@ -118,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         animator.SetFloat(AnimationStringList.yVelocity, rb.velocity.y);
 
-        // Coyote time & double jump
+        // Xử lý coyote time và double jump
         if (dt.IsGrounded)
         {
             coyoteTimeCounter = coyoteTime;
@@ -131,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
         jumpBufferCounter -= Time.deltaTime;
 
+        // Nếu bấm nhảy trong coyote time hoặc double jump
         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
         {
             Jump();
@@ -142,21 +149,19 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = false;
             jumpBufferCounter = 0;
         }
+        
     }
 
     private void FixedUpdate()
     {
-        // Kiểm tra tốc độ của Oy
+        // Áp dụng hệ số rơi nhanh hoặc nhảy thấp tuỳ trạng thái
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMuiltiple - 1) * Time.fixedDeltaTime;
         }
-        else if (rb.velocity.y > 0 && !Keyboard.current.spaceKey.isPressed)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowMuiltiple - 1) * Time.fixedDeltaTime;
-        }
     }
 
+    // Hàm được Input System gọi khi có tín hiệu di chuyển
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -169,9 +174,9 @@ public class PlayerMovement : MonoBehaviour
         {
             IsMoving = false;
         }
-        
     }
-    // kiểm tra quay đầu (flip)
+
+    // Xử lý hướng quay mặt (flip)
     private void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !IsFacingRight)
@@ -180,33 +185,29 @@ public class PlayerMovement : MonoBehaviour
             IsFacingRight = false;
     }
 
+    // Hàm xử lý di chuyển
     private void Move()
     {
         rb.velocity = new Vector2(moveInput.x * currentWalkSpeed, rb.velocity.y);
     }
 
+    // Hàm được Input System gọi khi nhấn Jump
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started && CanMove)
         {
-            animator.SetTrigger(AnimationStringList.Jump);
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            Jump();
         }
     }
 
-
+    // Hàm nhảy (kèm theo lực đẩy ngang)
     private void Jump()
     {
         animator.SetTrigger(AnimationStringList.Jump);
-
-        // Lực đẩy ngang (horizontal boost) khi nhảy
-        float horizontalBoost = moveInput.x * runSpeed * airSpeed; // Điều chỉnh hệ số nếu cần
-        rb.velocity = new Vector2(horizontalBoost, jumpSpeed); // Cập nhật velocity với cả chiều dọc (jumpSpeed) và chiều ngang (horizontalBoost)
+        rb.velocity = new Vector2(horizontalBoost, jumpSpeed);
     }
 
-
-
-
+    // Hàm được Input System gọi khi nhấn Dash
     public void OnDash(InputAction.CallbackContext context)
     {
         if (canDash && CanMove)
@@ -216,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Coroutine thực hiện dash
     IEnumerator Dashing()
     {
         canDash = false;
@@ -238,6 +240,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
     }
 
+    // Kích hoạt hiệu ứng bóng mờ khi dash
     private void dashEffect()
     {
         if (DashGhost != null)
@@ -247,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
         DashGhost = StartCoroutine(dashGhost());
     }
 
+    // Coroutine spawn bóng mờ trong lúc đang dash
     IEnumerator dashGhost()
     {
         while (IsDash)
@@ -260,12 +264,5 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(GhostDelay);
         }
     }
-    public void AttackPush()
-    {
-        if (!dt.IsOnWall && CanMove)
-        {
-            float pushDir = IsFacingRight ? 1f : -1f;
-            rb.velocity = new Vector2(pushDir * attackMove, rb.velocity.y);
-        }
-    }
+
 }

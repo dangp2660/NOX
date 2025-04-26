@@ -36,7 +36,7 @@ public class Bandit : Enemy
     void Update()
     {
         base.Update();
-        Attack = zone.detectedCollider.Count > 0;
+        Attack = zone.detectedColliders.Count > 0;
 
     }
 }

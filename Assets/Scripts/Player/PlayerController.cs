@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         attack.HandleAttackInput(context);
+
     }
     public void OnMagicAttack(InputAction.CallbackContext context)
     {

@@ -1,64 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DetectionZone : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D zone;
-    public List<Collider2D> detectedCollider = new List<Collider2D>();
-    private Dictionary<Collider2D, Coroutine> removeTimers = new Dictionary<Collider2D, Coroutine>();
+    public UnityEvent noCollidersRemain;
+
+    public List<Collider2D> detectedColliders = new List<Collider2D>();
+    private Collider2D col;
 
     private void Awake()
     {
-        zone = GetComponent<BoxCollider2D>();
+        col = GetComponent<Collider2D>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!detectedCollider.Contains(collision))
+        if (!detectedColliders.Contains(collision))
         {
-            detectedCollider.Add(collision);
+            detectedColliders.Add(collision);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Nếu coroutine đang chạy -> dừng lại
-        if (removeTimers.ContainsKey(collision))
-        {
-            StopCoroutine(removeTimers[collision]);
-            removeTimers.Remove(collision);
-        }
-
-        // Chạy coroutine từ CoroutineRunner (luôn hoạt động)
-        Coroutine removeCoroutine = CoroutineRunner.instance.StartCoroutine(RemoveAfterDelay(collision));
-        removeTimers.Add(collision, removeCoroutine);
+        StartCoroutine(RemoveAfterDelay(collision, 0.7f));
     }
 
-    private void Update()
+    private IEnumerator RemoveAfterDelay(Collider2D collision, float delay)
     {
-        for (int i = detectedCollider.Count - 1; i >= 0; i--)
+        yield return new WaitForSeconds(delay);
+
+        // Chỉ remove nếu collider vẫn còn trong danh sách
+        if (detectedColliders.Contains(collision))
         {
-            var health = detectedCollider[i].GetComponent<PlayerHealth>();
-            if (health != null && !health.isAlive())
+            detectedColliders.Remove(collision);
+
+            if (detectedColliders.Count <= 0)
             {
-                detectedCollider.RemoveAt(i);
+                noCollidersRemain.Invoke();
             }
         }
     }
 
-    private IEnumerator RemoveAfterDelay(Collider2D collider)
+    // Hàm remove thủ công bên ngoài có thể gọi
+    public void RemoveCollider(Collider2D collider)
     {
-        yield return new WaitForSeconds(0.7f);
-
-        if (detectedCollider.Contains(collider))
+        if (detectedColliders.Contains(collider))
         {
-            detectedCollider.Remove(collider);
+            detectedColliders.Remove(collider);
+
+            if (detectedColliders.Count <= 0)
+            {
+                noCollidersRemain.Invoke();
+            }
         }
-
-        if (removeTimers.ContainsKey(collider))
+    }
+    private void Update()
+    {
+        for (int i = detectedColliders.Count - 1; i >= 0; i--)
         {
-            removeTimers.Remove(collider);
+            var collider = detectedColliders[i];
+            PlayerHealth health = collider.GetComponent<PlayerHealth>();
+            if (!health.isAlive())
+            {
+                detectedColliders.RemoveAt(i);
+
+                if (detectedColliders.Count <= 0)
+                {
+                    noCollidersRemain.Invoke();
+                }
+            }
         }
     }
 }

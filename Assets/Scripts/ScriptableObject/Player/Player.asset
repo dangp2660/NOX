@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd364f67a2575c34e8d96ded0dd6f056, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  hp: 20
-  dame: 20
+  hp: 100
+  dame: 25
   defend: 20

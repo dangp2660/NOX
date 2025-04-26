@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyBandit
   m_EditorClassIdentifier: 
   hp: 50
-  dame: 20
-  defend: 20
+  dame: 15
+  defend: 10

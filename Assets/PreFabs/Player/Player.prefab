@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 5337634792809850259}
   - component: {fileID: 598642605627758385}
   - component: {fileID: 7919457457522824918}
+  - component: {fileID: 2661210271584348040}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -436,9 +437,9 @@ MonoBehaviour:
   runSpeed: 10
   jumpSpeed: 12
   fallMuiltiple: 2.5
-  lowMuiltiple: 2
   airSpeed: 3
   attackMove: 2
+  horizontalBoost: 10
   dashSpeed: 15
   dashDuration: 0.2
   dashCoolDown: 0.5
@@ -518,6 +519,18 @@ MonoBehaviour:
   isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
+--- !u!114 &2661210271584348040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82a7d855187372499f88632bcf1f051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5714647995679997085
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +593,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
