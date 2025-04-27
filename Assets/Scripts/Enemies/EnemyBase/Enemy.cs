@@ -10,32 +10,20 @@ public enum EnemyStae
 public abstract class Enemy : MonoBehaviour
 {
     private Data DataStat;
-    private float currentHP;
-    protected Animator ani;
+    protected Animator animator;
 
     [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
     [SerializeField] private EnemyPatrol patrol;
     void Start()
     {
-        
-            ani = GetComponent<Animator>();
-            patrol = GetComponent<EnemyPatrol>();
 
-            if (DataStat != null)
-            {
-                currentHP = DataStat.Hp;
-            }
-            else
-            {
-                Debug.LogWarning("DataStat chưa được gán! Dùng HP mặc định");
-                currentHP = 100;
-            }
-        
+            animator = GetComponent<Animator>();
+            patrol = GetComponent<EnemyPatrol>();   
 
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         switch (enemyStae)
         {
@@ -43,17 +31,17 @@ public abstract class Enemy : MonoBehaviour
                 patrol.enabled = true; break;
             case EnemyStae.Attack:
                 patrol.enabled = false;
+                Attack();
                 break;
             case EnemyStae.Die:
                 patrol.enabled = false;
+                animator.SetBool(AnimationStringList.isAlive, false);
                 Destroy(gameObject, 2f);
                 break;
         }
     }
 
-
-
-    protected void swichState(EnemyStae enemyStae)
+    public void swichState(EnemyStae enemyStae)
     {
         if (enemyStae == this.enemyStae) return;
         this.enemyStae = enemyStae;
@@ -62,7 +50,6 @@ public abstract class Enemy : MonoBehaviour
     public void SetData(Data data)
     {
         this.DataStat = data;
-        this.currentHP = data.Hp;
     }
 
 }

@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Advance")]
     [SerializeField] private float coyoteTime = 0.2f;     // Thời gian "lì" cho phép nhảy ngay sau khi rớt khỏi mặt đất
-    [SerializeField] private float jumpBufferTime = 0.2f; // Thời gian "đệm" nhảy khi bấm sớm
     [SerializeField] private bool allowDoubleJump = true; // Có cho phép nhảy hai lần không
 
     // Các biến nội bộ phục vụ dash, nhảy

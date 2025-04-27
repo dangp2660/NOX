@@ -191,8 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5e04a5b0fb5b44593e9e83dda12bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone: {fileID: 0}
-  detectedCollider: []
+  noCollidersRemain:
+    m_PersistentCalls:
+      m_Calls: []
+  detectedColliders: []
 --- !u!1 &6906863722393557198
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +211,7 @@ GameObject:
   - component: {fileID: 1078881775122541672}
   - component: {fileID: 7744784880538580642}
   - component: {fileID: 812738428516986384}
+  - component: {fileID: 4696169472827733190}
   m_Layer: 7
   m_Name: Bandit
   m_TagString: Enemy
@@ -407,7 +410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStae: 0
   patrol: {fileID: 1078881775122541672}
-  Stats: {fileID: 11400000, guid: a4b330e7676ac904398964b445ff8222, type: 2}
   zone: {fileID: 3252594880500679763}
 --- !u!114 &812738428516986384
 MonoBehaviour:
@@ -425,3 +427,15 @@ MonoBehaviour:
   isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
+--- !u!114 &4696169472827733190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906863722393557198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec3e81da23f3714eaa9e45c99db3c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

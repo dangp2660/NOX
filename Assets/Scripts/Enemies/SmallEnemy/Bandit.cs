@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Bandit : Enemy
 {
-    [SerializeField] Data Stats;
     [Header("Attack")]
     [SerializeField] private DetectionZone zone;
     private bool attack = false;
-    private bool Attack
+    public new bool Attack
     {
         get
         {
@@ -17,26 +16,32 @@ public class Bandit : Enemy
         set
         {
             attack = value;
-            ani.SetBool(AnimationStringList.Attack, value);
+            animator.SetBool(AnimationStringList.Attack, value);
         }
     }
 
     private void Awake()
     {
 
-        ani = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        SetData(Stats);
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update() 
     {
         base.Update();
         Attack = zone.detectedColliders.Count > 0;
-
+        if(Attack)
+        {
+            swichState(EnemyStae.Attack);  
+        }
+        else
+        {
+            swichState(EnemyStae.Patrol);
+        }
     }
 }

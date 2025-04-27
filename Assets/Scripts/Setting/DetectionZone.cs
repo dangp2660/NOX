@@ -17,10 +17,15 @@ public class DetectionZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!detectedColliders.Contains(collision))
+        Debug.Log("Can Attack");
+        if(collision.CompareTag("Player"))
         {
-            detectedColliders.Add(collision);
+            if (!detectedColliders.Contains(collision))
+            {
+                detectedColliders.Add(collision);
+            }
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
