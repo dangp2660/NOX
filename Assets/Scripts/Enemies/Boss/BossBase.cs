@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -60,6 +60,7 @@ public class BossBase : MonoBehaviour
         }
         handleMove();
         handleAttack();
+        die();
     }
     private float getCurrientMoveSpeed()
     {
@@ -94,23 +95,43 @@ public class BossBase : MonoBehaviour
                 isAttack = true;
                 AttackPlayer();
             }
-        }
-        
+        }        
     }
     
     protected virtual void AttackPlayer()
     {
         AttackTimer = AttackCoolDown;
-        animator.SetTrigger(AnimationStringList.Attack1);
-        StartCoroutine(DelayAttack());
+        int moveSet = isPhase2() ? Random.Range(1, 4) : Random.Range(1, 3);
+        Debug.Log(moveSet);
+        switch (moveSet)
+        {
+
+            case 1:
+                animator.SetTrigger(AnimationStringList.Attack1);
+                StartCoroutine(DelayAttack());
+                break;
+            case 2:
+                animator.SetTrigger(AnimationStringList.Attack2);
+                StartCoroutine(DelayAttack());
+                break;
+            case 3:
+                animator.SetTrigger(AnimationStringList.Attack3);
+                StartCoroutine(DelayAttack());
+                break;
+        }
+    }
+
+    private bool isPhase2()
+    {
+        return currentPhase == bossPhase.phase2 ? true : false;
     }
 
     IEnumerator DelayAttack()
     {
-        Vector2 origin = rb.velocity;
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(1f);
-        rb.velocity = origin;
+        yield return new WaitForSeconds(1.5f);
+        Vector2 direction = (Player.transform.position - transform.position).normalized;
+        rb.velocity = new Vector2(direction.x * getCurrientMoveSpeed(), rb.velocity.y);
         isAttack = false;
     }
     
@@ -122,4 +143,19 @@ public class BossBase : MonoBehaviour
         }
     }
 
+    protected virtual void die()
+    {
+        if (!Damageable.IsAlive)
+        {
+            Debug.Log("Boss die");
+            animator.SetBool(AnimationStringList.isAlive, false);
+        }
+    }
+
+    public void StartBossFight()
+    {
+        this.enabled = true;
+        Debug.Log("Trận chiến với boss đã bắt đầu!");
+        // Hiệu ứng âm thanh hoặc animation khi trận chiến bắt đầu
+    }
 }

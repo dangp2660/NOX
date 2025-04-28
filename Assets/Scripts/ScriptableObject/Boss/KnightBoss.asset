@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd364f67a2575c34e8d96ded0dd6f056, type: 3}
-  m_Name: EnemyArcher
+  m_Name: KnightBoss
   m_EditorClassIdentifier: 
-  hp: 30
+  hp: 200
   dame: 25
   defend: 5

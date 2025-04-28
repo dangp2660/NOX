@@ -12,6 +12,8 @@ internal class AnimationStringList
     internal static string isOnWall = "isOnWall";
     internal static string isOnCieling = "isOnCieling";
     internal static string Attack1 = "Attack1";
+    internal static string Attack2 = "Attack2";
+    internal static string Attack3 = "Attack3";
     internal static string Attack = "Attack";
     internal static string canMove = "canMove";
     internal static string isDash = "isDash";
