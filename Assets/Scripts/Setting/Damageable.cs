@@ -7,6 +7,7 @@ public class Damageable : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private Data stats; //dùng Data ScriptableObject
 
+    private float maxHealth;
     private float currentHealth;
     private float defend;
 
@@ -36,6 +37,7 @@ public class Damageable : MonoBehaviour
 
         currentHealth = stats.Hp;
         defend = stats.Defend;
+        maxHealth = stats.Hp;
     }
 
     private void Update()
@@ -77,4 +79,6 @@ public class Damageable : MonoBehaviour
             }
         }
     }
+
+    public float getMaxHealth() { return maxHealth; }
 }

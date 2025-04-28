@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.652174, y: -1.0084693}
+  m_Offset: {x: 1.1499119, y: -1.0084693}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.1027641, y: 3.0169387}
+  m_Size: {x: 2.09824, y: 3.0169387}
   m_EdgeRadius: 0
 --- !u!114 &241299295271476888
 MonoBehaviour:
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3615658755668276542}
   - component: {fileID: 3133968151169734716}
   - component: {fileID: 7445071457096265307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Knight(NPC)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

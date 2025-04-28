@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 enum bossPhase
@@ -36,6 +37,19 @@ public class BossBase : MonoBehaviour
     {
         currentPhase = bossPhase.phase1;
     }
+    private bool isMoving = true;
+    public bool IsMoving
+    {
+        get
+        {
+            return isMoving;
+        }
+        set
+        {
+            isMoving = value;
+            animator.SetBool(AnimationStringList.isMoving, value);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,14 +64,26 @@ public class BossBase : MonoBehaviour
     private float getCurrientMoveSpeed()
     {
         if(!canMove) return 0f;
-        return currentPhase == bossPhase.phase1 ? MovePhase1 : MovePhase2;
+            return currentPhase == bossPhase.phase1 ? MovePhase1 : MovePhase2;
     }
     protected virtual void handleMove()
     {
-        Vector2 direction = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * getCurrientMoveSpeed(), rb.velocity.y);
+        IsMoving = rb.velocity != Vector2.zero;
+        if (IsMoving) 
+        {
+            Vector2 direction = (Player.transform.position - transform.position).normalized;
+            rb.velocity = new Vector2(direction.x * getCurrientMoveSpeed(), rb.velocity.y);
+            if (direction.x > 0.001f)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if(direction.x < -0.001f)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
+  
     }
-
     protected virtual void handleAttack()
     {
         AttackTimer -= Time.deltaTime;  
@@ -65,6 +91,7 @@ public class BossBase : MonoBehaviour
         {
             if (attackZone.detectedColliders.Count > 0 && !isAttack)
             {
+                isAttack = true;
                 AttackPlayer();
             }
         }
@@ -75,6 +102,24 @@ public class BossBase : MonoBehaviour
     {
         AttackTimer = AttackCoolDown;
         animator.SetTrigger(AnimationStringList.Attack1);
+        StartCoroutine(DelayAttack());
+    }
+
+    IEnumerator DelayAttack()
+    {
+        Vector2 origin = rb.velocity;
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(1f);
+        rb.velocity = origin;
+        isAttack = false;
+    }
+    
+    protected virtual void changePhase()
+    {
+        if(Damageable.CurrentHealth <= 50 * Damageable.getMaxHealth())
+        {
+            currentPhase = bossPhase.phase2;
+        }
     }
 
 }

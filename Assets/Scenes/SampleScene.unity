@@ -211,6 +211,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e9827389fed9554b8fc7c0d501a8c67, type: 3}
+--- !u!1 &168263990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168263992}
+  - component: {fileID: 168263991}
+  m_Layer: 0
+  m_Name: BGAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &168263991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168263990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2babd35d904d34980a1855c467fc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: 649599cba697f6445add33648857d2a6, type: 3}
+--- !u!4 &168263992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168263990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.76826, y: -6.146969, z: -0.063954026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264234297
 GameObject:
   m_ObjectHideFlags: 0
@@ -74197,14 +74242,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 178380706769752167, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
-      propertyPath: m_Size.x
-      value: 2.09824
-      objectReference: {fileID: 0}
-    - target: {fileID: 178380706769752167, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
-      propertyPath: m_Offset.x
-      value: 1.1499119
-      objectReference: {fileID: 0}
     - target: {fileID: 880008631627249555, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.6
@@ -74245,17 +74282,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3143490000787476315, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5469064808339295554, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
       propertyPath: m_Name
       value: Knight(NPC)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5469064808339295554, guid: f152fb0cb39d98f498b77e12782cb709, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74420,3 +74449,4 @@ SceneRoots:
   - {fileID: 2040875244}
   - {fileID: 1158499941750010854}
   - {fileID: 66546919}
+  - {fileID: 168263992}
