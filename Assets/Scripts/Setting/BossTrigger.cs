@@ -4,7 +4,6 @@ public class BossTrigger : MonoBehaviour
 {
     public GameObject boss; // Tham chiếu đến boss
     public GameObject player; // Tham chiếu đến người chơi
-    private bool bossFightStarted = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +17,6 @@ public class BossTrigger : MonoBehaviour
     // Khởi động trận chiến với boss
     private void StartBossFight()
     {
-        bossFightStarted = true;
 
         // Khởi động trận chiến boss
         boss.GetComponent<BossBase>().StartBossFight();
