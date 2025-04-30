@@ -26,6 +26,7 @@ public class Archer : Enemy
 
     private void Awake()
     { 
+        range = GetComponent<MagicAttack>();
         animator = GetComponent<Animator>();
     }
     // Start is called before the first frame update

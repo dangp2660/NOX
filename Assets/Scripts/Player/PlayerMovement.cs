@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         animator.SetTrigger(AnimationStringList.Jump);
-        rb.velocity = new Vector2(horizontalBoost, jumpSpeed);
+        rb.velocity = new Vector2(rb.velocity.x + horizontalBoost, jumpSpeed);
     }
 
     // Hàm được Input System gọi khi nhấn Dash
