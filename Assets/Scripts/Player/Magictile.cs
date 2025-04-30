@@ -42,8 +42,10 @@ public class Magictile : MonoBehaviour
         {
             anim.SetTrigger(AnimationStringList.Explode);
         }
-            
-        // Hủy sau 0.5s (tùy độ dài animation impact)
-        Destroy(gameObject, 0.5f);
+           
+    }
+    public void OnDestroy()
+    {
+        Destroy(gameObject);
     }
 }

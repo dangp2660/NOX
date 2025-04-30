@@ -435,10 +435,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 10
-  jumpSpeed: 12
-  fallMuiltiple: 2.5
+  jumpSpeed: 10.5
+  fallMuiltiple: 5
   airSpeed: 3
-  attackMove: 2
+  attackMove: 2.5
   horizontalBoost: 10
   dashSpeed: 15
   dashDuration: 0.2
@@ -446,7 +446,6 @@ MonoBehaviour:
   GhostDash: {fileID: 44759386470465263, guid: 52bf2e25a9e93644d8558804344b182e, type: 3}
   GhostDelay: 0.05
   coyoteTime: 0.2
-  jumpBufferTime: 0.2
   allowDoubleJump: 1
 --- !u!114 &9204941724775531024
 MonoBehaviour:

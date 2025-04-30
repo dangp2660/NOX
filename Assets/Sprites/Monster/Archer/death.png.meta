@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7349fa2e6646aff4ead5e0e365d01fbe
+guid: 385b3489fa457004ca931e86bf144abe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,181 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_0
+      name: death_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eb8f339650972d4eb355280f4ce4e1d
+      internalID: -1136715902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a82edd463060649b16cfcedd742034
+      internalID: 821054187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61083641db826dc458744c84517c92ac
+      internalID: 1744145487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aacf32af329514f4d8a31d368bff9ec0
+      internalID: 1492453688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 968ca8b2e750e5342a0ce0e6a3316946
+      internalID: -566942317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_6
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c108e7b1139879846a66eac1f07ba3e5
+      internalID: -970095204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ebeecfdd35b22469657f0033493dd4
+      internalID: -1981134645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_8
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d151acf2174c1d0498164395391bb074
+      internalID: -1177156098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: death_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b1c4fdc5d759754aaf3af09cab18f7d
-      internalID: 265708298
+      spriteID: 72d6cffbd1319474da8469b6561bd13e
+      internalID: 669998658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_1
+      name: death_10
       rect:
         serializedVersion: 2
-        x: 288
+        x: 64
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,218 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7016f46dc2cc47b46b3f68fe186576c3
-      internalID: -82143080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_2
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 193b8521a68bc7742b7278c6c4f0e073
-      internalID: -161075223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_3
-      rect:
-        serializedVersion: 2
-        x: 864
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8304b58c2aa0b847bf4354204d72995
-      internalID: -1488664403
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_4
-      rect:
-        serializedVersion: 2
-        x: 1152
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4464658cff4aa594680c594bab6e6b6a
-      internalID: -1571035825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_5
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d29260faaae76c44fac35312dd32262e
-      internalID: -2059503403
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_6
-      rect:
-        serializedVersion: 2
-        x: 1728
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5b469756199f5a42a400bbb87c7cb45
-      internalID: -52695320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_7
-      rect:
-        serializedVersion: 2
-        x: 2016
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9cb6fc8271f25f4abdb76b44fad1bef
-      internalID: -1381694088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_8
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc5e390f69a8ec94496936074d2bacc7
-      internalID: -1067351659
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_9
-      rect:
-        serializedVersion: 2
-        x: 2592
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3153d6a727f9fb14caca5b1d670f1a92
-      internalID: -478322305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_10
-      rect:
-        serializedVersion: 2
-        x: 2880
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ead442128a647f14db20d99188593efc
-      internalID: 1062978839
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_11
-      rect:
-        serializedVersion: 2
-        x: 3168
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a42b99b200f478e4e832f963f3e4cf41
-      internalID: -411685765
+      spriteID: d6fc192bc2334224f9fd0d71ca2d87e4
+      internalID: -1617964470
       vertices: []
       indices: 
       edges: []
@@ -372,18 +330,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SilverWolf_DoubleSlash_0: 265708298
-      SilverWolf_DoubleSlash_1: -82143080
-      SilverWolf_DoubleSlash_10: 1062978839
-      SilverWolf_DoubleSlash_11: -411685765
-      SilverWolf_DoubleSlash_2: -161075223
-      SilverWolf_DoubleSlash_3: -1488664403
-      SilverWolf_DoubleSlash_4: -1571035825
-      SilverWolf_DoubleSlash_5: -2059503403
-      SilverWolf_DoubleSlash_6: -52695320
-      SilverWolf_DoubleSlash_7: -1381694088
-      SilverWolf_DoubleSlash_8: -1067351659
-      SilverWolf_DoubleSlash_9: -478322305
+      death_0: -1226615318
+      death_1: -1136715902
+      death_10: -1617964470
+      death_2: 821054187
+      death_3: 1744145487
+      death_4: 1492453688
+      death_5: -566942317
+      death_6: -970095204
+      death_7: -1981134645
+      death_8: -1177156098
+      death_9: 669998658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

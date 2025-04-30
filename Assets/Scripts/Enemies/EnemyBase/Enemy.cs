@@ -13,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
 
     [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
-    [SerializeField] private EnemyPatrol patrol;
+    [SerializeField] protected EnemyPatrol patrol;
     void Start()
     {
 
@@ -51,5 +51,6 @@ public abstract class Enemy : MonoBehaviour
     {
         this.DataStat = data;
     }
+
 
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7349fa2e6646aff4ead5e0e365d01fbe
+guid: cdd626f5771eac54aa83d8d76efc56e8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_0
+      name: Idle and running_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8088d53ad835f0d4fa728b4101ae983d
+      internalID: 817195814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle and running_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4f573b6554d84d42b78d1a09b81850a
+      internalID: 287671752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle and running_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b1c4fdc5d759754aaf3af09cab18f7d
-      internalID: 265708298
+      spriteID: 0ade8c086186cf6459365e01771b16aa
+      internalID: -1953324840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_1
+      name: Idle and running_3
       rect:
         serializedVersion: 2
-        x: 288
+        x: 64
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7016f46dc2cc47b46b3f68fe186576c3
-      internalID: -82143080
+      spriteID: d3d9a3aa1aac92448bcbb82faf281098
+      internalID: -1147999974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_2
+      name: Idle and running_4
       rect:
         serializedVersion: 2
-        x: 576
+        x: 128
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 193b8521a68bc7742b7278c6c4f0e073
-      internalID: -161075223
+      spriteID: ce818b24940126b4680c54c5a474e14c
+      internalID: -103805695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_3
+      name: Idle and running_5
       rect:
         serializedVersion: 2
-        x: 864
+        x: 192
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8304b58c2aa0b847bf4354204d72995
-      internalID: -1488664403
+      spriteID: 519ed19d4a977ff429def99225c98a91
+      internalID: -331792491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_4
+      name: Idle and running_6
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 256
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4464658cff4aa594680c594bab6e6b6a
-      internalID: -1571035825
+      spriteID: 8d595dd5392f02940905c2be707231f4
+      internalID: -2020389388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_5
+      name: Idle and running_7
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 320
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d29260faaae76c44fac35312dd32262e
-      internalID: -2059503403
+      spriteID: 1f69a4153fb42c74c9a79e7b4eb131b8
+      internalID: 670219654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_6
+      name: Idle and running_8
       rect:
         serializedVersion: 2
-        x: 1728
+        x: 384
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5b469756199f5a42a400bbb87c7cb45
-      internalID: -52695320
+      spriteID: 6ffb9e7fada3a0643890cc8577f10603
+      internalID: -1610982116
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_7
+      name: Idle and running_9
       rect:
         serializedVersion: 2
-        x: 2016
+        x: 448
         y: 0
-        width: 288
-        height: 188
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,92 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9cb6fc8271f25f4abdb76b44fad1bef
-      internalID: -1381694088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_8
-      rect:
-        serializedVersion: 2
-        x: 2304
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc5e390f69a8ec94496936074d2bacc7
-      internalID: -1067351659
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_9
-      rect:
-        serializedVersion: 2
-        x: 2592
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3153d6a727f9fb14caca5b1d670f1a92
-      internalID: -478322305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_10
-      rect:
-        serializedVersion: 2
-        x: 2880
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ead442128a647f14db20d99188593efc
-      internalID: 1062978839
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SilverWolf_DoubleSlash_11
-      rect:
-        serializedVersion: 2
-        x: 3168
-        y: 0
-        width: 288
-        height: 188
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a42b99b200f478e4e832f963f3e4cf41
-      internalID: -411685765
+      spriteID: da9a94f2cfba6e14fb586c07b12063b2
+      internalID: 485468845
       vertices: []
       indices: 
       edges: []
@@ -372,18 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SilverWolf_DoubleSlash_0: 265708298
-      SilverWolf_DoubleSlash_1: -82143080
-      SilverWolf_DoubleSlash_10: 1062978839
-      SilverWolf_DoubleSlash_11: -411685765
-      SilverWolf_DoubleSlash_2: -161075223
-      SilverWolf_DoubleSlash_3: -1488664403
-      SilverWolf_DoubleSlash_4: -1571035825
-      SilverWolf_DoubleSlash_5: -2059503403
-      SilverWolf_DoubleSlash_6: -52695320
-      SilverWolf_DoubleSlash_7: -1381694088
-      SilverWolf_DoubleSlash_8: -1067351659
-      SilverWolf_DoubleSlash_9: -478322305
+      Idle and running_0: 817195814
+      Idle and running_1: 287671752
+      Idle and running_2: -1953324840
+      Idle and running_3: -1147999974
+      Idle and running_4: -103805695
+      Idle and running_5: -331792491
+      Idle and running_6: -2020389388
+      Idle and running_7: 670219654
+      Idle and running_8: -1610982116
+      Idle and running_9: 485468845
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
