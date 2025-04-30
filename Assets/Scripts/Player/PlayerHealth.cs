@@ -7,9 +7,11 @@ public class PlayerHealth : MonoBehaviour
 {
     private Damageable Damegeable;
     private Animator  animator;
+    private PlayerMovement movement;
     // Update is called once per frame
     private void Awake()
     {
+        movement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
         Damegeable = GetComponent<Damageable>();
     }
@@ -23,5 +25,7 @@ public class PlayerHealth : MonoBehaviour
         {
             animator.SetBool(AnimationStringList.isAlive, false);
         }
+
     }
+
 }

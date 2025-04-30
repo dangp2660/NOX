@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScenes : MonoBehaviour
 {
-    [SerializeField] private string LoadScene;
-    public void changeScene()
+    public void changeScene(string LoadScene)
     {
         SceneManager.LoadScene(LoadScene);
+    }
+    public void outGame()
+    {
+        Application.Quit();
     }
 }

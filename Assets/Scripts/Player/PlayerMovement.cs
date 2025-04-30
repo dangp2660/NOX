@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Speed move")]
     [SerializeField] private float runSpeed = 5f;         // Tốc độ chạy trên mặt đất
     [SerializeField] private float jumpSpeed = 5f;        // Lực nhảy
-    [SerializeField] private float fallMuiltiple = 2.5f;  // Hệ số rơi nhanh hơn khi đang rơi
     [SerializeField] private float airSpeed = 7.5f;       // Tốc độ di chuyển trên không
     [SerializeField] private float attackMove = 0.8f;       // Lực đẩy khi tấn công
     [SerializeField] private float horizontalBoost = 10f;
@@ -28,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jump Advance")]
     [SerializeField] private float coyoteTime = 0.2f;     // Thời gian "lì" cho phép nhảy ngay sau khi rớt khỏi mặt đất
     [SerializeField] private bool allowDoubleJump = true; // Có cho phép nhảy hai lần không
-
+    [SerializeField] private float lowJumpMultiplier = 2f;
     // Các biến nội bộ phục vụ dash, nhảy
     private Coroutine DashGhost;
     private bool isDash = false;
@@ -38,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDoubleJump = true;
 
     // Các component
+    private Collider2D Collider2D;
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 moveInput;
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Quản lý trạng thái dash
-    private bool IsDash
+    public bool IsDash
     {
         get => isDash;
         set
@@ -111,6 +111,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         // Lấy các component
+
+        Collider2D =  GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         dt = GetComponent<DirectionTouch>();
@@ -144,8 +146,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (jumpBufferCounter > 0 && canDoubleJump && allowDoubleJump)
         {
-            Jump();
             canDoubleJump = false;
+            Jump();
             jumpBufferCounter = 0;
         }
         
@@ -153,11 +155,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Áp dụng hệ số rơi nhanh hoặc nhảy thấp tuỳ trạng thái
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y > 0)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMuiltiple - 1) * Time.fixedDeltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
         }
+
     }
 
     // Hàm được Input System gọi khi có tín hiệu di chuyển
@@ -195,15 +197,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started && CanMove)
         {
-            Jump();
+            jumpBufferCounter = 0.1f; // Nhảy trong khoảng 0.1s sau khi nhấn
         }
     }
 
     // Hàm nhảy (kèm theo lực đẩy ngang)
     private void Jump()
     {
+        
         animator.SetTrigger(AnimationStringList.Jump);
-        rb.velocity = new Vector2(rb.velocity.x + horizontalBoost, jumpSpeed);
+        rb.velocity = new Vector2(horizontalBoost, !canDoubleJump? 0.8f * jumpSpeed : jumpSpeed);
+        Debug.Log(rb.velocity);
     }
 
     // Hàm được Input System gọi khi nhấn Dash
@@ -226,11 +230,10 @@ public class PlayerMovement : MonoBehaviour
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-
         rb.velocity = new Vector2(dashSpeed * dashDirection, 0f);
-
+        this.Collider2D.enabled = false;
         yield return new WaitForSeconds(dashDuration);
-
+        this.Collider2D.enabled = true; 
         rb.velocity = Vector2.zero;
         rb.gravityScale = originalGravity;
         IsDash = false;

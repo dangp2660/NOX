@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
     private Animator animator;
+    public UnityEvent<float, float> healthChanged; 
 
     [Header("Stats")]
     [SerializeField] private Data stats; //dùng Data ScriptableObject
@@ -13,7 +15,7 @@ public class Damageable : MonoBehaviour
 
     [Header("State")]
     [SerializeField] private bool isAlive = true;
-    [SerializeField] private bool isInvincible = false;
+    [SerializeField] public bool isInvincible = false;
     private float timeSinceHit = 0f;
     public float invincibilityTime = 0.25f;
 
@@ -73,6 +75,7 @@ public class Damageable : MonoBehaviour
         set
         {
             currentHealth = Mathf.Max(0, value);
+            healthChanged?.Invoke(currentHealth, maxHealth);
             if (currentHealth <= 0)
             {
                 IsAlive = false;
