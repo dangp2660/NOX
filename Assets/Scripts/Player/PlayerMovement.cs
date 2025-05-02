@@ -263,5 +263,9 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(GhostDelay);
         }
     }
+    public float getYVelocity()
+    {
+        return rb.velocity.y;
+    }
 
 }

@@ -9,6 +9,7 @@
         private Animator  animator;
         private PlayerMovement movement;
         private DeathFade deathFade;
+        [SerializeField] private GameObject blood;
         // Update is called once per frame
         private void Awake()
         {
@@ -37,6 +38,7 @@
                         if (sr != null)
                         {
                             sr.color = Color.black; // Đổi màu thành đen
+                            blood.SetActive(true);
                         }
                     }
                 }
