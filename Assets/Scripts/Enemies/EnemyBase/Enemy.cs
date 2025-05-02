@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum EnemyState
 {
-    Patrol, Attack, Die, Hurt
+    Patrol, Attack, Die, Hurt, Sleep, Wakeup
 }
 
 public abstract class Enemy : MonoBehaviour
 {
     protected EnemyState enemyState;
-    [SerializeField] private EnemyState initialState = EnemyState.Patrol;
+    [SerializeField] protected EnemyState initialState = EnemyState.Patrol;
 
     protected Animator animator;
     protected EnemyPatrol patrol;

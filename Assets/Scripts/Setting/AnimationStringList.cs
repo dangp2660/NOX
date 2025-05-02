@@ -20,6 +20,7 @@ internal class AnimationStringList
     internal static string MagicAttack = "MagicAttack";
     internal static string Explode = "Explode";
     internal static string isAlive = "isAlive";
+    internal static string Wakeup = "Wakeup";
 
     
 
