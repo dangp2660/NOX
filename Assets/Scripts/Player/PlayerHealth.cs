@@ -1,4 +1,4 @@
-    using System.Collections;
+﻿    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.InputSystem;
@@ -28,8 +28,27 @@
             {
                 animator.SetBool(AnimationStringList.isAlive, false);
                 deathFade.showDeathScreen();
+                GameObject[] allObject = GameObject.FindObjectsOfType<GameObject>();
+                foreach (GameObject obj in allObject)
+                {
+                    if (obj.CompareTag("Player") || obj.CompareTag("Enemy") || obj.CompareTag("Ground"))
+                    {
+                        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+                        if (sr != null)
+                        {
+                            sr.color = Color.black; // Đổi màu thành đen
+                        }
+                    }
+                }
             }
-
         }
 
+        public void deadth(InputAction.CallbackContext context)
+        {
+            if(context.started)
+            {
+                Damegeable.TakeDamage(10000000, 1);
+            }
+        }
+        
     }

@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMovement movement;
     private PlayerAttack attack;
+    private PlayerHealth health;
 
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
+        health = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -42,5 +44,9 @@ public class PlayerController : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {
         movement.OnDash(context);
+    }
+    public void DeathCheat(InputAction.CallbackContext context)
+    {
+        health.deadth(context);
     }
 }

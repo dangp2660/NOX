@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDoubleJump = true;
 
     // Các component
-    private Collider2D Collider2D;
+    private Damageable damageable;
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 moveInput;
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Lấy các component
 
-        Collider2D =  GetComponent<Collider2D>();
+        damageable = GetComponent<Damageable>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         dt = GetComponent<DirectionTouch>();
@@ -217,6 +217,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dashing());
             dashEffect();
+            Debug.Log(damageable.isInvincible);
         }
     }
 
@@ -225,15 +226,12 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         IsDash = true;
-
         float dashDirection = IsFacingRight ? 1 : -1;
-
+        damageable.isInvincible = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(dashSpeed * dashDirection, 0f);
-        this.Collider2D.enabled = false;
-        yield return new WaitForSeconds(dashDuration);
-        this.Collider2D.enabled = true; 
+        yield return new WaitForSeconds(dashDuration); 
         rb.velocity = Vector2.zero;
         rb.gravityScale = originalGravity;
         IsDash = false;
@@ -261,7 +259,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 ghostScale = ghost.transform.localScale;
             ghostScale.x = IsFacingRight ? Mathf.Abs(ghostScale.x) : -Mathf.Abs(ghostScale.x);
             ghost.transform.localScale = ghostScale;
-
             Destroy(ghost, 0.5f);
             yield return new WaitForSeconds(GhostDelay);
         }

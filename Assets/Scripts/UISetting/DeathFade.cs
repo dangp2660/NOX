@@ -11,7 +11,6 @@ public class DeathFade : MonoBehaviour
 
     public void showDeathScreen()
     {
-        Debug.Log("DieEffect");
         StartCoroutine(FadedDeath());
     }
 
@@ -21,8 +20,8 @@ public class DeathFade : MonoBehaviour
         float alpha = 0f;
         while (alpha < 1f)
         {
-            alpha += Time.unscaledDeltaTime * 0.5f;
-            Debug.Log(alpha);
+            alpha += Time.unscaledDeltaTime * .25f;
+            //Debug.Log(alpha);
             redOverlay.color = new Color(0.3f, 0, 0, alpha);
             yield return null;
         }
