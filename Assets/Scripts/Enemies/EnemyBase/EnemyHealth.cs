@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(!Enemy.IsAlive)
         {
-            baseEnemy.swichState(EnemyStae.Die);
+            baseEnemy.switchState(EnemyState.Die);
         }
     }
 }

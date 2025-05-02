@@ -2,55 +2,64 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum EnemyStae
+public enum EnemyState
 {
     Patrol, Attack, Die, Hurt
 }
 
 public abstract class Enemy : MonoBehaviour
 {
-    private Data DataStat;
+    protected EnemyState enemyState;
+    [SerializeField] private EnemyState initialState = EnemyState.Patrol;
+
     protected Animator animator;
+    protected EnemyPatrol patrol;
 
-    [SerializeField] protected EnemyStae enemyStae = EnemyStae.Patrol;
-    [SerializeField] protected EnemyPatrol patrol;
-    void Start()
+    protected virtual void Start()
     {
-
-            animator = GetComponent<Animator>();
-            patrol = GetComponent<EnemyPatrol>();   
-
+        animator = GetComponent<Animator>();
+        patrol = GetComponent<EnemyPatrol>();
+        enemyState = initialState; // Gán trạng thái ban đầu từ prefab
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
-        switch (enemyStae)
+        switch (enemyState)
         {
-            case EnemyStae.Patrol:
-                patrol.enabled = true; break;
-            case EnemyStae.Attack:
-                patrol.enabled = false;
+            case EnemyState.Patrol:
+                if (patrol != null) patrol.enabled = true;
+                break;
+
+            case EnemyState.Attack:
+                if (patrol != null) patrol.enabled = false;
                 Attack();
                 break;
-            case EnemyStae.Die:
-                patrol.enabled = false;
-                animator.SetBool(AnimationStringList.isAlive, false);
-                Destroy(gameObject, 2f);
+
+            case EnemyState.Die:
+                if (patrol != null) patrol.enabled = false;
+                Die();
+                break;
+
+            case EnemyState.Hurt:
+                if (patrol != null) patrol.enabled = false;
+                Hurt();
                 break;
         }
     }
 
-    public void swichState(EnemyStae enemyStae)
+    public void switchState(EnemyState newState)
     {
-        if (enemyStae == this.enemyStae) return;
-        this.enemyStae = enemyStae;
+        if (newState == enemyState) return;
+        enemyState = newState;
     }
+
     protected virtual void Attack() { }
-    public void SetData(Data data)
+    protected virtual void Hurt() { }
+    protected virtual void Die()
     {
-        this.DataStat = data;
+        animator.SetBool(AnimationStringList.isAlive, false);
+        Destroy(gameObject, 2f);
     }
 
-
+    public void SetData(Data data) { }
 }

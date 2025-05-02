@@ -37,11 +37,11 @@ public class Bandit : Enemy
         Attack = zone.detectedColliders.Count > 0;
         if(Attack)
         {
-            swichState(EnemyStae.Attack);  
+            switchState(EnemyState.Attack);  
         }
         else
         {
-            swichState(EnemyStae.Patrol);
+            switchState(EnemyState.Patrol);
         }
     }
 }

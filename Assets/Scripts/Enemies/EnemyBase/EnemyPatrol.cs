@@ -6,19 +6,14 @@ public class EnemyPatrol : MonoBehaviour
     public GameObject PointA;
     public GameObject PointB;
     public float Speed = 2f;
+
     private Rigidbody2D rb;
     private Animator animator;
     private Transform currentPoint;
     private bool isMoving = true;
-    private bool isSwitching = false; // NEW: tránh gọi Coroutine nhiều lần
+    private bool isSwitching = false;
 
-    private bool CanMove
-    {
-        get
-        {
-            return animator.GetBool(AnimationStringList.Attack);
-        }
-    }
+    private bool CanMove => !animator.GetBool(AnimationStringList.Attack);
 
     void Start()
     {
@@ -29,8 +24,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void Update()
     {
-
-        if (isMoving)
+        if (isMoving && CanMove)
         {
             MovePatrol();
         }
@@ -39,24 +33,18 @@ public class EnemyPatrol : MonoBehaviour
             rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
-        animator.SetBool(AnimationStringList.isRunning, isMoving);
+        animator.SetBool(AnimationStringList.isRunning, isMoving && CanMove);
     }
 
     private void MovePatrol()
     {
-        if(!CanMove)
+        Vector2 direction = currentPoint.position - transform.position;
+        rb.velocity = new Vector2(Mathf.Sign(direction.x) * Speed, rb.velocity.y);
+
+        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && !isSwitching)
         {
-            Vector2 direction = currentPoint.position - transform.position;
-            rb.velocity = new Vector2(Mathf.Sign(direction.x) * Speed, rb.velocity.y); // luôn chạy với tốc độ cố định
-            //Debug.Log(Vector2.Distance(transform.position, currentPoint.position));
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && !isSwitching)
-            {
-                StartCoroutine(SwitchDirectionAfterDelay(1f));
-            }
+            StartCoroutine(SwitchDirectionAfterDelay(1f));
         }
-        else 
-            rb.velocity = Vector2.zero;
-        
     }
 
     private IEnumerator SwitchDirectionAfterDelay(float delay)
@@ -64,21 +52,20 @@ public class EnemyPatrol : MonoBehaviour
         isSwitching = true;
         isMoving = false;
         rb.velocity = Vector2.zero;
+
         yield return new WaitForSeconds(delay);
-        flip();
+
+        Flip();
         currentPoint = (currentPoint == PointA.transform) ? PointB.transform : PointA.transform;
         isMoving = true;
         isSwitching = false;
     }
 
-    private void flip()
+    private void Flip()
     {
-        Vector3 a = transform.position;
-       
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-        transform .localPosition = a;
     }
 
     private void OnDrawGizmos()

@@ -41,11 +41,11 @@ public class Archer : Enemy
         isAttack = attackZone.detectedColliders.Count > 0;
         if (isAttack)
         {
-            swichState(EnemyStae.Attack);
+            switchState(EnemyState.Attack);
         }
         else
         {
-            swichState(EnemyStae.Patrol);
+            switchState(EnemyState.Patrol);
         }
     }
 
