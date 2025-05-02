@@ -11,7 +11,7 @@ public class Archer : Enemy
     private MagicAttack range;
     private float coolDownTimer = 0;
     private bool attack = false;
-    public new bool isAttack
+    public bool isAttack
     {
         get
         {

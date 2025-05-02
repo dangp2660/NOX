@@ -50,7 +50,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 200
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -156,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 7.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,11 +192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1064
+      value: 428
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -254
+      value: -101
       objectReference: {fileID: 0}
     - target: {fileID: 7091287298925848242, guid: db486bb614abbc349b75e533a2a8ccc7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

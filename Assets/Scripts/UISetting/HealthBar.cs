@@ -18,7 +18,7 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         HealthSlider.value = CaculateSliderPercentage(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
-        HealthBarText.text = $"{CaculateSliderPercentage(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth()) * 100}";
+        HealthBarText.text = $"{CaculateSliderPercentage(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth()) * 100}%";
     }
 
     // Update is called once per frame
@@ -42,6 +42,6 @@ public class HealthBar : MonoBehaviour
     private void OnPLaterHealthChange(float newHealth, float maxHealth)
     {
         HealthSlider.value = CaculateSliderPercentage(newHealth, maxHealth);
-        HealthBarText.text = $"{CaculateSliderPercentage(newHealth, maxHealth) * 100}";
+        HealthBarText.text = $"{CaculateSliderPercentage(newHealth, maxHealth) * 100}%";
     }
 }
