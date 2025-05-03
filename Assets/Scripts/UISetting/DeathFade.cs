@@ -27,4 +27,11 @@ public class DeathFade : MonoBehaviour
         }
         textMeshPro.gameObject.SetActive(true);
     }
+    public void HideDeathScreen()
+    {
+        StopAllCoroutines();
+        redOverlay.gameObject.SetActive(false);
+        textMeshPro.gameObject.SetActive(false);
+    }
+
 }

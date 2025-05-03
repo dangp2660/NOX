@@ -7,50 +7,105 @@
     {
         private Damageable Damegeable;
         private Animator  animator;
-        private PlayerMovement movement;
         private DeathFade deathFade;
         [SerializeField] private GameObject blood;
-        // Update is called once per frame
-        private void Awake()
-        {
-            movement = GetComponent<PlayerMovement>();
-            animator = GetComponent<Animator>();
-            Damegeable = GetComponent<Damageable>();
+        private bool isRespawning = false;
+        private bool canRespawn = false;
 
-            deathFade = FindAnyObjectByType<DeathFade>();
-        }
-        public bool isAlive()
+    // Update is called once per frame
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        Damegeable = GetComponent<Damageable>();
+        deathFade = FindAnyObjectByType<DeathFade>();
+    }
+    public bool isAlive()
+    {
+        return Damegeable.IsAlive;
+    }
+    private void Update()
+    {
+        Die();
+    }
+        
+        
+        
+    public void deadth(InputAction.CallbackContext context)
+    {
+        if(context.started)
         {
-            return Damegeable.IsAlive;
+            Damegeable.TakeDamage(10000000, 1);
         }
-        private void Update()
+    }
+
+    public void Die()
+    {
+        if (!isAlive() && !isRespawning)
         {
-            if (!isAlive())
+            isRespawning = true;
+
+            animator.SetBool(AnimationStringList.isAlive, false);
+            deathFade.showDeathScreen();
+
+            GameObject[] allObject = GameObject.FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in allObject)
             {
-                animator.SetBool(AnimationStringList.isAlive, false);
-                deathFade.showDeathScreen();
-                GameObject[] allObject = GameObject.FindObjectsOfType<GameObject>();
-                foreach (GameObject obj in allObject)
+                if (!obj.CompareTag("Untagged"))
                 {
-                    if (obj.CompareTag("Player") || obj.CompareTag("Enemy") || obj.CompareTag("Ground"))
+                    SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+                    if (sr != null)
                     {
-                        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-                        if (sr != null)
-                        {
-                            sr.color = Color.black; // Đổi màu thành đen
-                            blood.SetActive(true);
-                        }
+                        sr.color = Color.black;
                     }
                 }
             }
+            blood.SetActive(true);
+            StartCoroutine(Delay());
         }
+    }
 
-        public void deadth(InputAction.CallbackContext context)
+    private void respawnPlayer()
+    {
+        ResetHealth();
+        RespawnScript respawn = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
+        respawn.RespawnPlayer();
+        isRespawning = false;
+        animator.SetBool(AnimationStringList.isAlive, true);
+        ResetSprite();
+        Time.timeScale = 1;
+    }
+
+    private void ResetSprite()
+    {
+        blood.SetActive(false);
+        deathFade.HideDeathScreen();
+        GameObject[] allObj = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObj)
         {
-            if(context.started)
+            SpriteRenderer sp = obj.GetComponent<SpriteRenderer>();
+            if (sp != null)
             {
-                Damegeable.TakeDamage(10000000, 1);
+                sp.color = Color.white;
             }
         }
-        
     }
+    public void ResetHealth()
+    {
+        Damegeable.CurrentHealth = Damegeable.getMaxHealth();
+        Damegeable.IsAlive = true;
+        canRespawn = false;
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(5f);
+        canRespawn = true;
+    }
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        if(canRespawn && context.started && !Damegeable.IsAlive)
+        {
+            respawnPlayer();
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -93,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
                         return airSpeed;
                 }
             }
-            return isAlive? attackMove: 0;
+            return isAlive ? attackMove: 0;
         }
     }
 
@@ -168,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         if (isAlive)
         {
+            
             IsMoving = moveInput != Vector2.zero;
             SetFacingDirection(moveInput);
         }
@@ -267,5 +269,6 @@ public class PlayerMovement : MonoBehaviour
     {
         return rb.velocity.y;
     }
+    
 
 }

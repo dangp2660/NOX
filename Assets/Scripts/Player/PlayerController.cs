@@ -49,4 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         health.deadth(context);
     }
+    public void OnReborn(InputAction.CallbackContext context)
+    {
+        health.OnRestart(context);
+    }
 }

@@ -38,7 +38,6 @@ public class Damageable : MonoBehaviour
         }
 
         currentHealth = stats.Hp;
-        defend = stats.Defend;
         maxHealth = stats.Hp;
     }
 
@@ -79,6 +78,10 @@ public class Damageable : MonoBehaviour
             if (currentHealth <= 0)
             {
                 IsAlive = false;
+            }
+            else
+            {
+                IsAlive = true;
             }
         }
     }

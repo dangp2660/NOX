@@ -5,8 +5,6 @@ public class Data : ScriptableObject
 {
     [SerializeField] private float hp;
     [SerializeField] private float dame;
-    [SerializeField] private float defend;
-
     public float Hp
     {
         get => hp;
@@ -14,5 +12,4 @@ public class Data : ScriptableObject
     }
 
     public float Dame => dame;
-    public float Defend => defend;
 }
