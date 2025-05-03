@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 7919457457522824918}
   - component: {fileID: 2661210271584348040}
   m_Layer: 6
-  m_Name: DefaultForm
+  m_Name: DarkForm
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

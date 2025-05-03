@@ -10,9 +10,6 @@ public class PlayerMovement : MonoBehaviour
 {
     // Biến kiểm tra nhân vật có đang di chuyển không
     private bool isMoving = false;
-    private enum PlayerForm { defaultForm, wolfForm}
-    [Serialize] private PlayerForm currentForm = PlayerForm.defaultForm;
-
     [Header("Speed move")]
     [SerializeField] private float runSpeed = 5f;         // Tốc độ chạy trên mặt đất
     [SerializeField] private float jumpSpeed = 5f;        // Lực nhảy
@@ -121,37 +118,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         dt = GetComponent<DirectionTouch>();
     }
-    private void Start()
-    {
-        // Tăng cường khả năng di chuyển khi vào wolfForm
-        UpdateStatsBasedOnForm();
-    }
-
-    private void UpdateStatsBasedOnForm()
-    {
-        if (currentForm == PlayerForm.wolfForm)
-        {
-            runSpeed *= 1.5f;
-            jumpSpeed *= 1.5f;
-            attackMove *= 1.5f;
-            airSpeed *= 1.5f;
-        }
-        else // Default form
-        {
-            runSpeed = 5f;
-            jumpSpeed = 5f;
-            attackMove = 0.8f;
-            airSpeed = 7.5f;
-        }
-    }
-
-    public void SwitchForm()
-    {
-        // Đây là hàm chuyển đổi giữa các trạng thái hình dạng
-        currentForm = (currentForm == PlayerForm.wolfForm) ? PlayerForm.defaultForm : PlayerForm.wolfForm;
-        UpdateStatsBasedOnForm();
-    }
-    
     private void Update()
     {
         if (IsDash) return;
@@ -302,6 +268,11 @@ public class PlayerMovement : MonoBehaviour
     {
         return rb.velocity.y;
     }
-    
+
+    public void CopyStateFrom()
+    {
+        this.isDash = false;
+        this.canDash = true;
+    }
 
 }
