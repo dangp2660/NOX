@@ -208,8 +208,8 @@ public class PlayerMovement : MonoBehaviour
     {
         
         animator.SetTrigger(AnimationStringList.Jump);
-        rb.velocity = new Vector2(horizontalBoost, !canDoubleJump? 0.8f * jumpSpeed : jumpSpeed);
-        Debug.Log(rb.velocity);
+        rb.velocity = new Vector2(horizontalBoost + rb.velocity.x, !canDoubleJump? 0.8f * jumpSpeed : jumpSpeed);
+        //Debug.Log(rb.velocity);
     }
 
     // Hàm được Input System gọi khi nhấn Dash
@@ -219,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dashing());
             dashEffect();
-            Debug.Log(damageable.isInvincible);
+            //Debug.Log(damageable.isInvincible);
         }
     }
 

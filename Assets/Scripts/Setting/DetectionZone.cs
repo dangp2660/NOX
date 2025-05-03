@@ -17,7 +17,7 @@ public class DetectionZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Can Attack");
+        //Debug.Log("Can Attack");
         if(collision.CompareTag("Player"))
         {
             if (!detectedColliders.Contains(collision))

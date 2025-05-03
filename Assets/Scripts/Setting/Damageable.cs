@@ -11,7 +11,6 @@ public class Damageable : MonoBehaviour
 
     private float maxHealth;
     private float currentHealth;
-    private float defend;
 
     [Header("State")]
     [SerializeField] private bool isAlive = true;
@@ -60,8 +59,8 @@ public class Damageable : MonoBehaviour
         if (IsAlive && !isInvincible)
         {
             float totaldamage = damage * damageRate;
-            if (defend > totaldamage) CurrentHealth -= 1;
-            CurrentHealth -= (totaldamage - defend);
+            CurrentHealth -= totaldamage;
+            Debug.Log($"{gameObject.name}:" + currentHealth);
             isInvincible = true;
             return true;
         }

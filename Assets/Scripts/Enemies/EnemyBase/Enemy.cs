@@ -9,6 +9,7 @@ public enum EnemyState
 
 public abstract class Enemy : MonoBehaviour
 {
+    [SerializeField] private string id;
     protected EnemyState enemyState;
     [SerializeField] protected EnemyState initialState = EnemyState.Patrol;
 

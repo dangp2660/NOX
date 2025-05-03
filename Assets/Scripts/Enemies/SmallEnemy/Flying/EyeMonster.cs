@@ -26,6 +26,7 @@ public class EyeMonster : Enemy
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         switch (enemyState)
         {
             case EnemyState.Sleep:
@@ -34,10 +35,8 @@ public class EyeMonster : Enemy
             case EnemyState.Wakeup:
                 WakeupState();
                 break;
-            case EnemyState.Attack:
-                Attack();
-                break;
-
+            case EnemyState.Die:
+                animator.SetBool(AnimationStringList.isAlive, false); break;
         }
 
         if (wakeupZone.detectedColliders.Count > 0)
@@ -46,26 +45,26 @@ public class EyeMonster : Enemy
             switchState(EnemyState.Wakeup);
         }
     }
-
+    private bool canMove => animator.GetBool(AnimationStringList.canMove);
     private void WakeupState()
     {
         float distance = Vector2.Distance(transform.position, Player.position);
         
         if (distance <= attackRange)
         {
-            Debug.Log(distance);
+            //Debug.Log(distance);
             rb.velocity = Vector2.zero;
-            switchState(EnemyState.Attack);
+            animator.SetTrigger(AnimationStringList.Attack);
         }
         else
         {
-            
-            follow.handleMove();
+            if(canMove) 
+                follow.handleMove();
         }
     }
     protected override void Attack()
     {
-        animator.SetTrigger(AnimationStringList.Attack);
+        
     }
 
 }
