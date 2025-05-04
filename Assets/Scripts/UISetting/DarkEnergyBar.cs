@@ -4,77 +4,77 @@ using TMPro;
 
 public class DarkEnergyBar : MonoBehaviour
 {
-    [SerializeField] private Slider darkEnergySlider;
-    [SerializeField] private TextMeshProUGUI darkEnergyText;
+    public Slider DarkEnergySlider;
+    public TMP_Text DarkEnergyText;
 
-    private DarkEnergyManager currentEnergyManager;
+    private DarkEnergyManager energyManager;
+    private GameObject player;
 
     private void Awake()
     {
-        if (darkEnergySlider == null || darkEnergyText == null)
-        {
-            Debug.LogError("DarkEnergyBar components not assigned!", this);
-            enabled = false;
-        }
+        FindAndAssignEnergyManager();
     }
 
     private void Start()
     {
-        if (currentEnergyManager != null)
+        if (energyManager != null)
         {
-            UpdateEnergyBar();
+            energyManager.darkEnergyChanged.AddListener(OnEnergyChanged);
+            UpdateEnergyBar(energyManager.CurrentDarkEnergy, energyManager.MaxDarkEnergy);
         }
     }
 
-    private void UpdateEnergyBar()
+    private void Update()
     {
-        if (currentEnergyManager != null)
+        // Tự động cập nhật nếu player bị switch (ví dụ trong biến hình)
+        GameObject newPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (newPlayer != null && newPlayer != player)
         {
-            float value = Calculate(currentEnergyManager.getDarkEnergy(), currentEnergyManager.getMaxEnergy());
-            darkEnergySlider.value = value;
-            darkEnergyText.text = $"{value * 100:F0}%";
+            if (energyManager != null)
+                energyManager.darkEnergyChanged.RemoveListener(OnEnergyChanged);
+
+            player = newPlayer;
+            energyManager = player.GetComponent<DarkEnergyManager>();
+
+            if (energyManager != null)
+            {
+                energyManager.darkEnergyChanged.AddListener(OnEnergyChanged);
+                UpdateEnergyBar(energyManager.CurrentDarkEnergy, energyManager.MaxDarkEnergy);
+            }
         }
     }
 
-    private float Calculate(float currentEnergy, float maxEnergy)
+    private void FindAndAssignEnergyManager()
     {
-        return maxEnergy > 0 ? currentEnergy / maxEnergy : 0;
-    }
-
-    private void OnPlayerEnergyChange(float newEnergy, float maxEnergy)
-    {
-        float value = Calculate(newEnergy, maxEnergy);
-        darkEnergySlider.value = value;
-        darkEnergyText.text = $"{value * 100:F0}%";
-    }
-
-    private void OnEnable()
-    {
-        if (currentEnergyManager != null)
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            currentEnergyManager.darkEnergyChange.AddListener(OnPlayerEnergyChange);
+            energyManager = player.GetComponent<DarkEnergyManager>();
         }
+    }
+
+    private void UpdateEnergyBar(float currentEnergy, float maxEnergy)
+    {
+        float percentage = CalculatePercentage(currentEnergy, maxEnergy);
+        DarkEnergySlider.value = percentage;
+        DarkEnergyText.text = $"{percentage * 100:F0}%";
+    }
+
+    private float CalculatePercentage(float current, float max)
+    {
+        return (max > 0) ? current / max : 0f;
+    }
+
+    private void OnEnergyChanged(float newEnergy, float maxEnergy)
+    {
+        UpdateEnergyBar(newEnergy, maxEnergy);
     }
 
     private void OnDisable()
     {
-        if (currentEnergyManager != null)
+        if (energyManager != null)
         {
-            currentEnergyManager.darkEnergyChange.RemoveListener(OnPlayerEnergyChange);
+            energyManager.darkEnergyChanged.RemoveListener(OnEnergyChanged);
         }
-    }
-
-    public void SwitchEnergyManager(DarkEnergyManager newEnergyManager)
-    {
-        if (newEnergyManager == null) return;
-
-        if (currentEnergyManager != null)
-        {
-            currentEnergyManager.darkEnergyChange.RemoveListener(OnPlayerEnergyChange);
-        }
-
-        currentEnergyManager = newEnergyManager;
-        currentEnergyManager.darkEnergyChange.AddListener(OnPlayerEnergyChange);
-        UpdateEnergyBar();
     }
 }

@@ -9,18 +9,40 @@ public class HealthBar : MonoBehaviour
     public Slider HealthSlider;
     public TMP_Text HealthBarText;
     private Damageable playerDamageable;
-
+    GameObject player;
     private void Awake()
     {
         // Find the player object and get its Damageable component
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerDamageable = player.GetComponent<Damageable>();
+      
     }
 
     void Start()
     {
         // Initialize health slider and text
-        UpdateHealthBar(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
+        if(playerDamageable != null) 
+            UpdateHealthBar(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
+    }
+    private void Update()
+    {
+        GameObject newPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (newPlayer != null) 
+        {
+            if(playerDamageable != null)
+            {
+                playerDamageable.healthChanged.RemoveListener(OnPlayerHealthChange);    
+            }
+
+            player = newPlayer;
+            playerDamageable = player.GetComponent<Damageable>();
+            if(playerDamageable != null)
+            {
+                playerDamageable.healthChanged.AddListener(OnPlayerHealthChange);
+                UpdateHealthBar(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
+            }
+        }
+        //Debug.Log(playerDamageable.gameObject.name);
     }
 
     private void UpdateHealthBar(float currentHealth, float maxHealth)

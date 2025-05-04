@@ -1,75 +1,50 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class DarkEnergyManager : MonoBehaviour
 {
-    [Header("Dark Form Settings")]
+    [Header("Dark Energy Settings")]
     [SerializeField] private float maxDarkEnergy = 100f;
-    [SerializeField] private float energyCostPerSecond = 10f;
-    [SerializeField] private float energyRegenRate = 5f;
+    private float currentDarkEnergy;
 
-    private float darkEnergy;
-    private bool isDraining = false;
+    [Header("Events")]
+    public UnityEvent<float, float> darkEnergyChanged;
 
-    public UnityEvent<float, float> darkEnergyChange = new UnityEvent<float, float>();
-
-    private void Start()
+    private void Awake()
     {
-        darkEnergy = maxDarkEnergy;
-        darkEnergyChange?.Invoke(darkEnergy, maxDarkEnergy);
+        currentDarkEnergy = maxDarkEnergy;
     }
 
-    private void Update()
+    public void UseDarkEnergy(float amount)
     {
-        if (isDraining)
+        if (currentDarkEnergy >= amount)
         {
-            darkEnergy -= energyCostPerSecond * Time.deltaTime;
-            darkEnergy = Mathf.Max(darkEnergy, 0f);
-            darkEnergyChange?.Invoke(darkEnergy, maxDarkEnergy);
-
-            if (darkEnergy <= 0f)
-            {
-                StopDrain();
-            }
-        }
-        else
-        {
-            if (darkEnergy < maxDarkEnergy)
-            {
-                darkEnergy += energyRegenRate * Time.deltaTime;
-                darkEnergy = Mathf.Min(darkEnergy, maxDarkEnergy);
-                darkEnergyChange?.Invoke(darkEnergy, maxDarkEnergy);
-            }
+            currentDarkEnergy -= amount;
+            darkEnergyChanged?.Invoke(currentDarkEnergy, maxDarkEnergy);
         }
     }
 
-    public void StartDrain()
+    public void RegenerateDarkEnergy(float amount)
     {
-        isDraining = true;
+        currentDarkEnergy += amount;
+        darkEnergyChanged?.Invoke(currentDarkEnergy, maxDarkEnergy);
     }
-
-    public void StopDrain()
+    public float CurrentDarkEnergy
     {
-        isDraining = false;
+        get => currentDarkEnergy;
+        set
+        {
+            currentDarkEnergy = Mathf.Max(0, value);
+            darkEnergyChanged?.Invoke(currentDarkEnergy, maxDarkEnergy);
+        }
     }
+    public float MaxDarkEnergy => maxDarkEnergy;
 
-    public bool HasEnoughEnergy(float threshold)
+    public void CopyDarkEnergy(DarkEnergyManager other)
     {
-        return darkEnergy >= threshold;
-    }
+        this.currentDarkEnergy = other.currentDarkEnergy;
+        darkEnergyChanged?.Invoke(currentDarkEnergy, maxDarkEnergy);
 
-    public void RestoreEnergy(float amount)
-    {
-        darkEnergy = Mathf.Min(darkEnergy + amount, maxDarkEnergy);
-        darkEnergyChange?.Invoke(darkEnergy, maxDarkEnergy);
-    }
-
-    public float getDarkEnergy() => darkEnergy;
-    public float getMaxEnergy() => maxDarkEnergy;
-
-    public void changeEnergy(DarkEnergyManager other)
-    {
-        darkEnergy = other.getDarkEnergy();
-        darkEnergyChange?.Invoke(darkEnergy, maxDarkEnergy);
     }
 }

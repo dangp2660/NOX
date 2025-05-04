@@ -1,145 +1,103 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
 public class PlayerSwitch : MonoBehaviour
 {
-    [Header("Forms Settings")]
     [SerializeField] public GameObject defaultForm;
     [SerializeField] public GameObject darkForm;
     [SerializeField] private CinemachineVirtualCamera camera;
 
     private PlayerMovement defaultMove;
     private PlayerMovement darkMove;
-
     private Damageable defaultHealth;
     private Damageable darkHealth;
-
     private DarkEnergyManager defaultEnergy;
     private DarkEnergyManager darkEnergy;
 
-    [SerializeField] private float energyCostPerSecond = 10f;
-    private float darkFormTimer = 0f;
-    [SerializeField] private bool isDefault = true;
+
+    public bool isDefault = true;
+
+    [Header("Dark Energy Settings")]
+    public float darkFormDrainRate = 10f; // per second
+    public float regenRate = 5f; // per second
 
     private void Start()
     {
-        // Kiểm tra và gán các thành phần
-        if (defaultForm == null)
-        {
-            Debug.LogError("defaultForm chưa được gán trong Unity Inspector!");
-            return;
-        }
-
-        if (darkForm == null)
-        {
-            Debug.LogError("darkForm chưa được gán trong Unity Inspector!");
-            return;
-        }
-
         defaultMove = defaultForm.GetComponent<PlayerMovement>();
         darkMove = darkForm.GetComponent<PlayerMovement>();
-
         defaultHealth = defaultForm.GetComponent<Damageable>();
         darkHealth = darkForm.GetComponent<Damageable>();
-
-        defaultEnergy = defaultForm.GetComponent<DarkEnergyManager>();
         darkEnergy = darkForm.GetComponent<DarkEnergyManager>();
+        defaultEnergy = defaultForm.GetComponent<DarkEnergyManager>();
 
-        // Thiết lập bắt đầu
-        defaultForm.SetActive(true);
-        darkForm.SetActive(false);
-        camera.Follow = defaultForm.transform;
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            TrySwitchForm();
-        }
+            Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
 
-        // Nếu đang ở dark form -> trừ năng lượng mỗi frame
-        if (!isDefault)
-        {
-            darkFormTimer -= Time.deltaTime;
-            darkEnergy.StartDrain();
+            isDefault = !isDefault;
 
-            if (darkFormTimer <= 0f || darkEnergy.getDarkEnergy() <= 0f)
+            defaultForm.SetActive(isDefault);
+            darkForm.SetActive(!isDefault);
+
+            if (isDefault)
             {
-                ForceSwitchToDefault();
-            }
-        }
-        else
-        {
-            defaultEnergy.StopDrain();
-        }
-    }
-
-    private void TrySwitchForm()
-    {
-        if (isDefault)
-        {
-            if (defaultEnergy.HasEnoughEnergy(10f))
-            {
-                darkFormTimer = defaultEnergy.getDarkEnergy() / energyCostPerSecond;
-                SwitchForm(false);
+                currentPosition.y += -0.1900992f;
+                defaultForm.transform.position = currentPosition;
+                defaultMove.CopyStateFrom();
+                defaultEnergy.CopyDarkEnergy(darkEnergy);
+                defaultHealth.healthCopy(darkHealth);
             }
             else
             {
-                Debug.Log("Not enough energy to enter dark form!");
+                darkForm.transform.position = currentPosition;
+                darkMove.CopyStateFrom();
+                darkHealth.healthCopy(defaultHealth);
+                darkEnergy.CopyDarkEnergy(defaultEnergy);
+            }
+
+            camera.Follow = isDefault ? defaultForm.transform : darkForm.transform;
+        }
+
+        HandleDarkEnergy();
+    }
+
+    private void HandleDarkEnergy()
+    {
+        if (!isDefault)
+        {
+            darkEnergy.CurrentDarkEnergy -= darkFormDrainRate * Time.deltaTime;
+
+            if (darkEnergy.CurrentDarkEnergy <= 0f)
+            {
+                // Auto chuyển về default
+                isDefault = true;
+                darkForm.SetActive(false);
+                defaultForm.SetActive(true);
+
+                Vector3 newPosition = darkForm.transform.position;
+                newPosition.y += -0.1900992f;
+                defaultForm.transform.position = newPosition;
+
+                defaultMove.CopyStateFrom();
+                defaultHealth.healthCopy(darkHealth);
+                defaultEnergy.CopyDarkEnergy(darkEnergy);
+
+                camera.Follow = defaultForm.transform;
             }
         }
         else
         {
-            ForceSwitchToDefault();
-        }
-    }
+            if (!defaultHealth.IsAlive || !darkHealth.IsAlive) return;
 
-    private void ForceSwitchToDefault()
-    {
-        SwitchForm(true);
-    }
-
-    private void SwitchForm(bool toDefault)
-    {
-        // Lưu vị trí giữ nguyên
-        Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
-
-        if (toDefault)
-        {
-            // Copy máu và năng lượng từ dark về default
-            defaultHealth.healthChange(darkHealth);
-            defaultEnergy.changeEnergy(darkEnergy);
-
-            darkEnergy.StopDrain();
-        }
-        else
-        {
-            // Copy máu và năng lượng từ default sang dark
-            darkHealth.healthChange(defaultHealth);
-            darkEnergy.changeEnergy(defaultEnergy);
-
-            darkEnergy.StartDrain();
+            if (defaultEnergy.CurrentDarkEnergy < defaultEnergy.MaxDarkEnergy)
+                defaultEnergy.RegenerateDarkEnergy(regenRate * Time.deltaTime);
         }
 
-        isDefault = toDefault;
-
-        defaultForm.SetActive(isDefault);
-        darkForm.SetActive(!isDefault);
-
-        if (isDefault)
-        {
-            currentPosition.y += -0.1900992f;
-            defaultForm.transform.position = currentPosition;
-            defaultMove.CopyStateFrom();
-        }
-        else
-        {
-            darkForm.transform.position = currentPosition;
-            darkMove.CopyStateFrom();
-        }
-
-        camera.Follow = isDefault ? defaultForm.transform : darkForm.transform;
     }
 }

@@ -423,5 +423,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f3619dd09b7854b8ff401f987888eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkEnergySlider: {fileID: 892577766694412730}
-  darkEnergyText: {fileID: 6902431557747270563}
+  DarkEnergySlider: {fileID: 892577766694412730}
+  DarkEnergyText: {fileID: 6902431557747270563}

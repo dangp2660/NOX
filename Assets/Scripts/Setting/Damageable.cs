@@ -61,6 +61,7 @@ public class Damageable : MonoBehaviour
             float totaldamage = damage * damageRate;
             CurrentHealth -= totaldamage;
             Debug.Log($"{gameObject.name}:" + currentHealth);
+            healthChanged.Invoke(currentHealth, maxHealth);
             isInvincible = true;
             return true;
         }
@@ -86,7 +87,7 @@ public class Damageable : MonoBehaviour
     }
 
     public float getMaxHealth() { return maxHealth; }
-    public void healthChange(Damageable other)
+    public void healthCopy(Damageable other)
     {
         this.currentHealth = other.currentHealth;
     }
