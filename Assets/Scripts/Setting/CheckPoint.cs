@@ -7,19 +7,36 @@ public class CheckPoint : MonoBehaviour
 {
     private RespawnScript respawnScript;
     private AudioManager audioManager;
+    private bool isPlayerInRange = false;
+
     private void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();  
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         respawnScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             audioManager.playSFX(audioManager.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
         }
     }
-}
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+        }
+    }
+}
