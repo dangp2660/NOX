@@ -36751,7 +36751,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000ff52bae0ed4d7babc313a90133e929be
+  m_ApplyToSortingLayers: 00000000ff52bae0ed4d7babc313a90133e929bef1abc0f7
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -83503,7 +83503,7 @@ PrefabInstance:
       objectReference: {fileID: 679279928}
     - target: {fileID: 3205357516858814272, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
       propertyPath: isDefault
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205357516858814272, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
       propertyPath: darkEnergy

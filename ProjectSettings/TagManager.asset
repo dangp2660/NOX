@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - NPC
   - CheckPoint
+  - Audio
   layers:
   - Default
   - TransparentFX

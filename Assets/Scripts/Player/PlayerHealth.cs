@@ -11,10 +11,11 @@
         [SerializeField] private GameObject blood;
         private bool isRespawning = false;
         private bool canRespawn = false;
-
+        private AudioManager audioManager;
     // Update is called once per frame
     private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         animator = GetComponent<Animator>();
         Damegeable = GetComponent<Damageable>();
         deathFade = FindAnyObjectByType<DeathFade>();
@@ -43,7 +44,7 @@
         if (!isAlive() && !isRespawning)
         {
             isRespawning = true;
-
+            audioManager.playSFX(audioManager.dealth);
             animator.SetBool(AnimationStringList.isAlive, false);
             deathFade.showDeathScreen();
 
