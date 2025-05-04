@@ -47,6 +47,15 @@ public class Magictile : MonoBehaviour
         }
            
     }
+    public void onStop()
+    {
+        rb.velocity = Vector2.zero; 
+    }
+    public void startMove()
+    {
+        float direction = Mathf.Sign(transform.localScale.x);
+        rb.velocity = new Vector2(moveSpeed.x * direction, moveSpeed.y);
+    }
     public void OnDestroy()
     {
         Destroy(gameObject);

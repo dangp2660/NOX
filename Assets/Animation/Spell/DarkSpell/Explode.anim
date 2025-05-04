@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill
+  m_Name: Explode
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,17 +21,19 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 87bda23192ad05d4fbecac3208e9a8cf, type: 3}
+      value: {fileID: 155591700, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: 304422955cd6e6b4dbf9dfcc0fb73324, type: 3}
+      value: {fileID: -275111879, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: 27280ca02af194e4e9cf82128b743e7d, type: 3}
+      value: {fileID: -1315336936, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     - time: 0.3
-      value: {fileID: 21300000, guid: c2d342002765b0b4fb6dc0f2bacafdf7, type: 3}
+      value: {fileID: -651809540, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     - time: 0.4
-      value: {fileID: 21300000, guid: 26a4a7adee01551488db0ab8114ec017, type: 3}
+      value: {fileID: -2007264565, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: 6c559ef48c4d76c40ac77b52aa4a5106, type: 3}
+      value: {fileID: 271551709, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - time: 0.6
+      value: {fileID: 1458870539, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,18 +56,19 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 87bda23192ad05d4fbecac3208e9a8cf, type: 3}
-    - {fileID: 21300000, guid: 304422955cd6e6b4dbf9dfcc0fb73324, type: 3}
-    - {fileID: 21300000, guid: 27280ca02af194e4e9cf82128b743e7d, type: 3}
-    - {fileID: 21300000, guid: c2d342002765b0b4fb6dc0f2bacafdf7, type: 3}
-    - {fileID: 21300000, guid: 26a4a7adee01551488db0ab8114ec017, type: 3}
-    - {fileID: 21300000, guid: 6c559ef48c4d76c40ac77b52aa4a5106, type: 3}
+    - {fileID: 155591700, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: -275111879, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: -1315336936, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: -651809540, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: -2007264565, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: 271551709, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
+    - {fileID: 1458870539, guid: 0be5fb02a1b907e4799c9edc69a7ff4a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6
+    m_StopTime: 0.70000005
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -85,8 +88,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: firePrefabs
+  - time: 0.6
+    functionName: OnDestroy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

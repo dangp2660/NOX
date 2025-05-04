@@ -31,6 +31,20 @@ public class PlayerSwitch : MonoBehaviour
         darkHealth = darkForm.GetComponent<Damageable>();
         darkEnergy = darkForm.GetComponent<DarkEnergyManager>();
         defaultEnergy = defaultForm.GetComponent<DarkEnergyManager>();
+        if (!isDefault)
+        {
+            Vector3 currentPosition = defaultForm.transform.position;
+
+            defaultForm.SetActive(false);
+            darkForm.SetActive(true);
+
+            darkForm.transform.position = currentPosition;
+            darkMove.CopyStateFrom();
+            darkHealth.healthCopy(defaultHealth);
+            darkEnergy.CopyDarkEnergy(defaultEnergy);
+
+            camera.Follow = darkForm.transform;
+        }
 
     }
 

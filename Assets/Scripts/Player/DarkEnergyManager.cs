@@ -45,6 +45,5 @@ public class DarkEnergyManager : MonoBehaviour
     {
         this.currentDarkEnergy = other.currentDarkEnergy;
         darkEnergyChanged?.Invoke(currentDarkEnergy, maxDarkEnergy);
-
     }
 }
