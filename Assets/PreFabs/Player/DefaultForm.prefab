@@ -151,8 +151,9 @@ GameObject:
   - component: {fileID: 9204941724775531024}
   - component: {fileID: 5337634792809850259}
   - component: {fileID: 598642605627758385}
-  - component: {fileID: 7919457457522824918}
   - component: {fileID: 2661210271584348040}
+  - component: {fileID: 1423617468309696160}
+  - component: {fileID: 5996947830333971225}
   m_Layer: 6
   m_Name: DefaultForm
   m_TagString: Player
@@ -638,7 +639,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ebad460ad6c1d4787a4a9fb68f2101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7919457457522824918
+  changingSpell: {fileID: 0}
+  changingPosition: {fileID: 0}
+  coolDown: 2
+--- !u!114 &2661210271584348040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b82a7d855187372499f88632bcf1f051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blood: {fileID: 6214518735679913269}
+--- !u!114 &1423617468309696160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a7413e3a39a9e4b8b06014dedf658f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDarkEnergy: 100
+  energyCostPerSecond: 10
+  energyRegenRate: 5
+  darkEnergyChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5996947830333971225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -657,19 +692,6 @@ MonoBehaviour:
   isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
---- !u!114 &2661210271584348040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5239481941380998345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b82a7d855187372499f88632bcf1f051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blood: {fileID: 6214518735679913269}
 --- !u!1 &5714647995679997085
 GameObject:
   m_ObjectHideFlags: 0

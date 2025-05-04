@@ -31,12 +31,11 @@ public class PlayerAttack : MonoBehaviour
 
     public void HandleMagic(InputAction.CallbackContext context)
     {
-        if (context.started)
-            Debug.Log("Nhấn phím magic");
+        
 
         if (context.started && canUseSkill)
         {
-            Debug.Log("Dùng spell");
+            Debug.Log("UseSpell");
 
             canUseSkill = false;
 

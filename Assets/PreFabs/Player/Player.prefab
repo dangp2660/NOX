@@ -49,7 +49,13 @@ MonoBehaviour:
   defaultForm: {fileID: 8844863325439863241}
   darkForm: {fileID: 1705258302258186044}
   camera: {fileID: 0}
+  maxDarkEnergy: 100
+  energyCostPerSecond: 10
+  energyRegenRate: 5
   isDefault: 1
+  darkEnergyChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3605453958269603072
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class Damageable : MonoBehaviour
 {
     private Animator animator;
-    public UnityEvent<float, float> healthChanged; 
+    public UnityEvent<float, float> healthChanged;
 
     [Header("Stats")]
     [SerializeField] private Data stats; //dùng Data ScriptableObject
@@ -51,7 +51,7 @@ public class Damageable : MonoBehaviour
                 timeSinceHit = 0;
             }
         }
-        
+
     }
 
     public bool TakeDamage(float damage, float damageRate)
@@ -86,4 +86,8 @@ public class Damageable : MonoBehaviour
     }
 
     public float getMaxHealth() { return maxHealth; }
+    public void healthChange(Damageable other)
+    {
+        this.currentHealth = other.currentHealth;
+    }
 }

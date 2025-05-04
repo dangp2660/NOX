@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -6,42 +6,50 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Slider HealthSlider;
     public TMP_Text HealthBarText;
     private Damageable playerDamageable;
+
     private void Awake()
     {
+        // Find the player object and get its Damageable component
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerDamageable = player.GetComponent<Damageable>();
     }
+
     void Start()
     {
-        HealthSlider.value = CaculateSliderPercentage(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
-        HealthBarText.text = $"{CaculateSliderPercentage(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth()) * 100}%";
+        // Initialize health slider and text
+        UpdateHealthBar(playerDamageable.CurrentHealth, playerDamageable.getMaxHealth());
     }
 
-    // Update is called once per frame
-    private float CaculateSliderPercentage(float currentHealth, float maxHealth)
+    private void UpdateHealthBar(float currentHealth, float maxHealth)
     {
-        return playerDamageable.CurrentHealth / playerDamageable.getMaxHealth();
+        float healthPercentage = CalculateSliderPercentage(currentHealth, maxHealth);
+        HealthSlider.value = healthPercentage;
+        HealthBarText.text = $"{healthPercentage * 100}%";
     }
-    void Update()
+
+    private float CalculateSliderPercentage(float currentHealth, float maxHealth)
     {
-        
+        return currentHealth / maxHealth;
     }
+
     private void OnEnable()
     {
-        playerDamageable.healthChanged.AddListener(OnPLaterHealthChange);
-    }
-    private void OnDisable()
-    {
-        playerDamageable.healthChanged.RemoveListener(OnPLaterHealthChange);
+        // Subscribe to health change events
+        playerDamageable.healthChanged.AddListener(OnPlayerHealthChange);
     }
 
-    private void OnPLaterHealthChange(float newHealth, float maxHealth)
+    private void OnDisable()
     {
-        HealthSlider.value = CaculateSliderPercentage(newHealth, maxHealth);
-        HealthBarText.text = $"{CaculateSliderPercentage(newHealth, maxHealth) * 100}%";
+        // Unsubscribe from health change events
+        playerDamageable.healthChanged.RemoveListener(OnPlayerHealthChange);
+    }
+
+    private void OnPlayerHealthChange(float newHealth, float maxHealth)
+    {
+        // Update health bar when health changes
+        UpdateHealthBar(newHealth, maxHealth);
     }
 }
