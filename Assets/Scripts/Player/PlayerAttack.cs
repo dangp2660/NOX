@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float coolDown = 2f;
 
     private GameObject activeSpell;
-    private float cooldownTimer = 0f;
+    public float cooldownTimer = 0f;
 
     private void Awake()
     {

@@ -26,8 +26,8 @@ public class PlayerSwitch : MonoBehaviour
 
     private void Start()
     {
-        defaultFormAttack = GetComponent<PlayerAttack>();
-        darkFormAttack = GetComponent<PlayerAttack>();
+        defaultFormAttack = defaultForm.GetComponent<PlayerAttack>();
+        darkFormAttack = darkForm.GetComponent<PlayerAttack>();
         defaultMove = defaultForm.GetComponent<PlayerMovement>();
         darkMove = darkForm.GetComponent<PlayerMovement>();
         defaultHealth = defaultForm.GetComponent<Damageable>();

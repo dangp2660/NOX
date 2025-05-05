@@ -36630,7 +36630,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.05518341, y: 1.8761694}
@@ -83098,6 +83098,14 @@ PrefabInstance:
       propertyPath: stats
       value: 
       objectReference: {fileID: 11400000, guid: fb5acfe81c104fa4bae8363efb6f8fe3, type: 2}
+    - target: {fileID: 6065814601604786360, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: airSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065814601604786360, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: jumpSpeed
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7560571888223180637, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
       propertyPath: m_Name
       value: Player
