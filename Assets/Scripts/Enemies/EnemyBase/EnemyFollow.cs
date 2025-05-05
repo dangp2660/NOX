@@ -26,7 +26,7 @@ public class EnemyFollow : MonoBehaviour
 
     private void Awake()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         baseEnemy = GetComponent<Enemy>();

@@ -13,6 +13,7 @@ public class EyeMonster : Enemy
 
     private void Awake()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         this.initialState = EnemyState.Sleep;
     }

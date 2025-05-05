@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 091d011bf70ced54cac8a49ba23a6141
   - enabled: 1
+    path: Assets/Scenes/Setting.unity
+    guid: a2f1114b01063fc4dac716ff51dd8ecb
+  - enabled: 1
     path: Assets/Scenes/ForestMap.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/CutScene1.unity
+    guid: 7a50e87ccdfbfb24cb52745c2c218681
+  - enabled: 1
+    path: Assets/Scenes/BossBattle1.unity
+    guid: e78d16f6f2eda7f408427fd92b3009ed
   m_configObjects: {}

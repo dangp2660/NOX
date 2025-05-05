@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-// RespawnScript.cs
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class RespawnScript : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    public string sceneName;
+    private GameObject player;
     private GameObject currentCheckpoint;
 
     private void Awake()
     {
-        
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && currentCheckpoint != null)
@@ -24,16 +23,20 @@ public class RespawnScript : MonoBehaviour
     public void SetCheckpoint(GameObject checkpoint)
     {
         currentCheckpoint = checkpoint;
-        Debug.Log("current Point" + currentCheckpoint);
-
+        Debug.Log("Current checkpoint set to: " + checkpoint.name);
     }
 
     public void RespawnPlayer()
     {
         if (player != null && currentCheckpoint != null)
         {
-            player.transform.position = currentCheckpoint.transform.position;
+            // Add offset to avoid being inside ground or enemies
+            player.transform.position = currentCheckpoint.transform.position + Vector3.up * 1f;
+        }
+        else
+        {
+            Debug.LogWarning("Respawn failed. Reloading scene: " + sceneName);
+            SceneManager.LoadScene(sceneName);
         }
     }
 }
-
