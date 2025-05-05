@@ -15,7 +15,8 @@ public class PlayerSwitch : MonoBehaviour
     private Damageable darkHealth;
     private DarkEnergyManager defaultEnergy;
     private DarkEnergyManager darkEnergy;
-
+    private PlayerAttack defaultFormAttack;
+    private PlayerAttack darkFormAttack;
 
     public bool isDefault = true;
 
@@ -25,6 +26,8 @@ public class PlayerSwitch : MonoBehaviour
 
     private void Start()
     {
+        defaultFormAttack = GetComponent<PlayerAttack>();
+        darkFormAttack = GetComponent<PlayerAttack>();
         defaultMove = defaultForm.GetComponent<PlayerMovement>();
         darkMove = darkForm.GetComponent<PlayerMovement>();
         defaultHealth = defaultForm.GetComponent<Damageable>();
@@ -66,6 +69,7 @@ public class PlayerSwitch : MonoBehaviour
                 defaultMove.CopyStateFrom();
                 defaultEnergy.CopyDarkEnergy(darkEnergy);
                 defaultHealth.healthCopy(darkHealth);
+                defaultFormAttack.getCoolDown(darkFormAttack);
             }
             else
             {
@@ -73,6 +77,7 @@ public class PlayerSwitch : MonoBehaviour
                 darkMove.CopyStateFrom();
                 darkHealth.healthCopy(defaultHealth);
                 darkEnergy.CopyDarkEnergy(defaultEnergy);
+                darkFormAttack.getCoolDown(defaultFormAttack);
             }
 
             camera.Follow = isDefault ? defaultForm.transform : darkForm.transform;
