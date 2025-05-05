@@ -7,12 +7,22 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement movement;
     private PlayerAttack attack;
     private PlayerHealth health;
-
+    private PlayerInput input;
     private void Awake()
     {
+        input = GetComponent<PlayerInput>();
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
+    }
+    public void EnableSignal()
+    {
+        input.enabled = true;
+    }
+
+    public void DisableSignal()
+    {
+        input.enabled = false;
     }
 
     private void Start()

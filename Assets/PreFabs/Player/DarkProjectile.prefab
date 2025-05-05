@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2105252806827540464}
   - component: {fileID: 7231596965412056206}
   - component: {fileID: 1833451419902591318}
+  - component: {fileID: -3846804658897075815}
   m_Layer: 8
   m_Name: DarkProjectile
   m_TagString: Untagged
@@ -149,3 +150,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: {x: 4, y: 0}
   dame: 30
+--- !u!61 &-3846804658897075815
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652978765765221139}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2.4309998, y: 1.9448009}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 33.00806, y: 33}
+    newSize: {x: 33.00806, y: 33}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 16.26117, y: 13.552007}
+  m_EdgeRadius: 0

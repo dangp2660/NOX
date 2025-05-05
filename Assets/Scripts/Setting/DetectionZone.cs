@@ -62,21 +62,19 @@ public class DetectionZone : MonoBehaviour
             }
         }
     }
-    private void Update()
+    public void ForceRecheck(Collider2D collider)
     {
-        for (int i = detectedColliders.Count - 1; i >= 0; i--)
+        if (collider != null && collider.CompareTag("Player"))
         {
-            var collider = detectedColliders[i];
-            PlayerHealth health = collider.GetComponent<PlayerHealth>();
-            if (!health.isAlive())
+            if (!detectedColliders.Contains(collider))
             {
-                detectedColliders.RemoveAt(i);
-
-                if (detectedColliders.Count <= 0)
-                {
-                    noCollidersRemain.Invoke();
-                }
+                detectedColliders.Add(collider);
             }
         }
+    }
+
+    private void Update()
+    {
+        
     }
 }

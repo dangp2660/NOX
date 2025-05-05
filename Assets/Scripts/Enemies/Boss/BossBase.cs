@@ -54,6 +54,7 @@ public class BossBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updatePlayer();
         if (!Damageable.IsAlive)
         {
             return;
@@ -62,6 +63,16 @@ public class BossBase : MonoBehaviour
         handleAttack();
         die();
     }
+
+    private void updatePlayer()
+    {
+        GameObject newPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (newPlayer != null)
+        {
+            Player = newPlayer.transform;
+
+        }
+    }
     private float getCurrientMoveSpeed()
     {
         if(!canMove) return 0f;
@@ -69,20 +80,23 @@ public class BossBase : MonoBehaviour
     }
     protected virtual void handleMove()
     {
-        IsMoving = rb.velocity != Vector2.zero;
-        if (IsMoving) 
+        if (canMove && Player != null)
         {
             Vector2 direction = (Player.transform.position - transform.position).normalized;
             rb.velocity = new Vector2(direction.x * getCurrientMoveSpeed(), rb.velocity.y);
+            IsMoving = true;
+
             if (direction.x > 0.001f)
-            {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
-            else if(direction.x < -0.001f)
-            {
+            else if (direction.x < -0.001f)
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            }
         }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            IsMoving = false;
+        }
+
     }
     protected virtual void handleAttack()
     {
@@ -157,4 +171,22 @@ public class BossBase : MonoBehaviour
         Debug.Log("Trận chiến với boss đã bắt đầu!");
         // Hiệu ứng âm thanh hoặc animation khi trận chiến bắt đầu
     }
+
+    public void EnableSignal()
+    {
+        this.enabled = true;
+        Debug.Log("Boss được bật!");
+    
+    }
+
+
+    public void DisableSignal()
+    {
+        Debug.Log("Boss stop");
+        this.enabled = false;
+        rb.velocity = Vector2.zero;
+        animator.Rebind(); // reset animation state nếu cần
+    }
+
+
 }

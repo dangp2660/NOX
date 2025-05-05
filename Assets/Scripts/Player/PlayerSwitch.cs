@@ -114,4 +114,13 @@ public class PlayerSwitch : MonoBehaviour
         }
 
     }
+
+    public void EnableSignal()
+    {
+        this.enabled = true;
+    }
+    public void DisableSignal()
+    {
+        this.enabled = false;
+    }
 }
