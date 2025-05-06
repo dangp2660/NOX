@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 internal class AnimationStringList 
 {
@@ -21,7 +18,6 @@ internal class AnimationStringList
     internal static string Explode = "Explode";
     internal static string isAlive = "isAlive";
     internal static string Wakeup = "Wakeup";
-
-    
-
+    internal static string Start = "Start";
+    internal static string End = "End";
 }

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class TriggerNextScene : MonoBehaviour
 {
-    NextScene nextScene;
-    private void Start()
-    {
-        nextScene = GetComponent<NextScene>();
-    }
+    [SerializeField] private bool goNextLevel;
+    [SerializeField] private string levelName;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            nextScene.enabled = true;
+            if (goNextLevel)
+                SceneController.instance.NextLevel();
+            else
+                SceneController.instance.LoadScene(levelName);
         }
+        
     }
 }

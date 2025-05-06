@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScenes : MonoBehaviour
 {
-    public void changeScene(string LoadScene)
+    public void playGame()
     {
-        SceneManager.LoadScene(LoadScene);
+        SceneManager.LoadSceneAsync(2);
     }
-    public void outGame()
+    public void setting()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
+
+    public void quitGame()
     {
         Application.Quit();
     }

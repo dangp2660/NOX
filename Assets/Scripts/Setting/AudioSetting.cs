@@ -12,9 +12,9 @@ public class AudioSettings : MonoBehaviour
     void Start()
     {
         // Khởi tạo giá trị từ PlayerPrefs nếu có
-        masterSlider.value = PlayerPrefs.GetFloat("MasterVol", 0.75f);
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVol", 0.75f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol", 0.75f);
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVol", masterSlider.value);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVol", musicSlider.value);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol", sfxSlider.value    );
 
         SetMasterVolume(masterSlider.value);
         SetMusicVolume(musicSlider.value);

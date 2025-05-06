@@ -12,7 +12,6 @@
         public AudioClip backgroud;
         public AudioClip dealth;
         public AudioClip checkPoint;
-        
         public static AudioManager instance;
         private void Awake()
         {
@@ -22,9 +21,11 @@
                 DontDestroyOnLoad(gameObject);
             }
             else
+            {
                 Destroy(gameObject);
-    }
-    private void Start()
+            }
+        }
+        private void Start()
         {   
             
             Music.clip = backgroud;
