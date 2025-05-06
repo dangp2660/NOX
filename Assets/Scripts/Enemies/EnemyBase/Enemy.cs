@@ -9,7 +9,8 @@ public enum EnemyState
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private string id;
+    [SerializeField] private string checkpointID; 
+    private Vector3 spawnPoint;
     protected EnemyState enemyState;
     [SerializeField] protected EnemyState initialState = EnemyState.Patrol;
 
@@ -18,9 +19,25 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
+        EnemyManager.instance.addEnemy(this);
+        spawnPoint = transform.position;
         animator = GetComponent<Animator>();
         patrol = GetComponent<EnemyPatrol>();
         enemyState = initialState; // Gán trạng thái ban đầu từ prefab
+    }
+
+    public void respawnEnemy()
+    {
+        gameObject.SetActive(true);
+        transform.position = spawnPoint;
+        enemyState = initialState;
+        if (patrol != null) { patrol.enabled = true; }
+        animator.SetBool(AnimationStringList.isAlive, true);
+    }
+
+    public string getCheckPointID()
+    {
+        return checkpointID;
     }
 
     protected virtual void Update()

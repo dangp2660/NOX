@@ -6,7 +6,7 @@ public class RespawnScript : MonoBehaviour
     public string sceneName;
     private GameObject player;
     private GameObject currentCheckpoint;
-
+    private string currentCheckPointID;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -23,6 +23,7 @@ public class RespawnScript : MonoBehaviour
     public void SetCheckpoint(GameObject checkpoint)
     {
         currentCheckpoint = checkpoint;
+        currentCheckPointID = checkpoint.name;
         Debug.Log("Current checkpoint set to: " + checkpoint.name);
     }
 
@@ -32,6 +33,7 @@ public class RespawnScript : MonoBehaviour
         {
             // Add offset to avoid being inside ground or enemies
             player.transform.position = currentCheckpoint.transform.position + Vector3.up * 1f;
+            EnemyManager.instance.respawnEnemy(currentCheckPointID);
         }
         else
         {
