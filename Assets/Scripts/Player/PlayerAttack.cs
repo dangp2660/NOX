@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
-
+    private PlayerMovement movement;
     [Header("Spell Settings")]
     [SerializeField] private GameObject changingSpell;
     [SerializeField] private Transform changingPosition;
@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
+        movement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
     }
 
@@ -33,8 +34,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.started)
         {
+            if(movement.IsDash)
+            {
+                Debug.Log("cancel");
+                animator.ResetTrigger(AnimationStringList.Attack1);
+                animator.SetBool(AnimationStringList.isDash, true);
+                return;
+            }   
             animator.SetTrigger(AnimationStringList.Attack1);
         }
+        
+        
     }
 
     public void HandleMagic(InputAction.CallbackContext context)
@@ -53,6 +63,10 @@ public class PlayerAttack : MonoBehaviour
 
             animator.SetTrigger(AnimationStringList.MagicAttack);
         }
+        if (context.started && movement.IsDash)
+        {
+            animator.SetBool(AnimationStringList.isDash, true);
+        }
     }
 
     private void OnDestroy()
@@ -61,12 +75,6 @@ public class PlayerAttack : MonoBehaviour
         {
             Destroy(activeSpell, 0.5f);
         }
-    }
-
-    // (Tùy chọn) Hàm public để lấy % cooldown còn lại
-    public float GetCooldownPercent()
-    {
-        return Mathf.Clamp01(cooldownTimer / coolDown);
     }
 
     public void getCoolDown(PlayerAttack other)

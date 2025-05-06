@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
                         return airSpeed;
                 }
             }
-            return isAlive ? attackMove: 0;
+            return isAlive? attackMove :0;
         }
     }
     private float CurrentSpeed;
@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
     // Hàm được Input System gọi khi nhấn Dash
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (canDash && CanMove)
+        if (canDash)
         {
             StartCoroutine(Dashing());
             dashEffect();
