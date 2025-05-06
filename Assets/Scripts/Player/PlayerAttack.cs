@@ -81,4 +81,9 @@ public class PlayerAttack : MonoBehaviour
     {
         this.cooldownTimer = other.cooldownTimer;
     }
+
+    public void attackSlashSFX(AudioClip clip)
+    {
+        AudioManager.instance.playSFX(clip);
+    }
 }

@@ -1,12 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// CheckPoint.cs
 public class CheckPoint : MonoBehaviour
 {
     private RespawnScript respawnScript;
     private bool isPlayerInRange = false;
+
+    [SerializeField] private string checkpointID = "KV1";
+    public string GetID() => checkpointID;
 
     private void Start()
     {

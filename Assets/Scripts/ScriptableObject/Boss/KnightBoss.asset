@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: KnightBoss
   m_EditorClassIdentifier: 
   hp: 200
-  dame: 25
-  defend: 5
+  dame: 20

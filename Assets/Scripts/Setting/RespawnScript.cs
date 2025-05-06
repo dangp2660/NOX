@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class RespawnScript : MonoBehaviour
@@ -29,16 +31,23 @@ public class RespawnScript : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        if (player != null && currentCheckpoint != null)
+        if (currentCheckpoint != null)
         {
-            // Add offset to avoid being inside ground or enemies
             player.transform.position = currentCheckpoint.transform.position + Vector3.up * 1f;
+            AudioManager.instance.playSFX(AudioManager.instance.reSpawn);
+            // Add offset to avoid being inside ground or enemies
             EnemyManager.instance.respawnEnemy(currentCheckPointID);
+            StartCoroutine(FadeRespawn());
         }
         else
         {
-            Debug.LogWarning("Respawn failed. Reloading scene: " + sceneName);
             SceneManager.LoadScene(sceneName);
         }
+    }
+    IEnumerator FadeRespawn()
+    {
+        SceneController.instance.Transition.SetTrigger(AnimationStringList.End);
+        yield return new WaitForSeconds(1f);
+        SceneController.instance.Transition.SetTrigger(AnimationStringList.Start);
     }
 }

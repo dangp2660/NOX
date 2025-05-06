@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
-    [SerializeField] private Animator Transition;
+    public Animator Transition;
     private void Awake()
     {
         if (instance == null)

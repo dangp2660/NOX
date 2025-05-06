@@ -51,6 +51,7 @@ MonoBehaviour:
   backgroud: {fileID: 8300000, guid: 0f0cb9811ac0d094b87e0b2082cf20ae, type: 3}
   dealth: {fileID: 8300000, guid: 9c8f281c23f9f404b91ba98b1da9845f, type: 3}
   checkPoint: {fileID: 8300000, guid: aff7762e97422e247bcf195a235cf833, type: 3}
+  reSpawn: {fileID: 8300000, guid: 21c3473959634f84d809964f72ed1158, type: 3}
 --- !u!1 &1897389088511104366
 GameObject:
   m_ObjectHideFlags: 0

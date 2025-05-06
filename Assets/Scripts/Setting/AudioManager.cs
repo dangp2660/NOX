@@ -12,6 +12,8 @@
         public AudioClip backgroud;
         public AudioClip dealth;
         public AudioClip checkPoint;
+        public AudioClip reSpawn;
+
         public static AudioManager instance;
         private void Awake()
         {
