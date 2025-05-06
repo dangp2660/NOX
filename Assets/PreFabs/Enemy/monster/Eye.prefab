@@ -40,7 +40,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176266013113772236}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d76bd27f75546643898ad46942f3b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  checkpointID: 
   initialState: 4
   wakeupZone: {fileID: 5676102324609944673}
   attackRange: 1.75
