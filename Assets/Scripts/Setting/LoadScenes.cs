@@ -12,6 +12,10 @@ public class LoadScenes : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
+    public void menuGame()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 
     public void quitGame()
     {

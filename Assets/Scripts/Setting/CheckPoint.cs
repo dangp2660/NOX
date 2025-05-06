@@ -6,12 +6,10 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     private RespawnScript respawnScript;
-    private AudioManager audioManager;
     private bool isPlayerInRange = false;
 
     private void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         respawnScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
     }
 
@@ -19,7 +17,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            audioManager.playSFX(audioManager.checkPoint);
+            AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
         }
     }
