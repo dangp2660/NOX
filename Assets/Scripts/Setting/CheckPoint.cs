@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CheckPoint : MonoBehaviour
@@ -12,22 +13,26 @@ public class CheckPoint : MonoBehaviour
 
     private void Start()
     {
-        respawnScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
+        respawnScript = GameObject.FindGameObjectWithTag("Respawn")?.GetComponent<RespawnScript>();
         player = GameObject.FindGameObjectWithTag("Player");
-        if(player == null)
+        if (player == null)
         {
-            Debug.Log(":");
+            Debug.LogError("Player not found in the scene.");
         }
         PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        if (respawnScript == null)
+        {
+            Debug.LogError("RespawnScript not found on any object with tag 'Respawn'.");
+        }
     }
+
 
     private void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && Keyboard.current.eKey.wasPressedThisFrame)
         {
             AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
-            Debug.Log(this.gameObject);
             SaveData data = new SaveData();
             Vector2 pos = player.transform.position;
             data.isDefault = PlayerManager.GetComponent<PlayerSwitch>().isDefault;
@@ -38,6 +43,7 @@ public class CheckPoint : MonoBehaviour
             data.currentEnergy = player.GetComponent<DarkEnergyManager>().CurrentDarkEnergy;
             data.currentMap = SceneManager.GetActiveScene().name;
             SaveManager.Save(data);
+            Debug.Log("Checkpoint set: " + checkpointID);
         }
     }
 

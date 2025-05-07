@@ -76,7 +76,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         animator.SetBool(AnimationStringList.isAlive, false);
-        Destroy(gameObject, 2f);
     }
 
     public void SetData(Data data) { }

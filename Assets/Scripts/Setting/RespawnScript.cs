@@ -26,13 +26,14 @@ public class RespawnScript : MonoBehaviour
     {
         currentCheckpoint = checkpoint;
         currentCheckPointID = checkpoint.name;
-        Debug.Log("Current checkpoint set to: " + checkpoint.name);
+        Debug.Log("Current checkpoint set to: " + checkpoint.name + ", " + checkpoint);
     }
 
     public void RespawnPlayer()
     {
         if (currentCheckpoint != null)
         {
+            Debug.Log(currentCheckpoint.name);
             player.transform.position = currentCheckpoint.transform.position + Vector3.up * 1f;
             AudioManager.instance.playSFX(AudioManager.instance.reSpawn);
             // Add offset to avoid being inside ground or enemies
