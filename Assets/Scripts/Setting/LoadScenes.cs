@@ -4,17 +4,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScenes : MonoBehaviour
 {
+    
     public void playGame()
     {
-        SceneManager.LoadSceneAsync(2);
+        SceneManager.LoadScene(2);
+    }
+
+    public void LoadGame()
+    {
+        SaveManager.Load();
     }
     public void setting()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
     }
     public void menuGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
+    }
+
+    public void loadScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+    public void LoadScene(int id)
+    {
+        SceneManager.LoadSceneAsync(id);
     }
 
     public void quitGame()

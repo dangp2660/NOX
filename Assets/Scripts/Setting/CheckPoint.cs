@@ -7,12 +7,14 @@ public class CheckPoint : MonoBehaviour
     private bool isPlayerInRange = false;
     private GameObject player;
     [SerializeField] private string checkpointID = "KV1";
+    private GameObject PlayerManager;
     public string GetID() => checkpointID;
 
     private void Start()
     {
         respawnScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
         player = GameObject.FindGameObjectWithTag("Player");
+        PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
     }
 
     private void Update()
@@ -23,8 +25,10 @@ public class CheckPoint : MonoBehaviour
             respawnScript.SetCheckpoint(this.gameObject);
             SaveData data = new SaveData();
             Vector2 pos = player.transform.position;
+            data.isDefault = PlayerManager.GetComponent<PlayerSwitch>().isDefault;
             data.playerX = pos.x;
             data.playerY = pos.y;
+            data.currentCheckPointName = checkpointID;
             data.currentHealth = player.GetComponent<Damageable>().CurrentHealth;
             data.currentEnergy = player.GetComponent<DarkEnergyManager>().CurrentDarkEnergy;
             data.currentMap = SceneManager.GetActiveScene().name;

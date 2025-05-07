@@ -1,5 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SaveManager : MonoBehaviour
 {
@@ -17,7 +19,20 @@ public class SaveManager : MonoBehaviour
         if (File.Exists(savePath))
         {
             string json = File.ReadAllText(savePath);
-            return JsonUtility.FromJson<SaveData>(json);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            Debug.Log("Game loaded successfully!");
+
+            // Nếu có dữ liệu hợp lệ, chuyển sang scene game
+            if (data != null)
+            {
+                // Giả sử scene game có buildIndex = 1 hoặc tên là "GameScene"
+                SceneManager.LoadSceneAsync(data.currentMap);
+                GameObject manager = new GameObject("LoadManager");
+                SaveManager saveManager = manager.AddComponent<SaveManager>();
+                saveManager.StartCoroutine(saveManager.RestoreGameData(data));
+            }
+
+            return data;
         }
         else
         {
@@ -25,6 +40,44 @@ public class SaveManager : MonoBehaviour
             return null;
         }
     }
+
+    IEnumerator RestoreGameData(SaveData data)
+    {
+        yield return null;
+
+        //find game object
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        GameObject PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        RespawnScript respawn = GameObject.FindAnyObjectByType<RespawnScript>();
+        if (Player != null)
+        {
+            // restore position
+            Player.transform.position = new Vector3(data.playerX, data.playerY, 0);
+            // restore health and dark energy
+            Damageable health = Player.GetComponent<Damageable>();
+            DarkEnergyManager energyManager = new DarkEnergyManager();
+
+            if(health != null)
+            {
+                health.CurrentHealth = data.currentHealth;
+            }
+            if(energyManager != null)
+            {
+                energyManager.CurrentDarkEnergy = data.currentEnergy;
+            }
+        }
+        if (PlayerManager != null)
+        {
+            PlayerManager.GetComponent<PlayerSwitch>().isDefault = data.isDefault;
+        }
+        if (respawn != null)
+        {
+            GameObject checkpoint = GameObject.Find(data.currentCheckPointName);
+
+        }
+
+    }
+
 
     public static void DeleteSave()
     {

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack attack;
     private PlayerHealth health;
     private PlayerInput input;
+    [SerializeField] private GameObject UIMenu;
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
@@ -63,4 +64,13 @@ public class PlayerController : MonoBehaviour
     {
         health.OnRestart(context);
     }
-}
+
+    public void OnPauseGame(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            bool active = !UIMenu.activeSelf;
+            UIMenu.SetActive(active);
+        }
+    }
+}   

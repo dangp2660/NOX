@@ -7,5 +7,6 @@ public class SaveData
     public float maxHealth;
     public float currentEnergy;
     public string currentMap;
-    public string currentForm; // ví dụ: "default", "dark"
+    public string currentCheckPointName;
+    public bool isDefault; // ví dụ: "default", "dark"
 }
