@@ -26,12 +26,10 @@ public class SaveManager : MonoBehaviour
             if (data != null)
             {
                 // Giả sử scene game có buildIndex = 1 hoặc tên là "GameScene"
+                Debug.Log("Data");
                 SceneManager.LoadSceneAsync(data.currentMap);
-                GameObject manager = new GameObject("LoadManager");
-                SaveManager saveManager = manager.AddComponent<SaveManager>();
-                saveManager.StartCoroutine(saveManager.RestoreGameData(data));
+                
             }
-
             return data;
         }
         else
@@ -41,42 +39,6 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    IEnumerator RestoreGameData(SaveData data)
-    {
-        yield return null;
-
-        //find game object
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        GameObject PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
-        RespawnScript respawn = GameObject.FindAnyObjectByType<RespawnScript>();
-        if (Player != null)
-        {
-            // restore position
-            Player.transform.position = new Vector3(data.playerX, data.playerY, 0);
-            // restore health and dark energy
-            Damageable health = Player.GetComponent<Damageable>();
-            DarkEnergyManager energyManager = new DarkEnergyManager();
-
-            if(health != null)
-            {
-                health.CurrentHealth = data.currentHealth;
-            }
-            if(energyManager != null)
-            {
-                energyManager.CurrentDarkEnergy = data.currentEnergy;
-            }
-        }
-        if (PlayerManager != null)
-        {
-            PlayerManager.GetComponent<PlayerSwitch>().isDefault = data.isDefault;
-        }
-        if (respawn != null)
-        {
-            GameObject checkpoint = GameObject.Find(data.currentCheckPointName);
-
-        }
-
-    }
 
 
     public static void DeleteSave()

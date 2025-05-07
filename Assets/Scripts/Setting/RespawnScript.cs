@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class RespawnScript : MonoBehaviour
 {
+    public string sceneName;
     private GameObject player;
     private GameObject currentCheckpoint;
     private string currentCheckPointID;
@@ -40,7 +41,7 @@ public class RespawnScript : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(sceneName);
         }
     }
     IEnumerator FadeRespawn()

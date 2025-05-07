@@ -14,6 +14,10 @@ public class CheckPoint : MonoBehaviour
     {
         respawnScript = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
         player = GameObject.FindGameObjectWithTag("Player");
+        if(player == null)
+        {
+            Debug.Log(":");
+        }
         PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
     }
 
@@ -23,6 +27,7 @@ public class CheckPoint : MonoBehaviour
         {
             AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
+            Debug.Log(this.gameObject);
             SaveData data = new SaveData();
             Vector2 pos = player.transform.position;
             data.isDefault = PlayerManager.GetComponent<PlayerSwitch>().isDefault;

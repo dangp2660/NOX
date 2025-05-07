@@ -307,6 +307,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &231031103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1681096198728507012, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+  m_PrefabInstance: {fileID: 3084482176960969876}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144d0cc44e5d2c44a4f48a8832209db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &235921287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25998,6 +26009,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326288353}
   m_CullTransparentMesh: 1
+--- !u!1001 &348301128
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2872923338061188480, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_Name
+      value: CheckPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872923338061188480, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_TagString
+      value: CheckPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047443499231200341, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: checkpointID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 90.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.400228
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 170d629fa68d03848979d7539faafe21, type: 3}
 --- !u!1 &390119148
 GameObject:
   m_ObjectHideFlags: 0
@@ -73176,6 +73252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bandit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7744784880538580642, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: checkpointID
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74176,6 +74256,10 @@ PrefabInstance:
     - target: {fileID: 2872923338061188480, guid: 170d629fa68d03848979d7539faafe21, type: 3}
       propertyPath: m_TagString
       value: CheckPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047443499231200341, guid: 170d629fa68d03848979d7539faafe21, type: 3}
+      propertyPath: checkpointID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7053664437393632312, guid: 170d629fa68d03848979d7539faafe21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83615,6 +83699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d10aa663fa95e4ba6d26cf88ec9ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: ForestMap
 --- !u!4 &1984086747
 Transform:
   m_ObjectHideFlags: 0
@@ -83897,6 +83982,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5233636876135336328, guid: 5f8828d646e0e0d49bffc040f757530f, type: 3}
+      propertyPath: checkpointID
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83910,10 +83999,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1681096198728507012, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: UIMenu
+      value: 
+      objectReference: {fileID: 2051877830}
     - target: {fileID: 3205357516858814272, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 679279928}
+    - target: {fileID: 3205357516858814272, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: isDefault
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: Player/MenuUI[/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 231031103}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455906619842326531, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7560571888223180637, guid: ccc01aa0adaf48644843dd9588a312ab, type: 3}
       propertyPath: m_Name
       value: Player
@@ -84127,6 +84264,10 @@ PrefabInstance:
     - target: {fileID: 6906863722393557198, guid: ff4aad62f2742564486ca0616773d585, type: 3}
       propertyPath: m_Name
       value: Bandit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744784880538580642, guid: ff4aad62f2742564486ca0616773d585, type: 3}
+      propertyPath: checkpointID
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84442,6 +84583,7 @@ SceneRoots:
   - {fileID: 8232113083984687080}
   - {fileID: 235921287}
   - {fileID: 1946745772}
+  - {fileID: 348301128}
   - {fileID: 1984086747}
   - {fileID: 3084482176960969876}
   - {fileID: 754400097}
