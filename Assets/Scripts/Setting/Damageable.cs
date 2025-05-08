@@ -95,4 +95,14 @@ public class Damageable : MonoBehaviour
     {
         this.currentHealth = other.currentHealth;
     }
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        IsAlive = true;
+        isInvincible = false;
+        timeSinceHit = 0;
+        healthChanged?.Invoke(currentHealth, maxHealth);
+        Debug.Log($"{gameObject.name} HP reset to max: {maxHealth}");
+    }
+
 }

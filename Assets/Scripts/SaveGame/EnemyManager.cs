@@ -9,22 +9,35 @@ public class EnemyManager : MonoBehaviour
     private List<Enemy> allEnemies = new List<Enemy>();
     private void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null)
+        {
+            instance = this; 
+            DontDestroyOnLoad(gameObject);
+        }
         else Destroy(gameObject);
     }
     public void addEnemy(Enemy enemy)
     {
         allEnemies.Add(enemy);
+        Debug.Log(enemy);
     }
 
     public void respawnEnemy(string checkPointID)
     {
-        foreach(var enemy in allEnemies)
+        if (allEnemies.Count == 0)
         {
-            if(enemy != null && enemy.getCheckPointID() == checkPointID)
+            Debug.LogWarning("No enemies registered in EnemyManager");
+            return;
+        }
+
+        foreach (var enemy in allEnemies)
+        {
+            if (enemy != null && enemy.getCheckPointID() == checkPointID)
             {
+                Debug.Log("Respawning enemy at checkpoint: " + checkPointID);
                 enemy.respawnEnemy();
             }
         }
     }
+
 }

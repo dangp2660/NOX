@@ -20,6 +20,7 @@ public class EyeMonster : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         animator = GetComponent<Animator>();
         follow = GetComponent<EnemyFollow>();
     }

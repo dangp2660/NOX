@@ -17,23 +17,43 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected EnemyPatrol patrol;
 
+    public void Awake()
+    {
+         // hoặc Start()
+
+    }
     protected virtual void Start()
     {
         EnemyManager.instance.addEnemy(this);
         spawnPoint = transform.position;
         animator = GetComponent<Animator>();
         patrol = GetComponent<EnemyPatrol>();
-        enemyState = initialState; // Gán trạng thái ban đầu từ prefab
+        enemyState = initialState;
     }
 
-    public void respawnEnemy()
+    public virtual void respawnEnemy()
     {
+        Debug.Log("Respawn enemy: " + gameObject.name);
         gameObject.SetActive(true);
-        transform.position = spawnPoint;
+            transform.position = spawnPoint;
+            animator.SetBool(AnimationStringList.isAlive, true);
+        // Kiểm tra nếu Damageable component tồn tại
+        Damageable damageable = GetComponent<Damageable>();
+        if (damageable != null)
+        {
+            damageable.ResetHealth();
+            Debug.Log("Damageable component found. Current Health: " + damageable.CurrentHealth);
+        }
+        else
+        {
+            Debug.LogError("No Damageable component found on " + gameObject.name);
+        }
+
         enemyState = initialState;
         if (patrol != null) { patrol.enabled = true; }
-        animator.SetBool(AnimationStringList.isAlive, true);
     }
+
+
 
     public string getCheckPointID()
     {
