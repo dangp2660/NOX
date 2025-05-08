@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     // Các biến nội bộ phục vụ dash, nhảy
     private Coroutine DashGhost;
     private bool isDash = false;
-    private bool canDash = true;
+    public bool canDash = true;
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
     private bool canDoubleJump = true;

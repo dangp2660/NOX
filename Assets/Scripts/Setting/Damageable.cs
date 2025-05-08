@@ -87,6 +87,10 @@ public class Damageable : MonoBehaviour
     }
 
     public float getMaxHealth() { return maxHealth; }
+    public void upHP(float HP)
+    {
+        maxHealth += HP;
+    }
     public void healthCopy(Damageable other)
     {
         this.currentHealth = other.currentHealth;

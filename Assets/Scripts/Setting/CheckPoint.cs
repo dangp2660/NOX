@@ -33,16 +33,6 @@ public class CheckPoint : MonoBehaviour
         {
             AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
-            SaveData data = new SaveData();
-            Vector2 pos = player.transform.position;
-            data.isDefault = PlayerManager.GetComponent<PlayerSwitch>().isDefault;
-            data.playerX = pos.x;
-            data.playerY = pos.y;
-            data.currentCheckPointName = checkpointID;
-            data.currentHealth = player.GetComponent<Damageable>().CurrentHealth;
-            data.currentEnergy = player.GetComponent<DarkEnergyManager>().CurrentDarkEnergy;
-            data.currentMap = SceneManager.GetActiveScene().name;
-            SaveManager.Save(data);
             Debug.Log("Checkpoint set: " + checkpointID);
         }
     }

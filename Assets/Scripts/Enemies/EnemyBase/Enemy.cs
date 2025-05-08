@@ -78,5 +78,4 @@ public abstract class Enemy : MonoBehaviour
         animator.SetBool(AnimationStringList.isAlive, false);
     }
 
-    public void SetData(Data data) { }
 }

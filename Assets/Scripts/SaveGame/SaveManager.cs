@@ -1,49 +1,51 @@
 ﻿using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
-public class SaveManager : MonoBehaviour
+public class SaveGameManager : MonoBehaviour
 {
-    private static string savePath => Application.persistentDataPath + "/save.json";
+    private static string saveFilePath => Application.persistentDataPath + "/save.json";
 
-    public static void Save(SaveData data)
+    public static void SaveGame(Vector3 position, float currentHealth, float maxHealth, float currentDarkEnergy, float maxDarkEnergy, string currentMap, string checkpointName, bool isDefault)
     {
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(savePath, json);
-        Debug.Log("Game saved to: " + savePath);
+        SaveData data = new SaveData
+        {
+            playerX = position.x,
+            playerY = position.y,
+            currentHealth = currentHealth,
+            maxHealth = maxHealth,
+            currentDarkEnergy = currentDarkEnergy,
+            maxDarkEnergy = maxDarkEnergy,
+            currentMap = currentMap,
+            currentCheckPointName = checkpointName,
+            isDefault = isDefault
+        };
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(saveFilePath, json);
+        Debug.Log("Game saved at: " + saveFilePath);
+    }
+
+    public static void LoadGame()
+    {
+        SaveData data = Load();
+        if (data != null)
+        {
+            SceneManager.LoadScene(data.currentMap);
+        }
     }
 
     public static SaveData Load()
     {
-        if (File.Exists(savePath))
+        if (File.Exists(saveFilePath))
         {
-            string json = File.ReadAllText(savePath);
+            string json = File.ReadAllText(saveFilePath);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            Debug.Log("Game loaded successfully!");
-
-            // Nếu có dữ liệu hợp lệ, chuyển sang scene game
-            if (data != null)
-            {
-                // Giả sử scene game có buildIndex = 1 hoặc tên là "GameScene"
-                Debug.Log("Data");
-                SceneManager.LoadSceneAsync(data.currentMap);
-                
-            }
+            Debug.Log("Game loaded from: " + saveFilePath);
             return data;
         }
-        else
-        {
-            Debug.LogWarning("No save file found!");
-            return null;
-        }
-    }
-
-
-
-    public static void DeleteSave()
-    {
-        if (File.Exists(savePath))
-            File.Delete(savePath);
+        Debug.Log("No save file found.");
+        return null;
     }
 }
+

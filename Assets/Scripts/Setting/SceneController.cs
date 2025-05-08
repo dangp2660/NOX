@@ -71,10 +71,4 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(id);
         Transition.SetTrigger(AnimationStringList.Start);
     }
-
-    public void LoadGame()
-    {
-        SaveManager.Load();
-    }
-
 }

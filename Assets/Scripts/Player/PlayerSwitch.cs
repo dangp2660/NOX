@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class PlayerSwitch : MonoBehaviour
 {
+    public static PlayerSwitch Instance;
     [SerializeField] public GameObject defaultForm;
     [SerializeField] public GameObject darkForm;
     [SerializeField] private CinemachineVirtualCamera camera;
@@ -23,7 +24,17 @@ public class PlayerSwitch : MonoBehaviour
     [Header("Dark Energy Settings")]
     public float darkFormDrainRate = 10f; // per second
     public float regenRate = 5f; // per second
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance =this;
+            DontDestroyOnLoad(gameObject);
+        }else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         defaultFormAttack = defaultForm.GetComponent<PlayerAttack>();

@@ -7,11 +7,11 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement movement;
     private PlayerAttack attack;
     private PlayerHealth health;
-    private PlayerInput input;
+    private PlayerSwitch input;
     [SerializeField] private GameObject UIMenu;
     private void Awake()
     {
-        input = GetComponent<PlayerInput>();
+        input = GameObject.FindGameObjectWithTag("PlayerManager").GetComponent<PlayerSwitch>();
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPauseGame(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.started)
         {
             bool active = !UIMenu.activeSelf;
             UIMenu.SetActive(active);

@@ -9,16 +9,28 @@ public class DetectionZone : MonoBehaviour
 
     public List<Collider2D> detectedColliders = new List<Collider2D>();
     private Collider2D col;
-
+    private PlayerHealth health;
     private void Awake()
     {
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         col = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Can Attack");
-        if(collision.CompareTag("Player"))
+        PlayerHealth newHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        health = newHealth;
+        if (health != null)
+        {
+            if(!health.isAlive())
+            {
+                detectedColliders.Remove(collision);
+                Debug.Log("Delete");
+                return;
+            }
+        }
+        if (collision.CompareTag("Player"))
         {
             if (!detectedColliders.Contains(collision))
             {
@@ -75,6 +87,6 @@ public class DetectionZone : MonoBehaviour
 
     private void Update()
     {
-        
+           
     }
 }

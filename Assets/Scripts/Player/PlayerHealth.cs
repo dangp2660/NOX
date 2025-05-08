@@ -42,8 +42,7 @@
         if (!isAlive() && !isRespawning)
         {
             isRespawning = true;
-            if(AudioManager.instance != null) 
-                AudioManager.instance.playSFX(AudioManager.instance.dealth);
+            AudioManager.instance.playSFX(AudioManager.instance.dealth);
             animator.SetBool(AnimationStringList.isAlive, false);
             deathFade.showDeathScreen();
 
@@ -68,7 +67,7 @@
     {
         ResetHealth();
         RespawnScript respawn = GameObject.FindGameObjectWithTag("Respawn").GetComponent<RespawnScript>();
-        respawn.RespawnPlayer();    
+        respawn.RespawnPlayer();
         isRespawning = false;
         animator.SetBool(AnimationStringList.isAlive, true);
         ResetSprite();
