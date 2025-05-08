@@ -76,6 +76,13 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         animator.SetBool(AnimationStringList.isAlive, false);
+        StartCoroutine(delay());
+        
+    }
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
     }
 
 }

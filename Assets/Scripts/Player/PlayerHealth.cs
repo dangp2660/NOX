@@ -1,16 +1,16 @@
-﻿    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.InputSystem;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-    public class PlayerHealth : MonoBehaviour
-    {
-        private Damageable Damegeable;
-        private Animator  animator;
-        private DeathFade deathFade;
-        [SerializeField] private GameObject blood;
-        private bool isRespawning = false;
-        private bool canRespawn = false;
+public class PlayerHealth : MonoBehaviour
+{
+    private Damageable Damegeable;
+    private Animator animator;
+    private DeathFade deathFade;
+    [SerializeField] private GameObject blood;
+    private bool isRespawning = false;
+    private bool canRespawn = false;
     // Update is called once per frame
     private void Awake()
     {
@@ -26,12 +26,12 @@
     {
         Die();
     }
-        
-        
-        
+
+
+
     public void deadth(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
             Damegeable.TakeDamage(10000000, 1);
         }
@@ -42,7 +42,8 @@
         if (!isAlive() && !isRespawning)
         {
             isRespawning = true;
-            AudioManager.instance.playSFX(AudioManager.instance.dealth);
+            if (AudioManager.instance != null)
+                AudioManager.instance.playSFX(AudioManager.instance.dealth);
             animator.SetBool(AnimationStringList.isAlive, false);
             deathFade.showDeathScreen();
 
@@ -102,7 +103,7 @@
     }
     public void OnRestart(InputAction.CallbackContext context)
     {
-        if(canRespawn && context.started && !Damegeable.IsAlive)
+        if (canRespawn && context.started && !Damegeable.IsAlive)
         {
             respawnPlayer();
         }
