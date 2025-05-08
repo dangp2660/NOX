@@ -10,6 +10,8 @@ TagManager:
   - CheckPoint
   - Audio
   - PlayerManager
+  - Save
+  - UIManager
   layers:
   - Default
   - TransparentFX

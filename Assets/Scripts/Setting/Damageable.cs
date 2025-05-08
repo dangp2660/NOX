@@ -87,6 +87,7 @@ public class Damageable : MonoBehaviour
     }
 
     public float getMaxHealth() { return maxHealth; }
+    public void setMaxHP(float amount) => maxHealth = amount;
     public void upHP(float HP)
     {
         maxHealth += HP;

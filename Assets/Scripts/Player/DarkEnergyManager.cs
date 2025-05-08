@@ -41,6 +41,8 @@ public class DarkEnergyManager : MonoBehaviour
         }
     }
     public float MaxDarkEnergy => maxDarkEnergy;
+    public void upDarkEnergy(float amount) => currentDarkEnergy += amount;
+    public void setDarkEnergy(float value) => currentDarkEnergy = value;
 
     public void CopyDarkEnergy(DarkEnergyManager other)
     {
