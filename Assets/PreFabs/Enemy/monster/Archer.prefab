@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddd31ae9a0281647851bf8ed360c5d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStae: 0
-  patrol: {fileID: 3254031083199156240}
+  checkpointID: 
+  initialState: 0
   attackZone: {fileID: 638497656827663047}
   coolDown: 2
 --- !u!1 &1690478949183831649
@@ -387,4 +387,5 @@ MonoBehaviour:
   noCollidersRemain:
     m_PersistentCalls:
       m_Calls: []
+  Damageable: {fileID: 7022111427482084181}
   detectedColliders: []

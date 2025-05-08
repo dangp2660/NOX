@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class DetectionZone : MonoBehaviour
 {
     public UnityEvent noCollidersRemain;
-
+    [SerializeField] private Damageable Damageable;
     public List<Collider2D> detectedColliders = new List<Collider2D>();
     private Collider2D col;
     private PlayerHealth health;
@@ -23,7 +23,7 @@ public class DetectionZone : MonoBehaviour
         health = newHealth;
         if (health != null)
         {
-            if(!health.isAlive())
+            if(!health.isAlive() || !Damageable.IsAlive)
             {
                 detectedColliders.Remove(collision);
                 Debug.Log("Delete");

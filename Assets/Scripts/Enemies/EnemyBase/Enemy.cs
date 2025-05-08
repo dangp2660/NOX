@@ -35,8 +35,12 @@ public abstract class Enemy : MonoBehaviour
     {
         Debug.Log("Respawn enemy: " + gameObject.name);
         gameObject.SetActive(true);
-            transform.position = spawnPoint;
-            animator.SetBool(AnimationStringList.isAlive, true);
+        transform.position = spawnPoint;
+        animator.SetBool(AnimationStringList.isAlive, true);
+        enemyState = initialState;
+        switchState(enemyState);
+        Debug.Log(enemyState);
+        if (patrol != null) { patrol.enabled = true; }
         // Kiểm tra nếu Damageable component tồn tại
         Damageable damageable = GetComponent<Damageable>();
         if (damageable != null)
@@ -49,8 +53,8 @@ public abstract class Enemy : MonoBehaviour
             Debug.LogError("No Damageable component found on " + gameObject.name);
         }
 
-        enemyState = initialState;
-        if (patrol != null) { patrol.enabled = true; }
+       
+        
     }
 
 

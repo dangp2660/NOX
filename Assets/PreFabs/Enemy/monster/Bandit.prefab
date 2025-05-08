@@ -194,6 +194,7 @@ MonoBehaviour:
   noCollidersRemain:
     m_PersistentCalls:
       m_Calls: []
+  Damageable: {fileID: 812738428516986384}
   detectedColliders: []
 --- !u!1 &6906863722393557198
 GameObject:
@@ -408,8 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e973f02377ec44881d943a4034bf32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStae: 0
-  patrol: {fileID: 1078881775122541672}
+  checkpointID: 
+  initialState: 0
   zone: {fileID: 3252594880500679763}
 --- !u!114 &812738428516986384
 MonoBehaviour:
@@ -423,6 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79945ba321dd3f499fdda2de68dc13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   stats: {fileID: 11400000, guid: a4b330e7676ac904398964b445ff8222, type: 2}
   isAlive: 1
   isInvincible: 0

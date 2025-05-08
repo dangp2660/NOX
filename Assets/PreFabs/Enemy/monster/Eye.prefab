@@ -423,4 +423,5 @@ MonoBehaviour:
   noCollidersRemain:
     m_PersistentCalls:
       m_Calls: []
+  Damageable: {fileID: 6127412699854641667}
   detectedColliders: []
