@@ -8,7 +8,10 @@ public class CheckPoint : MonoBehaviour
     private GameObject player;
     [SerializeField] private string checkpointID = "KV1";
     [SerializeField] private GameManager gameManager;
-
+    public string getID()
+    {
+        return checkpointID;
+    }
     private void Start()
     {
         respawnScript = GameObject.FindGameObjectWithTag("Respawn")?.GetComponent<RespawnScript>();
@@ -22,7 +25,7 @@ public class CheckPoint : MonoBehaviour
         {
             AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
-            gameManager.SaveAtCheckpoint(respawnScript.sceneName, this.transform.position);
+            gameManager.SaveAtCheckpoint(respawnScript.sceneName, this.transform.position, gameObject.name);
             Debug.Log("Checkpoint set: " + checkpointID);
         }
     }

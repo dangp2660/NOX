@@ -9,8 +9,11 @@ public class SaveData
     public float maxHP;
     public float maxDarkEnergy;
     public string currentMap;
+    public string checkPointID;
+    public EnemyManager enemyManager;
+
     public SaveData() { }
-    public SaveData(Vector3 playerPos, float currentHP, float currentDarkEnergy, float maxHP, float maxDarkEnergy, string currentMap)
+    public SaveData(Vector3 playerPos, float currentHP, float currentDarkEnergy, float maxHP, float maxDarkEnergy, string currentMap, string checkPointName)
     {
         this.playerPos = playerPos;
         this.currentHP = currentHP;
@@ -18,5 +21,6 @@ public class SaveData
         this.maxHP = maxHP;
         this.maxDarkEnergy = maxDarkEnergy;
         this.currentMap = currentMap;
+        this.checkPointID = checkPointName;
     }
 }

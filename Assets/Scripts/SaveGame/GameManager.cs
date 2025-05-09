@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Player Data")]
     public GameObject player;
     public int currentCheckpoint;
-
+    public EnemyManager enemyManager;
     private void Awake()
     {
         // Singleton Pattern để đảm bảo chỉ có một GameManager tồn tại
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Hàm gọi khi đạt checkpoint
-    public void SaveAtCheckpoint(string currentMap, Vector3 position)
+    public void SaveAtCheckpoint(string currentMap, Vector3 position, string checkPointName)
     {
         if (player == null)
         {
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
                 player.GetComponent<DarkEnergyManager>().CurrentDarkEnergy,
                 player.GetComponent<Damageable>().getMaxHealth(),
                 player.GetComponent<DarkEnergyManager>().MaxDarkEnergy,
-                currentMap
+                currentMap,checkPointName
             );
             Debug.Log("Game saved at checkpoint: " + currentCheckpoint);
         }
@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
                 player.GetComponent<Damageable>().setMaxHP(data.maxHP);
                 player.GetComponent<DarkEnergyManager>().CurrentDarkEnergy = data.currentDarkEnergy;
                 player.GetComponent<DarkEnergyManager>().setDarkEnergy(data.maxDarkEnergy);
-                Debug.Log("Player data loaded successfully.");
+                enemyManager.respawnEnemy(data.checkPointID);
+                Debug.Log("Player data loaded successfully."); 
             }
             else
             {

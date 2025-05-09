@@ -5,9 +5,9 @@ public static class SaveManager
 {
     private static string savePath = Application.persistentDataPath + "/saveData.json";
 
-    public static void SaveGame(Vector3 playerPos, float currentHP, float currentDarkEnergy, float maxHP, float maxDarkEnergy, string currentMap)
+    public static void SaveGame(Vector3 playerPos, float currentHP, float currentDarkEnergy, float maxHP, float maxDarkEnergy, string currentMap, string checkPointName)
     {
-        SaveData data = new SaveData(playerPos, currentHP, currentDarkEnergy, maxHP, maxDarkEnergy, currentMap);
+        SaveData data = new SaveData(playerPos, currentHP, currentDarkEnergy, maxHP, maxDarkEnergy, currentMap, checkPointName);
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(savePath, json);
         Debug.Log("Game saved to: " + savePath);
