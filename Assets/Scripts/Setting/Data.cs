@@ -11,5 +11,9 @@ public class Data : ScriptableObject
         set => hp = Mathf.Max(0, value); // Ngăn máu xuống âm
     }
 
-    public float Dame => dame;
+    public float Dame
+    {
+        get => dame;
+        set => dame = Mathf.Max(0,value);
+    }
 }

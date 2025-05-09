@@ -12,6 +12,7 @@ TagManager:
   - PlayerManager
   - Save
   - UIManager
+  - Projecttile
   layers:
   - Default
   - TransparentFX
