@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LoadScenes : MonoBehaviour
 {
-
+    [SerializeField] GameObject Menu;
+    [SerializeField] GameObject Setting;
     public void playGame()
     {
         if(SaveManager.HasSaveData())
         {
             SaveManager.DeleteSave();
         }
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
     }
 
     public void LoadGame()
@@ -19,6 +21,7 @@ public class LoadScenes : MonoBehaviour
         if(SaveManager.HasSaveData())
         {
             SceneManager.LoadScene(SaveManager.LoadData().currentMap);
+            Time.timeScale = 1f;
         }
         else
         {
@@ -27,7 +30,8 @@ public class LoadScenes : MonoBehaviour
     }
     public void setting()
     {
-        SceneManager.LoadScene(1);
+        Menu.SetActive(false);
+        Setting.SetActive(true);
     }
     public void menuGame()
     {
@@ -42,9 +46,13 @@ public class LoadScenes : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(id);
     }
-
     public void quitGame()
     {
         Application.Quit();
+    }
+    public void back() 
+    {
+        Setting.SetActive(false);
+        Menu.SetActive(true);
     }
 }

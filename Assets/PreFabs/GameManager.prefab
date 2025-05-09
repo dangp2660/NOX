@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4bc9451b6b4f6469f107bd52b69aec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamecheck: {fileID: 8929430336905614853}
   Transition: {fileID: 4815280942329855381}
 --- !u!1001 &2854534178347718391
 PrefabInstance:

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] GameObject gamecheck;
     public static SceneController instance;
     public Animator Transition;
     private void Awake()
@@ -22,6 +23,13 @@ public class SceneController : MonoBehaviour
 
         // Kiểm tra nếu là scene menu thì hủy đối tượng
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Destroy(gamecheck);
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

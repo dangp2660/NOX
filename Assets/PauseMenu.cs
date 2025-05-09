@@ -17,21 +17,20 @@ public class PauseMenu : MonoBehaviour
 
     public void Setting()
     {
-        pauseMenuUI.SetActive(false);
         SettingUI.SetActive(true);
     }
     public void Back()
     {
         SettingUI.SetActive(false);
-        pauseMenuUI.SetActive(true);
     }
-
-    private void Awake()
+    private void Update()
     {
-        // Đảm bảo rằng menu luôn tắt ở scene "Menu"
-        if (SceneManager.GetActiveScene().name != "Menu")
+        
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             pauseMenuUI.SetActive(false);
-        }
+            SettingUI.SetActive(false);
+        }  
     }
+
 }

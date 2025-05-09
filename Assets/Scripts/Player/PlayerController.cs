@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerHealth health;
     private PlayerSwitch input;
     [SerializeField] private GameObject UIMenu;
+    [SerializeField] private GameObject SettingUI;
     private void Awake()
     {
         input = GameObject.FindGameObjectWithTag("PlayerManager").GetComponent<PlayerSwitch>();
@@ -71,6 +72,15 @@ public class PlayerController : MonoBehaviour
         {
             bool active = !UIMenu.activeSelf;
             UIMenu.SetActive(active);
+            SettingUI.SetActive(false);
+            if (!UIMenu.activeSelf)
+            {
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+            }
         }
     }
 }   
