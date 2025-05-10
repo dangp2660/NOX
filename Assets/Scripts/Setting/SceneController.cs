@@ -35,25 +35,18 @@ public class SceneController : MonoBehaviour
     }
     public void NextLevel()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         StartCoroutine(LoadLevel());
-        player.transform.position = spawnPoint.transform.position;  
     }
 
     public void LoadScene(string name)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
         StartCoroutine(LoadSceneFade(name));
-        player.transform.position = spawnPoint.transform.position;
     }
     public void LoadScene(int id)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
         StartCoroutine(LoadSceneFade(id));
-        player.transform.position = spawnPoint.transform.position;
     }
 
     public void ExitGame()

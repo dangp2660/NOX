@@ -93,6 +93,7 @@ MonoBehaviour:
   noCollidersRemain:
     m_PersistentCalls:
       m_Calls: []
+  Damageable: {fileID: 7445071457096265307}
   detectedColliders: []
 --- !u!1 &1347815621023827031
 GameObject:
@@ -315,7 +316,7 @@ GameObject:
   - component: {fileID: 3133968151169734716}
   - component: {fileID: 7445071457096265307}
   m_Layer: 7
-  m_Name: Knight(NPC)
+  m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

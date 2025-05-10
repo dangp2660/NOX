@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PlayerSwitch : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerSwitch : MonoBehaviour
     [Header("Dark Energy Settings")]
     public float darkFormDrainRate = 10f; // per second
     public float regenRate = 5f; // per second
+    
     private void Awake()
     {
         if (instance == null)
@@ -37,6 +39,12 @@ public class PlayerSwitch : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+
+    }
+    private void LateUpdate()
+    {
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
     }
     private void OnDestroy()
     {
@@ -101,9 +109,7 @@ public class PlayerSwitch : MonoBehaviour
         }
 
     }
-    void LateUpdate()
-    {
-    }
+  
 
     void Update()
     {

@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 enum bossPhase
@@ -10,6 +8,9 @@ enum bossPhase
 
 public class BossBase : MonoBehaviour
 {
+    [Header("Arena")]
+    [SerializeField] GameObject PosA;
+    [SerializeField] GameObject PosB;
     [Header("MoveSpeed")]
     [SerializeField] private float MovePhase1 = 5f;
     [SerializeField] private float MovePhase2 = 8f;
@@ -62,6 +63,17 @@ public class BossBase : MonoBehaviour
         handleMove();
         handleAttack();
         die();
+        if (Damageable.IsAlive)
+        {
+            PosA.SetActive(true);
+            PosB.SetActive(true);
+        }
+        else
+        {
+            PosA.SetActive(false);
+            PosB.SetActive(false);
+        }
+        
     }
 
     private void updatePlayer()
