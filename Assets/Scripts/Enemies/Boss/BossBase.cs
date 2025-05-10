@@ -56,24 +56,19 @@ public class BossBase : MonoBehaviour
     void Update()
     {
         updatePlayer();
-        if (!Damageable.IsAlive)
-        {
-            return;
-        }
         handleMove();
         handleAttack();
-        die();
+        if (!Damageable.IsAlive)
+        {
+            die();
+            return;
+        }
+        Debug.Log(Damageable.IsAlive);
         if (Damageable.IsAlive)
         {
             PosA.SetActive(true);
             PosB.SetActive(true);
         }
-        else
-        {
-            PosA.SetActive(false);
-            PosB.SetActive(false);
-        }
-        
     }
 
     private void updatePlayer()
@@ -154,7 +149,7 @@ public class BossBase : MonoBehaviour
     IEnumerator DelayAttack()
     {
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         Vector2 direction = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(direction.x * getCurrientMoveSpeed(), rb.velocity.y);
         isAttack = false;
@@ -170,11 +165,12 @@ public class BossBase : MonoBehaviour
 
     protected virtual void die()
     {
-        if (!Damageable.IsAlive)
-        {
-            Debug.Log("Boss die");
-            animator.SetBool(AnimationStringList.isAlive, false);
-        }
+        Debug.Log("Boss died");
+        animator.SetTrigger(AnimationStringList.isAlive);
+        PosA.SetActive(false);
+        PosB.SetActive(false);
+        rb.velocity = Vector2.zero;
+        this.enabled = false;
     }
 
     public void StartBossFight()
@@ -198,6 +194,11 @@ public class BossBase : MonoBehaviour
         this.enabled = false;
         rb.velocity = Vector2.zero;
         animator.Rebind(); // reset animation state nếu cần
+    }
+    public void turnOffArena()
+    {
+        PosA.SetActive(false);
+        PosB.SetActive(false);
     }
 
 

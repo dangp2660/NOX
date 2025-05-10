@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 
 public class DetectionZone : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DetectionZone : MonoBehaviour
     public List<Collider2D> detectedColliders = new List<Collider2D>();
     private Collider2D col;
     private PlayerHealth health;
+    [SerializeField] private Collider2D Player;
     private void Awake()
     {
         health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
@@ -87,6 +89,6 @@ public class DetectionZone : MonoBehaviour
 
     private void Update()
     {
-           
+        
     }
 }
