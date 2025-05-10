@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 Debug.LogError("Player not found during load.");
-            }
+            }   
         }
         else
         {

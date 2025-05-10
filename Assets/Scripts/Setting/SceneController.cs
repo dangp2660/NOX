@@ -7,6 +7,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject gamecheck;
     public static SceneController instance;
     public Animator Transition;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject spawnPoint;
     private void Awake()
     {
         // Nếu đã tồn tại một instance, hủy game object mới
@@ -21,8 +23,8 @@ public class SceneController : MonoBehaviour
             return;
         }
 
+
         // Kiểm tra nếu là scene menu thì hủy đối tượng
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void Update()
     {
@@ -31,27 +33,27 @@ public class SceneController : MonoBehaviour
             Destroy(gamecheck);
         }
     }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.buildIndex == 0 || scene.name == "Menu")
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void NextLevel()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         StartCoroutine(LoadLevel());
+        player.transform.position = spawnPoint.transform.position;  
     }
 
     public void LoadScene(string name)
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         StartCoroutine(LoadSceneFade(name));
+        player.transform.position = spawnPoint.transform.position;
     }
     public void LoadScene(int id)
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         StartCoroutine(LoadSceneFade(id));
+        player.transform.position = spawnPoint.transform.position;
     }
 
     public void ExitGame()

@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8540780195287511189
 Transform:
   m_ObjectHideFlags: 0
@@ -415,6 +415,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fd1c0166-ff5e-421d-9af5-4a151c974255
     m_ActionName: Player/Respawn[/Keyboard/anyKey]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
+    m_ActionName: Player/MenuUI[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -432,6 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0144d0cc44e5d2c44a4f48a8832209db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIMenu: {fileID: 0}
+  SettingUI: {fileID: 0}
 --- !u!114 &5610483983641586045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +492,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   allowDoubleJump: 1
   lowJumpMultiplier: 2
+  canDash: 1
 --- !u!114 &9204941724775531024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +551,7 @@ MonoBehaviour:
   changingSpell: {fileID: 6822439260541536147, guid: 841bf23cb8c0b594fb35b5b3765300e8, type: 3}
   changingPosition: {fileID: 1706763450681541340}
   coolDown: 3
+  cooldownTimer: 0
 --- !u!114 &2661210271584348040
 MonoBehaviour:
   m_ObjectHideFlags: 0

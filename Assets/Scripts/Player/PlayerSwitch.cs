@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSwitch : MonoBehaviour
 {
-    public static PlayerSwitch Instance;
+    public static PlayerSwitch instance;
     [SerializeField] public GameObject defaultForm;
     [SerializeField] public GameObject darkForm;
     [SerializeField] private CinemachineVirtualCamera camera;
@@ -26,16 +27,54 @@ public class PlayerSwitch : MonoBehaviour
     public float regenRate = 5f; // per second
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
     }
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Tìm vị trí spawn trong scene
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
+        if (spawnPoint != null)
+        {
+            if(isDefault)
+            {
+                defaultForm.transform.position = spawnPoint.transform.position;
+            }
+            else
+            {
+                darkForm.transform.position = spawnPoint.transform.position;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No PlayerSpawn point found in scene. Player stays at previous position.");
+        }
+
+        // Dọn dẹp nếu có bản player khác được load sẵn trong scene
+        GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
+        if (tempPlayer != null && tempPlayer != defaultForm && tempPlayer != darkForm)
+        {
+            Destroy(tempPlayer);
+        }
+    }
+
     private void Start()
     {
         defaultFormAttack = defaultForm.GetComponent<PlayerAttack>();
@@ -62,9 +101,13 @@ public class PlayerSwitch : MonoBehaviour
         }
 
     }
+    void LateUpdate()
+    {
+    }
 
     void Update()
     {
+            
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
