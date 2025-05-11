@@ -113,7 +113,8 @@ public class PlayerSwitch : MonoBehaviour
 
     void Update()
     {
-            
+     
+       
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
@@ -141,7 +142,6 @@ public class PlayerSwitch : MonoBehaviour
                 darkFormAttack.getCoolDown(defaultFormAttack);
             }
 
-            camera.Follow = isDefault ? defaultForm.transform : darkForm.transform;
         }
 
         HandleDarkEnergy();

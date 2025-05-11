@@ -51,6 +51,9 @@ TagManager:
   - name: BG
     uniqueID: 3770307327
     locked: 0
+  - name: MidBG
+    uniqueID: 1801236435
+    locked: 0
   - name: View
     uniqueID: 3190417715
     locked: 0

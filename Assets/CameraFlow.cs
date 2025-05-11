@@ -23,9 +23,16 @@ public class CameraFlow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (playerTransform != null && camera.Follow != playerTransform)
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
+            playerTransform = player.transform;
             camera.Follow = playerTransform;
+        }
+        else
+        {
+            Debug.LogError("Player not found! Make sure the player object has the 'Player' tag.");
         }
     }
 }
