@@ -2,80 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
 
 public class DetectionZone : MonoBehaviour
 {
     public UnityEvent noCollidersRemain;
     [SerializeField] private Damageable Damageable;
     public List<Collider2D> detectedColliders = new List<Collider2D>();
-    private Collider2D col;
     private PlayerHealth health;
-    [SerializeField] private Collider2D Player;
+
     private void Awake()
     {
-        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        col = GetComponent<Collider2D>();
+        // Tìm PlayerHealth một lần duy nhất
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            health = playerObject.GetComponent<PlayerHealth>();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("Can Attack");
-        PlayerHealth newHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        health = newHealth;
-        if (health != null)
-        {
-            if(!health.isAlive() || !Damageable.IsAlive)
-            {
-                detectedColliders.Remove(collision);
-                Debug.Log("Delete");
-                return;
-            }
-        }
         if (collision.CompareTag("Player"))
         {
+            // Kiểm tra trực tiếp xem Player còn sống không
+            if (health != null && (!health.isAlive() || !Damageable.IsAlive))
+            {
+                RemoveCollider(collision);
+                return;
+            }
+
             if (!detectedColliders.Contains(collision))
             {
                 detectedColliders.Add(collision);
+                Debug.Log("Player entered detection zone.");
             }
         }
-        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(RemoveAfterDelay(collision, 0.7f));
-    }
-
-    private IEnumerator RemoveAfterDelay(Collider2D collision, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // Chỉ remove nếu collider vẫn còn trong danh sách
-        if (detectedColliders.Contains(collision))
+        if (collision.CompareTag("Player"))
         {
-            detectedColliders.Remove(collision);
-
-            if (detectedColliders.Count <= 0)
-            {
-                noCollidersRemain.Invoke();
-            }
+            RemoveCollider(collision);
         }
     }
 
-    // Hàm remove thủ công bên ngoài có thể gọi
-    public void RemoveCollider(Collider2D collider)
+    // Hàm xóa collider khỏi danh sách
+    private void RemoveCollider(Collider2D collider)
     {
         if (detectedColliders.Contains(collider))
         {
             detectedColliders.Remove(collider);
+            Debug.Log("Player exited detection zone.");
 
-            if (detectedColliders.Count <= 0)
+            if (detectedColliders.Count == 0)
             {
                 noCollidersRemain.Invoke();
             }
         }
     }
+
+    // Hàm để thêm collider từ bên ngoài
     public void ForceRecheck(Collider2D collider)
     {
         if (collider != null && collider.CompareTag("Player"))
@@ -83,12 +70,8 @@ public class DetectionZone : MonoBehaviour
             if (!detectedColliders.Contains(collider))
             {
                 detectedColliders.Add(collider);
+                Debug.Log("Player force-rechecked into detection zone.");
             }
         }
-    }
-
-    private void Update()
-    {
-        
     }
 }

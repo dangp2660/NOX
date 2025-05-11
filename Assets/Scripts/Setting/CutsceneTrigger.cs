@@ -35,6 +35,7 @@ public class CutsceneTrigger : MonoBehaviour
         isActive = false;
         Player.GetComponent<PlayerInput>().enabled = true;
         PlayerManager.GetComponent<PlayerSwitch>().enabled = true;
+        this.enabled = false;
         Destroy(Cutscene);
     }
 
