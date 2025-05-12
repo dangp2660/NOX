@@ -44,6 +44,20 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true;
     private DirectionTouch dt; // Kiểm tra va chạm (ground, wall)
 
+    //Kiểm tra đứng trên platform
+    private bool isPlatform;
+    private Rigidbody2D platformRb; 
+
+    public void setIsPlatform(bool isPlatform)
+    {
+        this.isPlatform = isPlatform;
+    }
+
+    public void setRiggidbodyPlatform(Rigidbody2D rigidbody2D)
+    {
+        platformRb = rigidbody2D;
+    }
+    
     // Trạng thái sống/chết
     public bool isAlive
     {
@@ -190,7 +204,14 @@ public class PlayerMovement : MonoBehaviour
     // Hàm xử lý di chuyển
     private void Move()
     {
-        rb.velocity = new Vector2(moveInput.x * currentWalkSpeed, rb.velocity.y);
+        if(isPlatform)
+        {
+            rb.velocity = new Vector2(moveInput.x * currentWalkSpeed + platformRb.velocity.x, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(moveInput.x * currentWalkSpeed, rb.velocity.y);
+        }
     }
 
     // Hàm được Input System gọi khi nhấn Jump
