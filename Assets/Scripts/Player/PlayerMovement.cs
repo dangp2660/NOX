@@ -226,7 +226,6 @@ public class PlayerMovement : MonoBehaviour
     // Hàm nhảy (kèm theo lực đẩy ngang)
     private void Jump()
     {
-        
         animator.SetTrigger(AnimationStringList.Jump);
         rb.velocity = new Vector2(horizontalBoost + rb.velocity.x, !canDoubleJump? 0.8f * jumpSpeed : jumpSpeed);
         //Debug.Log(rb.velocity);
