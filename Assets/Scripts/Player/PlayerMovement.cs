@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Kiểm tra đứng trên platform
     private bool isPlatform;
-    private Rigidbody2D platformRb; 
+    private Rigidbody2D platformRb;
 
     public void setIsPlatform(bool isPlatform)
     {
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         platformRb = rigidbody2D;
     }
-    
+
     // Trạng thái sống/chết
     public bool isAlive
     {
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                         return airSpeed;
                 }
             }
-            return isAlive? attackMove :0;
+            return isAlive ? attackMove : 0;
         }
     }
     private float CurrentSpeed;
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
             jumpBufferCounter = 0;
         }
-        
+
     }
 
     private void FixedUpdate()
@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         if (isAlive)
         {
-            
+
             IsMoving = moveInput != Vector2.zero;
             SetFacingDirection(moveInput);
         }
@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
     // Hàm xử lý di chuyển
     private void Move()
     {
-        if(isPlatform)
+        if (isPlatform)
         {
             rb.velocity = new Vector2(moveInput.x * currentWalkSpeed + platformRb.velocity.x, rb.velocity.y);
         }
@@ -226,8 +226,9 @@ public class PlayerMovement : MonoBehaviour
     // Hàm nhảy (kèm theo lực đẩy ngang)
     private void Jump()
     {
+
         animator.SetTrigger(AnimationStringList.Jump);
-        rb.velocity = new Vector2(horizontalBoost + rb.velocity.x, !canDoubleJump? 0.8f * jumpSpeed : jumpSpeed);
+        rb.velocity = new Vector2(horizontalBoost + rb.velocity.x, !canDoubleJump ? 0.8f * jumpSpeed : jumpSpeed);
         //Debug.Log(rb.velocity);
     }
 
@@ -252,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(dashSpeed * dashDirection, 0f);
-        yield return new WaitForSeconds(dashDuration); 
+        yield return new WaitForSeconds(dashDuration);
         rb.velocity = Vector2.zero;
         rb.gravityScale = originalGravity;
         IsDash = false;
