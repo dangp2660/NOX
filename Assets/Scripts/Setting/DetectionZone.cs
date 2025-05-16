@@ -36,6 +36,10 @@ public class DetectionZone : MonoBehaviour
                 detectedColliders.Add(collision);
                 Debug.Log("Player entered detection zone.");
             }
+        }else if(collision.CompareTag("Door"))
+        {
+            detectedColliders.Clear();
+            noCollidersRemain.Invoke();s
         }
     }
 
