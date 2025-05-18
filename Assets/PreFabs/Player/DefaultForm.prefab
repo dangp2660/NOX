@@ -146,13 +146,14 @@ GameObject:
   - component: {fileID: 8909739662620217860}
   - component: {fileID: 7118683591495078902}
   - component: {fileID: 5208516740581752177}
-  - component: {fileID: 5610483983641586045}
   - component: {fileID: 7360921901640213944}
+  - component: {fileID: 3263096350561798047}
   - component: {fileID: 9204941724775531024}
   - component: {fileID: 5337634792809850259}
   - component: {fileID: 598642605627758385}
   - component: {fileID: 2661210271584348040}
   - component: {fileID: 1423617468309696160}
+  - component: {fileID: 25028399519384276}
   - component: {fileID: 5996947830333971225}
   m_Layer: 6
   m_Name: DefaultForm
@@ -514,6 +515,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fd1c0166-ff5e-421d-9af5-4a151c974255
     m_ActionName: Player/Respawn[/Keyboard/anyKey]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
+    m_ActionName: Player/MenuUI[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -531,35 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0144d0cc44e5d2c44a4f48a8832209db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5610483983641586045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5239481941380998345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f325dc524830648a731744806b0880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 8
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  distance: 0.05
-  wallDistance: 0.5
-  ceilingDistance: 0.05
+  UIMenu: {fileID: 0}
+  SettingUI: {fileID: 0}
 --- !u!114 &7360921901640213944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +563,42 @@ MonoBehaviour:
   coyoteTime: 0.2
   allowDoubleJump: 1
   lowJumpMultiplier: 2
+  canDash: 1
+--- !u!58 &3263096350561798047
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.074496984, y: -1.0601411}
+  serializedVersion: 2
+  m_Radius: 0.14706826
 --- !u!114 &9204941724775531024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,23 +611,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f325dc524830648a731744806b0880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 8
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  distance: 0.05
-  wallDistance: 0.5
-  ceilingDistance: 0.05
+  groundCollider: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5337634792809850259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +644,7 @@ MonoBehaviour:
   changingSpell: {fileID: 0}
   changingPosition: {fileID: 0}
   coolDown: 2
+  cooldownTimer: 0
 --- !u!114 &2661210271584348040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +674,51 @@ MonoBehaviour:
   darkEnergyChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!61 &25028399519384276
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.020572662, y: -0.9812162}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.125, y: 2.3125}
+    newSize: {x: 3.125, y: 2.3125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0060806, y: 0.22226}
+  m_EdgeRadius: 0
 --- !u!114 &5996947830333971225
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class DetectionZone : MonoBehaviour
         }else if(collision.CompareTag("Door"))
         {
             detectedColliders.Clear();
-            noCollidersRemain.Invoke();s
+            noCollidersRemain.Invoke();
         }
     }
 
