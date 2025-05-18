@@ -54,6 +54,7 @@ public class DirectionTouch : MonoBehaviour
         // Kiểm tra mặt đất bằng collider phụ
         IsGrounded = groundCollider.IsTouchingLayers(groundLayer);
 
+
         // Kiểm tra va chạm tường
         Vector2 wallCheckDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         RaycastHit2D wallHit = Physics2D.Raycast(groundCollider.bounds.center, wallCheckDirection, 0.5f, groundLayer);

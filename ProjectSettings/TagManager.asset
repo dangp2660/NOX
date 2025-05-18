@@ -15,6 +15,7 @@ TagManager:
   - Projecttile
   - SpawnPoint
   - Door
+  - OneWay
   layers:
   - Default
   - TransparentFX

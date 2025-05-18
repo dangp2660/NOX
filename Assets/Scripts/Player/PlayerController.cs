@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack attack;
     private PlayerHealth health;
     private PlayerSwitch input;
+    private PlayerOneWayPlatform oneWay;
     [SerializeField] private GameObject UIMenu;
     [SerializeField] private GameObject SettingUI;
     private void Awake()
     {
+        oneWay = gameObject.GetComponent<PlayerOneWayPlatform>();
         input = GameObject.FindGameObjectWithTag("PlayerManager").GetComponent<PlayerSwitch>();
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
@@ -83,4 +85,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-}   
+
+    public void downPlatForm(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            StartCoroutine(oneWay.DisableCollision());
+        }
+    }
+}

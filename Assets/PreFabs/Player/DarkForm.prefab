@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 3778744235648473970}
   - component: {fileID: 583850335368739204}
   - component: {fileID: 4926878018519712408}
+  - component: {fileID: 5780390258474680909}
   m_Layer: 6
   m_Name: DarkForm
   m_TagString: Player
@@ -124,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2bcb046fd0d81664ca28c3e3176d2cdd, type: 3}
   m_Color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
   m_FlipX: 0
@@ -195,7 +196,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003443718, y: -0.41587496}
+  m_Offset: {x: -0.003443718, y: -0.46693242}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -206,7 +207,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3001194, y: 2.2892313}
+  m_Size: {x: 3.3001194, y: 2.391346}
   m_EdgeRadius: 0
 --- !u!95 &8909739662620217860
 Animator:
@@ -418,6 +419,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
     m_ActionName: Player/MenuUI[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5208516740581752177}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: downPlatForm
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 615b89d5-85ed-4384-a37e-b9959a48e289
+    m_ActionName: Player/downPlatForm[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -602,6 +619,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0396879, y: 0.5894306}
   m_EdgeRadius: 0
+--- !u!114 &5780390258474680909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64d40c2cd61d8a4292537270ca08ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCollider: {fileID: 4926878018519712408}
 --- !u!1 &5714647995679997085
 GameObject:
   m_ObjectHideFlags: 0

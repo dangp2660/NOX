@@ -225,7 +225,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4fc35565de79d5540a5504a46d807f60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -519,6 +519,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
     m_ActionName: Player/MenuUI[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5208516740581752177}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: downPlatForm
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 615b89d5-85ed-4384-a37e-b9959a48e289
+    m_ActionName: Player/downPlatForm[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
