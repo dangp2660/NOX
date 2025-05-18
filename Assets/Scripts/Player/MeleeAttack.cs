@@ -16,6 +16,13 @@ public class MeleeAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Damageable damageable = collision.GetComponent<Damageable>();
+        BreakDoor breakDoor = collision.GetComponent<BreakDoor>();
+        if(breakDoor != null)
+        {
+            Debug.Log("Break");
+            breakDoor.Break();
+        }
+
         if (damageable != null)
         {
             Debug.Log("Hit");

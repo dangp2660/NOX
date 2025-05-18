@@ -13,7 +13,8 @@
         public AudioClip dealth;
         public AudioClip checkPoint;
         public AudioClip reSpawn;
-
+        public AudioClip breakdoor;
+ 
         public static AudioManager instance;
         private void Awake()
         {
