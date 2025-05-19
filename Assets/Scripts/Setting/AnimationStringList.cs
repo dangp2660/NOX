@@ -20,4 +20,5 @@ internal class AnimationStringList
     internal static string Wakeup = "Wakeup";
     internal static string Start = "Start";
     internal static string End = "End";
+    internal static string isBlocking = "isBlocking";
 }

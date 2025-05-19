@@ -58,15 +58,29 @@ public class Damageable : MonoBehaviour
     {
         if (IsAlive && !isInvincible)
         {
-            float totaldamage = damage * damageRate;
-            CurrentHealth -= totaldamage;
-            Debug.Log($"{gameObject.name}:" + currentHealth);
+            float totalDamage = damage * damageRate;
+
+            // Kiểm tra nếu là quái và có khả năng block
+            BlockMonster blockMonster = GetComponent<BlockMonster>();
+            if (blockMonster != null)
+            {
+                Vector2 attackPosition = GameObject.FindWithTag("Player").transform.position;
+                if (!blockMonster.AttemptDamage(totalDamage, attackPosition))
+                {
+                    return false;
+                }
+            }
+
+            // Thực thi khi không block
+            CurrentHealth -= totalDamage;
+            Debug.Log($"{gameObject.name} nhận sát thương: {totalDamage}");
             healthChanged.Invoke(currentHealth, maxHealth);
             isInvincible = true;
             return true;
         }
         return false;
     }
+
 
     public float CurrentHealth
     {

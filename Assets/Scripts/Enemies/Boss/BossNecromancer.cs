@@ -7,7 +7,6 @@ public class BossMovementAndAttack : MonoBehaviour
 {
     public Transform[] waypoints;
     public GameObject[] phaseOneSpells;
-    public GameObject[] phaseTwoSpells;
     public GameObject[] summonMinionsPrefabs;
     public GameObject fireColumnPrefab;
     public GameObject meteorPrefab;
@@ -42,7 +41,7 @@ public class BossMovementAndAttack : MonoBehaviour
         CheckPhaseChange();
     }
 
-    void FacePlayer()
+    public void FacePlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -71,7 +70,7 @@ public class BossMovementAndAttack : MonoBehaviour
         }
     }
 
-    void MoveToWaypoint()
+    public void MoveToWaypoint()
     {
         Transform target = waypoints[currentWaypoint];
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
@@ -83,7 +82,7 @@ public class BossMovementAndAttack : MonoBehaviour
 
     void Attack()
     {
-        GameObject[] spells = currentPhase == BossPhase.Phase1 ? phaseOneSpells : phaseTwoSpells;
+        GameObject[] spells = currentPhase == BossPhase.Phase1 ? phaseOneSpells : null;
         if (spells.Length > 0)
         {
             int spellIndex = Random.Range(0, spells.Length);
@@ -91,7 +90,7 @@ public class BossMovementAndAttack : MonoBehaviour
         }
     }
 
-    void CheckPhaseChange()
+    public void CheckPhaseChange()
     {
         if (damageable.CurrentHealth <= damageable.getMaxHealth() / 2)
         {
