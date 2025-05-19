@@ -7,9 +7,7 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] private Transform player;         // Gán player vào đây (trong Unity)
     [SerializeField] private float speed = 2f;         // Tốc độ di chuyển
     private Animator animator;
-    private Enemy baseEnemy;
     private Rigidbody2D rb;
-    private Vector2 movement;
     private bool isMoving = false;
     public bool IsMoving
     {
@@ -29,7 +27,6 @@ public class EnemyFollow : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        baseEnemy = GetComponent<Enemy>();
     }
     public void handleMove()
     {

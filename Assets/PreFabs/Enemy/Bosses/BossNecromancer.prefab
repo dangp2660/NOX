@@ -189,7 +189,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907173150180435348}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cad020cf657e86468215801f217e8d4, type: 3}
   m_Name: 
@@ -200,13 +200,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   phaseOneSpells: []
-  summonMinionsPrefabs: []
+  summonMinionsPrefabs:
+  - {fileID: 5742446484424825093, guid: 7674d5932cc5e2e4f81c03e05aebc1fb, type: 3}
   fireColumnPrefab: {fileID: 0}
   meteorPrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
-  SummonPosition: {fileID: 0}
   moveSpeed: 3.5
   stayDuration: 10
+  summonInterval: 15
+  buffInterval: 15
   fireColumnInterval: 10
   meteorInterval: 12
   laserInterval: 20

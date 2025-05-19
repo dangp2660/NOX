@@ -95,6 +95,8 @@ public class Damageable : MonoBehaviour
             }
             else
             {
+                
+                animator.SetTrigger(AnimationStringList.hurt);
                 IsAlive = true;
             }
         }

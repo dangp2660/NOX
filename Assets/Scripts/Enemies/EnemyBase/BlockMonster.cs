@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockMonster : MonoBehaviour
 {
-    [SerializeField] private Data monsterData;
     [SerializeField] private float moveSpeed = 2f;
     [Header("Block Setup")]
     [SerializeField] private float blockDuration = 5f;
@@ -37,16 +37,15 @@ public class BlockMonster : MonoBehaviour
         }
     }
 
-    private bool canMove => animator.GetBool(AnimationStringList.canMove);
     private Rigidbody2D rb;
-    private DetectionZone zone;
+    [SerializeField] private DetectionZone zone;
     private float direcrtionBlock = 3f;
     private bool Attack = false;
     [SerializeField] private float timeAttack;
     
     private void Awake()
     {
-        zone = GetComponent<DetectionZone>();   
+        zone = GetComponentInChildren<DetectionZone>();   
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
         rb = GetComponent<Rigidbody2D>();
@@ -56,14 +55,14 @@ public class BlockMonster : MonoBehaviour
     {
         // Tự động kích hoạt block khi cooldown kết thúc
         float direction = Vector2.Distance(transform.position, Player.position);
-        if (blockTimer <= 0 && !isBlocking && direction <= direcrtionBlock)
+        if (blockTimer <= 0 && !IsBlocking && direction <= direcrtionBlock)
         {
             startBlock();
         }
 
 
         // Quản lý thời gian block
-        if (isBlocking)
+        if (IsBlocking)
         {
             blockTimer -= Time.deltaTime;
             if (blockTimer <= 0)
@@ -75,16 +74,21 @@ public class BlockMonster : MonoBehaviour
         {
             StartCoroutine(delayBlockToAttack(timeAttack));
         }
-
+        bool isPlayerAlive = Player.GetComponent<PlayerHealth>().isAlive();
+        if (!isPlayerAlive)
+        {
+            Destroy(gameObject);
+        }
     }
     IEnumerator delayBlockToAttack(float time)
     {
         Attack = true;
-        animator.SetBool(AnimationStringList.Attack, Attack);
-        isBlocking = false;
+        animator.SetBool(AnimationStringList.Attack, true);
+        IsBlocking = false;
         yield return new WaitForSeconds(time + 0.2f);
         Attack = false;
-        isBlocking = true;
+        animator.SetBool(AnimationStringList.Attack, false);
+        IsBlocking = true;
     }
     private void FixedUpdate()
     {
@@ -93,7 +97,7 @@ public class BlockMonster : MonoBehaviour
 
     public void handleMove()
     {
-        if (!IsMoving) return;
+        if (IsBlocking ||Attack) return;
 
         Vector2 direction = (Player.position - transform.position).normalized;
         rb.velocity = direction * moveSpeed;
@@ -111,14 +115,14 @@ public class BlockMonster : MonoBehaviour
 
     private void startBlock()
     {
-        isBlocking = true;
+        IsBlocking = true;
         blockTimer = blockDuration;
     }
 
     private void stopBlock()
     {
-        isBlocking = false;
-        blockTimer = blockTimer;
+        IsBlocking = false;
+        blockTimer = blockCoolDown;
     }
     public bool AttemptDamage(float damage, Vector2 attackPosition)
     {
@@ -152,4 +156,6 @@ public class BlockMonster : MonoBehaviour
         Debug.Log("Tấn công phía trước nhưng không block được!");
         return true;  // Cho phép nhận sát thương bình thường
     }
+
+    
 }
