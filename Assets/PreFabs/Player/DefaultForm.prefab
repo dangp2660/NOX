@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 7118683591495078902}
   - component: {fileID: 5208516740581752177}
   - component: {fileID: 7360921901640213944}
-  - component: {fileID: 3263096350561798047}
   - component: {fileID: 9204941724775531024}
   - component: {fileID: 5337634792809850259}
   - component: {fileID: 598642605627758385}
@@ -155,6 +154,7 @@ GameObject:
   - component: {fileID: 1423617468309696160}
   - component: {fileID: 25028399519384276}
   - component: {fileID: 5996947830333971225}
+  - component: {fileID: 3765877512601206559}
   m_Layer: 6
   m_Name: DefaultForm
   m_TagString: Player
@@ -516,7 +516,19 @@ MonoBehaviour:
     m_ActionId: fd1c0166-ff5e-421d-9af5-4a151c974255
     m_ActionName: Player/Respawn[/Keyboard/anyKey]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5208516740581752177}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
     m_ActionName: Player/MenuUI[/Keyboard/escape]
   - m_PersistentCalls:
@@ -567,8 +579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 10
-  jumpSpeed: 10.5
-  airSpeed: 3
+  jumpSpeed: 12
+  airSpeed: 5
   attackMove: 2.5
   horizontalBoost: 10
   dashSpeed: 15
@@ -580,41 +592,6 @@ MonoBehaviour:
   allowDoubleJump: 1
   lowJumpMultiplier: 2
   canDash: 1
---- !u!58 &3263096350561798047
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5239481941380998345}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.074496984, y: -1.0601411}
-  serializedVersion: 2
-  m_Radius: 0.14706826
 --- !u!114 &9204941724775531024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f325dc524830648a731744806b0880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 0}
+  groundCollider: {fileID: 25028399519384276}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -754,6 +731,19 @@ MonoBehaviour:
   isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
+--- !u!114 &3765877512601206559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239481941380998345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64d40c2cd61d8a4292537270ca08ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 25028399519384276}
 --- !u!1 &5714647995679997085
 GameObject:
   m_ObjectHideFlags: 0

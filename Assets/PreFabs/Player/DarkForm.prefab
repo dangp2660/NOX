@@ -196,7 +196,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003443718, y: -0.46693242}
+  m_Offset: {x: 0.07755768, y: -0.46693242}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -207,7 +207,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3001194, y: 2.391346}
+  m_Size: {x: 3.501218, y: 2.391346}
   m_EdgeRadius: 0
 --- !u!95 &8909739662620217860
 Animator:
@@ -416,7 +416,19 @@ MonoBehaviour:
     m_ActionId: fd1c0166-ff5e-421d-9af5-4a151c974255
     m_ActionName: Player/Respawn[/Keyboard/anyKey]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5208516740581752177}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnPauseGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2ad7238f-1488-49a2-91d6-8742a2bb68f0
     m_ActionName: Player/MenuUI[/Keyboard/escape]
   - m_PersistentCalls:
@@ -471,10 +483,10 @@ MonoBehaviour:
   airSpeed: 5
   attackMove: 2.5
   horizontalBoost: 10
-  dashSpeed: 15
-  dashDuration: 0.2
+  dashSpeed: 20
+  dashDuration: 0.3
   dashCoolDown: 0.5
-  GhostDash: {fileID: 44759386470465263, guid: 52bf2e25a9e93644d8558804344b182e, type: 3}
+  GhostDash: {fileID: 44759386470465263, guid: def0450db8e0ad24ca1ea7c670294c7d, type: 3}
   GhostDelay: 0.05
   coyoteTime: 0.2
   allowDoubleJump: 1
@@ -492,10 +504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f325dc524830648a731744806b0880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 0}
+  groundCollider: {fileID: 4926878018519712408}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &5337634792809850259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64d40c2cd61d8a4292537270ca08ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 4926878018519712408}
+  playerCollider: {fileID: 4926878018519712408}
 --- !u!1 &5714647995679997085
 GameObject:
   m_ObjectHideFlags: 0

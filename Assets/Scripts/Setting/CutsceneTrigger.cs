@@ -17,6 +17,7 @@ public class CutsceneTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(Cutscene == null) return;
         if ((collision.CompareTag("Player")) && !isActive)
         {
             StartCoroutine(TimeCutsceneRun(timeCutscene));

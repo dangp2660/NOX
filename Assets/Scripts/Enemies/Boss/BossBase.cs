@@ -87,6 +87,7 @@ public class BossBase : MonoBehaviour
     }
     protected virtual void handleMove()
     {
+        if(attackZone.detectedColliders.Count > 0) return;
         if (canMove && Player != null)
         {
             Vector2 direction = (Player.transform.position - transform.position).normalized;
