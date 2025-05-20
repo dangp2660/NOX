@@ -3,45 +3,61 @@ using System.Collections;
 
 public enum BossPhase { Phase1, Phase2 }
 
-public class BossMovementAndAttack : MonoBehaviour
+public class NecromancerBoss : MonoBehaviour
 {
-    public Transform[] waypoints;
-    public GameObject[] phaseOneSpells;
-    public GameObject[] summonMinionsPrefabs;
-    public GameObject fireColumnPrefab;
-    public GameObject meteorPrefab;
-    public GameObject laserPrefab;
-    public float moveSpeed = 3f;
-    public float stayDuration = 10f;
-    public float summonInterval = 15f;
-    public float buffInterval = 15f;
-    public float fireColumnInterval = 10f;
-    public float meteorInterval = 12f;
-    public float laserInterval = 20f;
-    public float laserDuration = 3f;
+    [Header("Waypoints")]
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Transform summonPos;
+
+    [Header("Phase 1 Spells")]
+    [SerializeField] private GameObject[] phaseOneSpells;
+    [SerializeField] private float phaseOneAttackInterval = 2.5f;
+
+    [Header("Phase 2 Skills")]
+    [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private GameObject fireColumnPrefab;
+    [SerializeField] private GameObject meteorPrefab;
+    [SerializeField] private GameObject[] summonMinionsPrefabs;
+
+    [Header("Skill Cooldowns")]
+    [SerializeField] private float laserInterval = 20f;
+    [SerializeField] private float laserDuration = 3f;
+    [SerializeField] private float fireColumnInterval = 10f;
+    [SerializeField] private float meteorInterval = 12f;
+    [SerializeField] private float summonInterval = 15f;
+    [SerializeField] private float buffInterval = 15f;
+
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float stayDuration = 10f;
+
     private int currentWaypoint = 0;
     private bool isMoving = true;
     private BossPhase currentPhase = BossPhase.Phase1;
+    private bool phase2Started = false;
+
+    private Coroutine phaseOneAttackCoroutine;
     private Damageable damageable;
+    private Animator animator;
 
     void Start()
     {
         damageable = GetComponent<Damageable>();
+        animator = GetComponent<Animator>();
         StartCoroutine(MovementCycle());
-        StartCoroutine(FireColumnRoutine());
-        StartCoroutine(MeteorRoutine());
-        StartCoroutine(LaserRoutine());
-        StartCoroutine(SummonRoutine());
-        StartCoroutine(BuffRoutine());
+
+        // Phase 1 attack
+        phaseOneAttackCoroutine = StartCoroutine(PhaseOneAttackRoutine());
     }
 
     void Update()
     {
+        if(!damageable.IsAlive) return;
         FacePlayer();
         CheckPhaseChange();
     }
 
-    public void FacePlayer()
+    private void FacePlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -51,7 +67,7 @@ public class BossMovementAndAttack : MonoBehaviour
         }
     }
 
-    IEnumerator MovementCycle()
+    private IEnumerator MovementCycle()
     {
         while (true)
         {
@@ -62,7 +78,11 @@ public class BossMovementAndAttack : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(stayDuration);
-                Attack();
+                if (currentPhase == BossPhase.Phase1)
+                {
+                    Attack();
+                }
+
                 currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
                 isMoving = true;
             }
@@ -70,7 +90,7 @@ public class BossMovementAndAttack : MonoBehaviour
         }
     }
 
-    public void MoveToWaypoint()
+    private void MoveToWaypoint()
     {
         Transform target = waypoints[currentWaypoint];
         transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
@@ -80,76 +100,115 @@ public class BossMovementAndAttack : MonoBehaviour
         }
     }
 
-    void Attack()
+    private void Attack()
     {
         GameObject[] spells = currentPhase == BossPhase.Phase1 ? phaseOneSpells : null;
-        if (spells.Length > 0)
+        if (spells != null && spells.Length > 0)
         {
             int spellIndex = Random.Range(0, spells.Length);
-            Instantiate(spells[spellIndex], transform.position, Quaternion.identity);
-        }
-    }
+            GameObject spell = Instantiate(spells[spellIndex], transform.position, Quaternion.identity);
 
-    public void CheckPhaseChange()
-    {
-        if (damageable.CurrentHealth <= damageable.getMaxHealth() / 2)
-        {
-            currentPhase = BossPhase.Phase2;
-        }
-    }
+            animator.SetTrigger("AttackSpell");
 
-    IEnumerator LaserRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(laserInterval);
-            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-            laser.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
-            Destroy(laser, laserDuration);
-        }
-    }
-
-    IEnumerator FireColumnRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(fireColumnInterval);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player)
+            if (player != null)
             {
-                Instantiate(fireColumnPrefab, player.transform.position, Quaternion.identity);
+                Vector2 dir = (player.transform.position - transform.position).normalized;
+                Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.velocity = dir * 5f;
+                }
             }
         }
     }
 
-    IEnumerator MeteorRoutine()
+    private IEnumerator PhaseOneAttackRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(meteorInterval);
-            Vector3 randomPos = new Vector3(Random.Range(-5, 5), 10, 0);
-            Instantiate(meteorPrefab, randomPos, Quaternion.identity);
+            yield return new WaitForSeconds(phaseOneAttackInterval);
+            Attack();
         }
     }
 
-    IEnumerator SummonRoutine()
+    private void CheckPhaseChange()
+    {
+        if (!phase2Started && damageable.CurrentHealth <= damageable.getMaxHealth() / 2)
+        {
+            phase2Started = true;
+            currentPhase = BossPhase.Phase2;
+
+            if (phaseOneAttackCoroutine != null)
+                StopCoroutine(phaseOneAttackCoroutine);
+
+            StartCoroutine(PhaseTwoSkillRoutine());
+        }
+    }
+
+    private IEnumerator PhaseTwoSkillRoutine()
     {
         while (true)
         {
+            yield return StartCoroutine(SummonMinions());
             yield return new WaitForSeconds(summonInterval);
-            foreach (var minion in summonMinionsPrefabs)
-            {
-                Instantiate(minion, transform.position + Vector3.right, Quaternion.identity);
-            }
+
+            yield return StartCoroutine(UseLaser());
+            yield return new WaitForSeconds(laserInterval);
+
+            yield return StartCoroutine(UseFireColumn());
+            yield return new WaitForSeconds(fireColumnInterval);
+
+            yield return StartCoroutine(UseMeteor());
+            yield return new WaitForSeconds(meteorInterval);
+
+            yield return StartCoroutine(ApplyBuff());
+            yield return new WaitForSeconds(buffInterval);
         }
     }
 
-    IEnumerator BuffRoutine()
+    private IEnumerator UseLaser()
     {
-        while (true)
+        animator.SetTrigger("AttackSpell2");
+        GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        laser.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+        Destroy(laser, laserDuration);
+        yield return null;
+    }
+
+    private IEnumerator UseFireColumn()
+    {
+        animator.SetTrigger("AttackSpell");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player)
         {
-            yield return new WaitForSeconds(buffInterval);
-            damageable.CurrentHealth += damageable.getMaxHealth() * 0.02f;
+            Instantiate(fireColumnPrefab, player.transform.position, Quaternion.identity);
         }
+        yield return null;
+    }
+
+    private IEnumerator UseMeteor()
+    {
+        animator.SetTrigger("AttackSpell");
+        Vector3 randomPos = new Vector3(Random.Range(-5, 5), 10, 0);
+        Instantiate(meteorPrefab, randomPos, Quaternion.identity);
+        yield return null;
+    }
+
+    private IEnumerator SummonMinions()
+    {
+        animator.SetTrigger("AttackSpell2");
+        foreach (var minion in summonMinionsPrefabs)
+        {
+            Instantiate(minion, summonPos.position, Quaternion.identity);
+        }
+        yield return null;
+    }
+
+    private IEnumerator ApplyBuff()
+    {
+        animator.SetTrigger("Buff");
+        damageable.CurrentHealth += damageable.getMaxHealth() * 0.02f;
+        yield return null;
     }
 }
