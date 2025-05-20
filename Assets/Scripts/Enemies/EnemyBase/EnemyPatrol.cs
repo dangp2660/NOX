@@ -6,6 +6,7 @@ public class EnemyPatrol : MonoBehaviour
     public GameObject PointA;
     public GameObject PointB;
     public float Speed = 2f;
+    public EnemyFollow follow;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -17,13 +18,21 @@ public class EnemyPatrol : MonoBehaviour
 
     void Start()
     {
+        
+        follow = GetComponent<EnemyFollow>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentPoint = PointB.transform;
+       
     }
 
     void Update()
     {
+        if (PointA == null && PointB == null)
+        {
+            follow.enabled = true;
+            this.enabled = false;
+        }
         if (isMoving && CanMove)
         {
             MovePatrol();

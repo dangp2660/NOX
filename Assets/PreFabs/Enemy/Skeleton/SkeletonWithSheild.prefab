@@ -111,9 +111,10 @@ GameObject:
   - component: {fileID: 7662733424422878410}
   - component: {fileID: 5113357555446663919}
   - component: {fileID: 866972362492247330}
+  - component: {fileID: 7109390079772321900}
   m_Layer: 7
   m_Name: SkeletonWithSheild
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,11 +293,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6043a86a5fc00d14e87ae5de82182fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  checkpointID: Boss
+  initialState: 0
   blockDuration: 5
-  blockCoolDown: 8
+  blockCooldown: 8
+  directionBlockRange: 3
+  timeToAttackAfterDetect: 1.5
+  blockAngleThreshold: 60
   zone: {fileID: 2416593280779329170}
-  timeAttack: 0.6
 --- !u!114 &5113357555446663919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +332,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec3e81da23f3714eaa9e45c99db3c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7109390079772321900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742446484424825093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b27507dfb7bd0443bfde1b32e37fc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 2
 --- !u!1 &6427461062647487356
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3213057009989885789}
   - component: {fileID: 8472530151884424573}
+  - component: {fileID: 5606845321365221164}
   m_Layer: 9
   m_Name: AttackPoint
   m_TagString: Untagged
@@ -413,3 +432,17 @@ PolygonCollider2D:
       - {x: 1.4493394, y: -1.7040292}
       - {x: 1.1267128, y: -0.97076684}
   m_UseDelaunayMesh: 0
+--- !u!114 &5606845321365221164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427461062647487356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996d3642d6754984eb9d014b9b84bcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackData: {fileID: 11400000, guid: a18be74c5cd4e34419a781ea03a82348, type: 2}
+  damageRate: 1

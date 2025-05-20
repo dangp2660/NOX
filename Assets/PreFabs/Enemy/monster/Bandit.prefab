@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 7744784880538580642}
   - component: {fileID: 812738428516986384}
   - component: {fileID: 4696169472827733190}
+  - component: {fileID: 2125093376039843130}
   m_Layer: 7
   m_Name: Bandit
   m_TagString: Enemy
@@ -349,7 +350,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: de4b47c9dd1904b4d9d567ed6301cf21, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -397,6 +398,7 @@ MonoBehaviour:
   PointA: {fileID: 0}
   PointB: {fileID: 0}
   Speed: 2
+  follow: {fileID: 2125093376039843130}
 --- !u!114 &7744784880538580642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,3 +445,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec3e81da23f3714eaa9e45c99db3c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2125093376039843130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906863722393557198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b27507dfb7bd0443bfde1b32e37fc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  speed: 2

@@ -139,7 +139,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.03125763, y: -1.7038202}
@@ -199,6 +199,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  summonPos: {fileID: 0}
   phaseOneSpells:
   - {fileID: 4066950319764902414, guid: f2479e91d0fdbc04882cb0ebbaa8be02, type: 3}
   phaseOneAttackInterval: 2.5
@@ -206,7 +207,8 @@ MonoBehaviour:
   fireColumnPrefab: {fileID: 0}
   meteorPrefab: {fileID: 0}
   summonMinionsPrefabs:
-  - {fileID: 5742446484424825093, guid: 7674d5932cc5e2e4f81c03e05aebc1fb, type: 3}
+  - {fileID: 365902292936911769, guid: 48f89c2126bcdb94caff0a4679c8935d, type: 3}
+  - {fileID: 6906863722393557198, guid: 123633c9df6f0f940bf1a424636acdbc, type: 3}
   laserInterval: 20
   laserDuration: 12.5
   fireColumnInterval: 10

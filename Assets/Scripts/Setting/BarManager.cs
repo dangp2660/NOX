@@ -10,7 +10,7 @@ public class BarManager : MonoBehaviour
     private void Update()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-        Debug.Log(currentScene.name + ":" + currentScene.buildIndex);
+       // Debug.Log(currentScene.name + ":" + currentScene.buildIndex);
 
         // Kiểm tra bar có được gán hay không
         if (bar == null)

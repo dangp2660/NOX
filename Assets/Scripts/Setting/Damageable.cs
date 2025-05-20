@@ -24,7 +24,7 @@ public class Damageable : MonoBehaviour
         set
         {
             isAlive = value;
-            Debug.Log("IsAlive set " + value);
+            Debug.Log( gameObject.name +"IsAlive set " + value);
         }
     }
 
@@ -122,4 +122,19 @@ public class Damageable : MonoBehaviour
         Debug.Log($"{gameObject.name} HP reset to max: {maxHealth}");
     }
 
+    // Add this method to directly apply damage without calling back to AttemptDamage
+    public void ApplyDamage(float damage, float damageRate)
+    {
+        // Copy the core logic from TakeDamage but without calling AttemptDamage
+        // This breaks the recursive loop
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+        
+        // Trigger any events or animations
+        healthChanged?.Invoke(CurrentHealth, getMaxHealth());
+        
+        if (CurrentHealth <= 0)
+        {
+            IsAlive = false;
+        }
+    }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd364f67a2575c34e8d96ded0dd6f056, type: 3}
   m_Name: SheildSkeleton
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 50
   dame: 25
