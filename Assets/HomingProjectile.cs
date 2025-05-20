@@ -2,11 +2,10 @@
 
 public class HomingProjectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 2f;
     [SerializeField] private float damage = 15f;
     [SerializeField] private float lifetime = 5f;
 
-    private Vector2 direction;
     private Rigidbody2D rb;
     private Animator anim;
     private Collider2D col;
@@ -21,28 +20,14 @@ public class HomingProjectile : MonoBehaviour
 
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            Vector2 targetDir = (player.transform.position - transform.position).normalized;
-            direction = targetDir;
-            rb.velocity = direction * speed;
 
-            // Flip projectile theo hướng
-            if (direction.x != 0)
-            {
-                Vector3 scale = transform.localScale;
-                scale.x = Mathf.Sign(direction.x) * Mathf.Abs(scale.x);
-                transform.localScale = scale;
-            }
-        }
-
+        rb.velocity = transform.right * speed;
         Destroy(gameObject, lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hasHit) return;
+        if (collision.CompareTag("OneWay") || hasHit) return;
 
         Damageable damageable = collision.GetComponent<Damageable>();
         if (damageable != null && !damageable.isInvincible)
@@ -56,7 +41,7 @@ public class HomingProjectile : MonoBehaviour
 
         if (anim != null)
         {
-            anim.SetTrigger("Explode");
+            anim.SetTrigger(AnimationStringList.Explode);
         }
     }
 

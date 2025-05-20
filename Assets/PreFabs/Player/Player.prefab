@@ -620,6 +620,7 @@ MonoBehaviour:
   defaultForm: {fileID: 8844863325439863241}
   darkForm: {fileID: 1705258302258186044}
   camera: {fileID: 0}
+  VFX: {fileID: 3667533735056224741, guid: 041a2da8a62858d4092f7a8efcd18b77, type: 3}
   isDefault: 1
   darkFormDrainRate: 10
   regenRate: 5

@@ -8,10 +8,10 @@ using Unity.VisualScripting;
 public class PlayerSwitch : MonoBehaviour
 {
     public static PlayerSwitch instance;
-    [SerializeField] public GameObject defaultForm;
-    [SerializeField] public GameObject darkForm;
+    [SerializeField] private GameObject defaultForm;
+    [SerializeField] private GameObject darkForm;
     [SerializeField] private CinemachineVirtualCamera camera;
-
+    [SerializeField] private GameObject VFX;
     private PlayerMovement defaultMove;
     private PlayerMovement darkMove;
     private Damageable defaultHealth;
@@ -141,12 +141,21 @@ public class PlayerSwitch : MonoBehaviour
                 darkEnergy.CopyDarkEnergy(defaultEnergy);
                 darkFormAttack.getCoolDown(defaultFormAttack);
             }
+            StartCoroutine(DestroyVFX());
 
         }
 
         HandleDarkEnergy();
     }
 
+    IEnumerator DestroyVFX()
+    {
+        Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
+        GameObject VFXused = Instantiate(VFX, currentPosition, Quaternion.identity);
+        yield return new WaitForSeconds(1);
+        Destroy(VFXused);
+
+    }
     private void HandleDarkEnergy()
     {
         if (!isDefault)
@@ -155,6 +164,7 @@ public class PlayerSwitch : MonoBehaviour
 
             if (darkEnergy.CurrentDarkEnergy <= 0f)
             {
+                StartCoroutine(DestroyVFX());
                 // Auto chuyển về default
                 isDefault = true;
                 darkForm.SetActive(false);

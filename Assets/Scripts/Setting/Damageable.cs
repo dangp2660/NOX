@@ -52,6 +52,7 @@ public class Damageable : MonoBehaviour
             }
         }
 
+
     }
 
     public bool TakeDamage(float damage, float damageRate)
@@ -121,6 +122,7 @@ public class Damageable : MonoBehaviour
         healthChanged?.Invoke(currentHealth, maxHealth);
         Debug.Log($"{gameObject.name} HP reset to max: {maxHealth}");
     }
+    
 
     // Add this method to directly apply damage without calling back to AttemptDamage
     public void ApplyDamage(float damage, float damageRate)

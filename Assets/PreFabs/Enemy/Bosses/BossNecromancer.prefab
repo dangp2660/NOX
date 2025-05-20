@@ -203,18 +203,18 @@ MonoBehaviour:
   phaseOneSpells:
   - {fileID: 4066950319764902414, guid: f2479e91d0fdbc04882cb0ebbaa8be02, type: 3}
   phaseOneAttackInterval: 2.5
-  laserPrefab: {fileID: 0}
-  fireColumnPrefab: {fileID: 0}
-  meteorPrefab: {fileID: 0}
+  laserPrefab: {fileID: 4294698878764570703, guid: 51d3dbee995bea94ba0c20d84e22cde8, type: 3}
+  laserHintPrefab: {fileID: 4294698878764570703, guid: 148b87c04edc30a468769c242bf0ba06, type: 3}
+  fireColumnPrefab: {fileID: 5862678817003776316, guid: 2b02d0e4086db1c49bb6ee9f2ad339ac, type: 3}
+  meteorPrefab: {fileID: 410200977826678394, guid: 4f5fd2791cd5a6047b00b4a28f027741, type: 3}
   summonMinionsPrefabs:
-  - {fileID: 365902292936911769, guid: 48f89c2126bcdb94caff0a4679c8935d, type: 3}
-  - {fileID: 6906863722393557198, guid: 123633c9df6f0f940bf1a424636acdbc, type: 3}
-  laserInterval: 20
-  laserDuration: 12.5
-  fireColumnInterval: 10
-  meteorInterval: 12
-  summonInterval: 15
-  buffInterval: 15
+  - {fileID: 5742446484424825093, guid: 7674d5932cc5e2e4f81c03e05aebc1fb, type: 3}
+  laserInterval: 5
+  laserDuration: 3
+  fireColumnInterval: 8
+  meteorInterval: 11
+  summonInterval: 9
+  buffInterval: 14
   moveSpeed: 3.5
   stayDuration: 10
 --- !u!114 &6311969324270260398

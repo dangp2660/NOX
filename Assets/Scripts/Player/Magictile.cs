@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Magictile : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class Magictile : MonoBehaviour
 
     private void Start()
     {
-        float direction = Mathf.Sign(transform.localScale.x);
-        rb.velocity = new Vector2(moveSpeed.x * direction, moveSpeed.y);
+            float direction = Mathf.Sign(transform.localScale.x);
+            rb.velocity = new Vector2(moveSpeed.x * direction, moveSpeed.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
