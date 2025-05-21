@@ -56,6 +56,7 @@ public class Magictile : MonoBehaviour
     {
         float direction = Mathf.Sign(transform.localScale.x);
         rb.velocity = new Vector2(moveSpeed.x * direction, moveSpeed.y);
+        Destroy(gameObject, 5f);
 
     }
     public void OnDestroy()

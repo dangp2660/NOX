@@ -23,6 +23,8 @@ public class CheckPoint : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
+            Damageable player = GameObject.FindGameObjectWithTag("Player").GetComponent<Damageable>();
+            player.ResetHealth();
             AudioManager.instance.playSFX(AudioManager.instance.checkPoint);
             respawnScript.SetCheckpoint(this.gameObject);
             gameManager.SaveAtCheckpoint(respawnScript.sceneName, this.transform.position, gameObject.name);
