@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isPlatform;
     private Rigidbody2D platformRb;
 
+    [SerializeField] private SpellCoolDown DashCoolDown;
+
     public void setIsPlatform(bool isPlatform)
     {
         this.isPlatform = isPlatform;
@@ -237,6 +239,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canDash)
         {
+            DashCoolDown.UseSpell();
             StartCoroutine(Dashing());
             dashEffect();
             //Debug.Log(damageable.isInvincible);

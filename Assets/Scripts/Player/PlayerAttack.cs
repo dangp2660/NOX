@@ -11,7 +11,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject changingSpell;
     [SerializeField] private Transform changingPosition;
     [SerializeField] private float coolDown = 2f;
-
+    [SerializeField] private SpellCoolDown coolDownTime;
+    [SerializeField] private SpellCoolDown MeleeCoolDown;
     private GameObject activeSpell;
     public float cooldownTimer = 0f;
 
@@ -34,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.started)
         {
+            MeleeCoolDown.UseSpell();
             if(movement.IsDash)
             {
                 Debug.Log("cancel");
@@ -52,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
         if (context.started && cooldownTimer <= 0f)
         {
             Debug.Log("UseSpell");
-
+            coolDownTime.UseSpell();
             cooldownTimer = coolDown;
 
             if (changingSpell != null && changingPosition != null)

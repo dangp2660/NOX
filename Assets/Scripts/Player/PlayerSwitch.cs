@@ -12,6 +12,7 @@ public class PlayerSwitch : MonoBehaviour
     [SerializeField] private GameObject darkForm;
     [SerializeField] private CinemachineVirtualCamera camera;
     [SerializeField] private GameObject VFX;
+    [SerializeField] private SpellCoolDown SpellCoolDown;
     private PlayerMovement defaultMove;
     private PlayerMovement darkMove;
     private Damageable defaultHealth;
@@ -117,6 +118,7 @@ public class PlayerSwitch : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+            SpellCoolDown.UseSpell();
             Vector3 currentPosition = isDefault ? defaultForm.transform.position : darkForm.transform.position;
 
             isDefault = !isDefault;
