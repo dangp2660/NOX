@@ -148,6 +148,8 @@ public class NecromancerBoss : MonoBehaviour
 
             StartCoroutine(PhaseTwoSkillRoutine());
             StartCoroutine(SummonMinions());
+            StartCoroutine(UseMeteor());
+
         }
     }
 
@@ -155,15 +157,11 @@ public class NecromancerBoss : MonoBehaviour
     {
         while (true)
         {
-
             yield return StartCoroutine(UseLaser());
             yield return new WaitForSeconds(laserInterval);
 
             yield return StartCoroutine(UseFireColumn());
             yield return new WaitForSeconds(fireColumnInterval);
-
-            yield return StartCoroutine(UseMeteor());
-            yield return new WaitForSeconds(meteorInterval);
 
             yield return StartCoroutine(ApplyBuff());
             yield return new WaitForSeconds(buffInterval);
@@ -173,12 +171,12 @@ public class NecromancerBoss : MonoBehaviour
     private IEnumerator UseLaser()
     {
         Debug.Log("Use Laser 5 Shots");
-        animator.SetTrigger("AttackSpell2");
 
         for (int i = 0; i < 5; i++)
         {
-            Vector3 pos = new Vector3(transform.position.x + 10f, transform.position.y, transform.position.z);
-            ShootProjectileAtPlayer(laserPrefab, transform.position);
+            animator.SetTrigger("AttackSpell2");
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            ShootProjectileAtPlayer(laserPrefab, pos);
 
             yield return new WaitForSeconds(1.25f); // Thời gian giữa mỗi phát
         }
@@ -188,41 +186,53 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator UseFireColumn()
     {
-        Debug.Log("Use fire column");
-        animator.SetTrigger("AttackSpell");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player)
+        for (int i = 0; i < 3; i++)
         {
-            Instantiate(fireColumnPrefab, player.transform.position, Quaternion.identity);
+            Debug.Log("Use fire column");
+            animator.SetTrigger("AttackSpell");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player)
+            {
+                Instantiate(fireColumnPrefab, player.transform.position, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(2f);
         }
-        yield return null;
     }
 
     private IEnumerator UseMeteor()
     {
-        Debug.Log("Use Meteor");
-        animator.SetTrigger("AttackSpell");
+        while (true)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Debug.Log("Use Meteor");
+                animator.SetTrigger("AttackSpell");
 
-        Vector3 randomPos = new Vector3(Random.Range(170, 200), 25, 0);
+                Vector3 randomPos = new Vector3(Random.Range(170, 200), 27, 0);
 
-        // Tạo Quaternion quay hướng xuống (tức là góc 90 hoặc -90 độ tùy hướng sprite)
-        Quaternion rotation = Quaternion.Euler(0, 0, -90f); // -90 độ xoay quanh trục Z
+                // Tạo Quaternion quay hướng xuống (tức là góc 90 hoặc -90 độ tùy hướng sprite)
+                Quaternion rotation = Quaternion.Euler(0, 0, -90f); // -90 độ xoay quanh trục Z
 
-        Instantiate(meteorPrefab, randomPos, rotation);
+                Instantiate(meteorPrefab, randomPos, rotation);
+            }
 
-        yield return null;
+            yield return new WaitForSeconds(meteorInterval);
+        }
     }
 
 
     private IEnumerator SummonMinions()
     {
-        Debug.Log("Use Summon");
-        animator.SetTrigger("AttackSpell2");
-        foreach (var minion in summonMinionsPrefabs)
+        while (true)
         {
-            Instantiate(minion, summonPos.position, Quaternion.identity);
+            Debug.Log("Use Summon");
+            animator.SetTrigger("AttackSpell2");
+            foreach (var minion in summonMinionsPrefabs)
+            {
+                Instantiate(minion, summonPos.position, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(summonInterval);
         }
-        yield return new WaitForSeconds(summonInterval);
     }
 
     private IEnumerator ApplyBuff()

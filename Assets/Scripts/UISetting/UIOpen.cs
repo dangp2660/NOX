@@ -17,4 +17,13 @@ public class UIOpen : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+    public void EnableSignal()
+    {
+        this.gameObject.SetActive(true);
+    }
+    public void DisableSignal()
+    {
+        this.gameObject.SetActive(false);
+    }
+
 }
