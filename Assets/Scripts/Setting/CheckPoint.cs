@@ -29,6 +29,8 @@ public class CheckPoint : MonoBehaviour
             respawnScript.SetCheckpoint(this.gameObject);
             gameManager.SaveAtCheckpoint(respawnScript.sceneName, this.transform.position, gameObject.name);
             Debug.Log("Checkpoint set: " + checkpointID);
+            EnemyManager.instance.respawnEnemy(gameObject.name);
+
         }
     }
 

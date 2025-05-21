@@ -38,7 +38,6 @@ public class RespawnScript : MonoBehaviour
             AudioManager.instance.playSFX(AudioManager.instance.reSpawn);
             // Add offset to avoid being inside ground or enemies
             EnemyManager.instance.respawnEnemy(currentCheckPointID);
-            StartCoroutine(FadeRespawn());
         }
         else
         {
