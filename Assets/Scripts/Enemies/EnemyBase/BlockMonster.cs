@@ -3,7 +3,8 @@ using UnityEngine;
  
 public class BlockMonster : Enemy 
 { 
-    [Header("BlockMonster Settings")] 
+    [Header("BlockMonster Settings")]
+    [SerializeField] private GameObject Boss;
     [SerializeField] private float blockDuration = 5f; 
     [SerializeField] private float blockCooldown = 8f; 
     [SerializeField] private float directionBlockRange = 3f; 
@@ -113,6 +114,10 @@ public class BlockMonster : Enemy
     {
         bool isPlayerAlive = player.GetComponent<PlayerHealth>().isAlive();
         if (!isPlayerAlive)
+        {
+            Destroy(gameObject);
+        }
+        if (!Boss.GetComponent<Damageable>().IsAlive)
         {
             Destroy(gameObject);
         }

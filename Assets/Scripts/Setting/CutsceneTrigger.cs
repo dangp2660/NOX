@@ -1,44 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class CutsceneTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject Cutscene;
-    [SerializeField] private float timeCutscene;
-    [SerializeField] private bool isActive =false;
+    [SerializeField] private bool isActive = false;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject PlayerManager;
+    [SerializeField] private CinemachineVirtualCamera cameraBattle;
+    [SerializeField] private CinemachineVirtualCamera currentCam;
+
+
+
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(Cutscene == null) return;
-        if ((collision.CompareTag("Player")) && !isActive)
+        if (Cutscene == null) return;
+        if (collision.CompareTag("Player") && !isActive)
         {
-            StartCoroutine(TimeCutsceneRun(timeCutscene));
+            StartCutscene();
+        }
+    }
+
+    public void StartCutscene()
+    {
+        
+        currentCam.gameObject.SetActive(false);
+        isActive = true;
+        Player.GetComponent<PlayerInput>().enabled = false;
+        PlayerManager.GetComponent<PlayerSwitch>().enabled = false;
+        if (Cutscene != null)
+        {
+            Cutscene.SetActive(true);
         }
 
     }
 
-    IEnumerator TimeCutsceneRun(float timeCutscene)
+    // ✅ Gọi hàm này từ cuối Timeline / AnimationEvent / Trigger tùy bạn
+    public void EndCutscene(PlayableDirector signalDirector)
     {
-        Player.GetComponent<PlayerInput>().enabled = false;
-        PlayerManager.GetComponent<PlayerSwitch>().enabled = false;
-        isActive = true;
-        Cutscene.SetActive(true);
-        yield return new WaitForSeconds(timeCutscene);
+        if (!isActive) return;
+
         Cutscene.SetActive(false);
-        isActive = false;
+
+        if (cameraBattle != null )
+        {
+            Debug.Log("avc");
+ 
+            cameraBattle.gameObject.SetActive(true);
+
+        }
+
         Player.GetComponent<PlayerInput>().enabled = true;
         PlayerManager.GetComponent<PlayerSwitch>().enabled = true;
-        this.enabled = false;
-        this.gameObject.SetActive(false);
+        if (signalDirector != null)
+        {
+            signalDirector.gameObject.SetActive(true);
+            signalDirector.Play(); // ✅ Phát Timeline có SignalEmitter → Trigger UnityEvent
+        }
+
+        this.GetComponent<Collider2D>().enabled = false;
+        
     }
-
-
 }

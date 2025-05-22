@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointID: Boss
   initialState: 0
+  Boss: {fileID: 907173150180435348, guid: 99b78a97fc6893a49899be9ca89a282b, type: 3}
   blockDuration: 5
   blockCooldown: 8
   directionBlockRange: 3

@@ -164,6 +164,12 @@ public class PlayerSwitch : MonoBehaviour
         {
             darkEnergy.CurrentDarkEnergy -= darkFormDrainRate * Time.deltaTime;
 
+            if (darkHealth.IsAlive)
+            {
+                float regenAmount = darkHealth.getMaxHealth() * 0.02f * Time.deltaTime;
+                darkHealth.CurrentHealth += regenAmount;
+            }
+
             if (darkEnergy.CurrentDarkEnergy <= 0f)
             {
                 StartCoroutine(DestroyVFX());

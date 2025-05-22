@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9086532955002901627}
   - component: {fileID: 8413467420608853820}
   - component: {fileID: 6256563142516176490}
+  - component: {fileID: 8315145923942358285}
   m_Layer: 0
   m_Name: Hunter
   m_TagString: NPC
@@ -33,7 +34,8 @@ Transform:
   m_LocalPosition: {x: 44.02, y: -7.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4261652278299441101}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1537312795298895651
@@ -148,11 +150,12 @@ MonoBehaviour:
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   dialogue:
-  - "\u1ED2? M\u1ED9t linh h\u1ED3n l\u1EA1c l\u1ED1i gi\u1EEFa m\xE0n \u0111\xEAm...  "
-  - "C\u1EADu \u0111\u1EBFn t\u1EEB n\u01A1i n\xE0o? Kh\xF4ng quan tr\u1ECDng n\u1EEFa.  "
-  - "N\u1EBFu mu\u1ED1n s\u1ED1ng s\xF3t \u1EDF \u0111\xE2y, c\u1EADu c\u1EA7n h\u1ECDc
-    c\xE1ch chi\u1EBFn \u0111\u1EA5u.  "
-  worldSpeed: 0.05
+  - You now stand upon the ruins of  a land once radiant with light... now drowned
+    in darkness and blood
+  - "Evil did not come from afar\u2026 it rose from within the hearts of men. "
+  - "We once had faith, once had hope\u2026 "
+  - "But now\u2026 only you remain!"
+  worldSpeed: 0.1
   closePlayer: 0
   panelOffset: {x: 0, y: 2, z: 0}
 --- !u!95 &8413467420608853820
@@ -189,3 +192,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &8315145923942358285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367301839337799918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b95d7b363ec184c90409a8bf6e0498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 2376948432650506926}
+  offset: {x: 2, y: 2, z: 0}
+--- !u!1001 &2153247625217409068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3104349279365859421}
+    m_Modifications:
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403747818314371714, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_Name
+      value: E
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403747818314371714, guid: f3eecd575d821b545b1c646537995001, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f3eecd575d821b545b1c646537995001, type: 3}
+--- !u!1 &2376948432650506926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4403747818314371714, guid: f3eecd575d821b545b1c646537995001, type: 3}
+  m_PrefabInstance: {fileID: 2153247625217409068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4261652278299441101 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2793834188968310753, guid: f3eecd575d821b545b1c646537995001, type: 3}
+  m_PrefabInstance: {fileID: 2153247625217409068}
+  m_PrefabAsset: {fileID: 0}

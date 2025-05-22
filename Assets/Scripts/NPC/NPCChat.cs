@@ -41,7 +41,7 @@ public class NPCChat : MonoBehaviour
             }
         }
     }
-    
+
 
     void LateUpdate()
     {

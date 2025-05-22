@@ -5,6 +5,7 @@ public enum BossPhase { Phase1, Phase2 }
 
 public class NecromancerBoss : MonoBehaviour
 {
+    [SerializeField] private GameObject Arena;
     [Header("Waypoints")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private Transform summonPos;
@@ -42,6 +43,9 @@ public class NecromancerBoss : MonoBehaviour
 
     void Start()
     {
+        Arena.SetActive(true);
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.flipX = false;
         damageable = GetComponent<Damageable>();
         animator = GetComponent<Animator>();
         StartCoroutine(MovementCycle());
@@ -52,8 +56,12 @@ public class NecromancerBoss : MonoBehaviour
 
     void Update()
     {
-        if (!damageable.IsAlive) animator.SetBool(AnimationStringList.isAlive, false);
-        FacePlayer();
+        if (!damageable.IsAlive)
+        {
+            animator.SetBool(AnimationStringList.isAlive, false);
+            Arena.SetActive(false);
+        }
+            FacePlayer();
         CheckPhaseChange();
     }
 
@@ -128,7 +136,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator PhaseOneAttackRoutine()
     {
-        while (true)
+        while (damageable.IsAlive)
         {
             yield return new WaitForSeconds(phaseOneAttackInterval);
             Attack();
@@ -155,7 +163,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator PhaseTwoSkillRoutine()
     {
-        while (true)
+        while (damageable.IsAlive)
         {
             yield return StartCoroutine(UseLaser());
             yield return new WaitForSeconds(laserInterval);
@@ -201,7 +209,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator UseMeteor()
     {
-        while (true)
+        while (damageable.IsAlive)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -223,7 +231,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator SummonMinions()
     {
-        while (true)
+        while (damageable.IsAlive)
         {
             Debug.Log("Use Summon");
             animator.SetTrigger("AttackSpell2");
@@ -237,8 +245,21 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator ApplyBuff()
     {
-        animator.SetTrigger("Buff");
-        damageable.CurrentHealth += damageable.getMaxHealth() * 0.02f;
-        yield return null;
+        if(damageable.IsAlive)
+        {
+            animator.SetTrigger("Buff");
+            damageable.CurrentHealth += damageable.getMaxHealth() * 0.02f;
+            yield return null;
+        }
+        
+    }
+
+    public void OnEnable()
+    {
+        this.enabled = true;
+    }
+    public void OnDisable()
+    {
+        this.enabled = false;
     }
 }
