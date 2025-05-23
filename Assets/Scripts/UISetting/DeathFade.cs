@@ -11,7 +11,11 @@ public class DeathFade : MonoBehaviour
 
     public void showDeathScreen()
     {
-        StartCoroutine(FadedDeath());
+        // Add null check and gameObject.activeInHierarchy check
+        if (this != null && gameObject.activeInHierarchy)
+        {
+            StartCoroutine(FadedDeath());
+        }
     }
 
     IEnumerator FadedDeath()
@@ -27,11 +31,11 @@ public class DeathFade : MonoBehaviour
         }
         textMeshPro.gameObject.SetActive(true);
     }
+    
     public void HideDeathScreen()
     {
         StopAllCoroutines();
         redOverlay.gameObject.SetActive(false);
         textMeshPro.gameObject.SetActive(false);
     }
-
 }

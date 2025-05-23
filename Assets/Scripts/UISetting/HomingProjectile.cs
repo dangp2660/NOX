@@ -20,10 +20,14 @@ public class HomingProjectile : MonoBehaviour
 
     void Start()
     {
+        if (rb != null)
+        {
+            rb.velocity = transform.right * speed;
+        }
 
-        rb.velocity = transform.right * speed;
         Destroy(gameObject, lifetime);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

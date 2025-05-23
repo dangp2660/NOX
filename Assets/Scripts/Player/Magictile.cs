@@ -40,8 +40,12 @@ public class Magictile : MonoBehaviour
         hasHit = true;
         if(hasHit)
         {
-            Damageable damageable =  collision.GetComponent<Damageable>();
+            Damageable damageable = collision.GetComponent<Damageable>();
+            if (damageable == null) return; // tránh lỗi null
+
             if (damageable.isInvincible) return;
+            damageable.TakeDamage(dame, 1);
+
             damageable.TakeDamage(dame, 1);
         }
         

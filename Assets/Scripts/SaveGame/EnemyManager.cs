@@ -18,8 +18,11 @@ public class EnemyManager : MonoBehaviour
     }
     public void addEnemy(Enemy enemy)
     {
-        allEnemies.Add(enemy);
-        Debug.Log(enemy);
+        if (enemy != null)
+        {
+            allEnemies.Add(enemy);
+            Debug.Log(enemy);
+        }
     }
 
     public void respawnEnemy(string checkPointID)
@@ -39,5 +42,5 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
-
+    
 }
