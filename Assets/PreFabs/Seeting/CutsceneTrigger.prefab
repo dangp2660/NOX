@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cutscene: {fileID: 0}
-  timeCutscene: 5.1
   isActive: 0
   Player: {fileID: 0}
   PlayerManager: {fileID: 0}
   cameraBattle: {fileID: 0}
+  currentCam: {fileID: 0}
 --- !u!61 &826382674222221613
 BoxCollider2D:
   m_ObjectHideFlags: 0

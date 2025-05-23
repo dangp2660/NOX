@@ -265,8 +265,8 @@ MonoBehaviour:
   boolName: canMove
   updateOnState: 1
   updateOnStateMachine: 0
-  valueOnEnter: 0
-  valueOnExit: 1
+  valueOnEnter: 1
+  valueOnExit: 0
 --- !u!1107 &5048529397367491412
 AnimatorStateMachine:
   serializedVersion: 6

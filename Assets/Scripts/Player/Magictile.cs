@@ -18,6 +18,10 @@ public class Magictile : MonoBehaviour
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
     }
+    private void Update()
+    {
+        Destroy(gameObject, 5f);
+    }
 
     private void Start()
     {
@@ -27,6 +31,10 @@ public class Magictile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.CompareTag("Ground"))
+        {
+            OnDestroy();
+        }
         Debug.Log(collision.GetType());
         if (hasHit) return; // tránh trúng nhiều lần
         hasHit = true;

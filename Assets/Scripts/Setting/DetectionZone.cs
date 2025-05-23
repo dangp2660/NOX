@@ -47,6 +47,7 @@ public class DetectionZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            StartCoroutine(Delay());
             RemoveCollider(collision);
         }
     }
@@ -64,6 +65,10 @@ public class DetectionZone : MonoBehaviour
                 noCollidersRemain.Invoke();
             }
         }
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     // Hàm để thêm collider từ bên ngoài

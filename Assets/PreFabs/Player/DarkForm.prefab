@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8540780195287511189
 Transform:
   m_ObjectHideFlags: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
   allowDoubleJump: 1
   lowJumpMultiplier: 2
   canDash: 1
+  DashCoolDown: {fileID: 0}
 --- !u!114 &9204941724775531024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +538,8 @@ MonoBehaviour:
   changingSpell: {fileID: 6822439260541536147, guid: 841bf23cb8c0b594fb35b5b3765300e8, type: 3}
   changingPosition: {fileID: 1706763450681541340}
   coolDown: 3
+  coolDownTime: {fileID: 0}
+  MeleeCoolDown: {fileID: 0}
   cooldownTimer: 0
 --- !u!114 &2661210271584348040
 MonoBehaviour:

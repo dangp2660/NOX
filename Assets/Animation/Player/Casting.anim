@@ -79,6 +79,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: attackSlashSFX
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: e90d3ef9b660ee343a5a61f58b4b774d, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.3
     functionName: firePrefabs
     data: 

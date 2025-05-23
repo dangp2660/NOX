@@ -67,7 +67,7 @@ public class CutsceneTrigger : MonoBehaviour
             signalDirector.Play(); // ✅ Phát Timeline có SignalEmitter → Trigger UnityEvent
         }
 
-        this.GetComponent<Collider2D>().enabled = false;
+        this.gameObject.SetActive(false );
         
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class BlockMonster : Enemy 
 { 
     [Header("BlockMonster Settings")]
-    [SerializeField] private GameObject Boss;
+    [SerializeField] private Damageable Boss;
     [SerializeField] private float blockDuration = 5f; 
     [SerializeField] private float blockCooldown = 8f; 
     [SerializeField] private float directionBlockRange = 3f; 
@@ -52,10 +52,27 @@ public class BlockMonster : Enemy
  
     protected override void Update() 
     { 
-        base.Update(); 
- 
+
+        base.Update();
+
         if (player == null) return;
-        
+
+        if (Boss == null)
+        {
+            Debug.LogWarning("BlockMonster: Boss reference is null!");
+           
+            return;
+        }
+
+        Debug.Log($"{gameObject.name} Checking Boss IsAlive: {Boss.IsAlive}");
+
+        if (!Boss.IsAlive)
+        {
+            Debug.Log($"{gameObject.name} Destroyed because Boss is dead.");
+            damageable.IsAlive = false;
+            return;
+        }
+
         // Check if monster is dead
         if (damageable != null && !damageable.IsAlive) return;
         

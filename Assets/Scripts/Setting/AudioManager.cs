@@ -14,7 +14,14 @@
         public AudioClip checkPoint;
         public AudioClip reSpawn;
         public AudioClip breakdoor;
- 
+        public AudioClip dash;
+        public AudioClip enemyDie;
+        public AudioClip run;
+        public AudioClip jump;
+      
+       
+
+
         public static AudioManager instance;
         private void Awake()
         {

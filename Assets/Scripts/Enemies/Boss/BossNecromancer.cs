@@ -18,14 +18,12 @@ public class NecromancerBoss : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject fireColumnPrefab;
     [SerializeField] private GameObject meteorPrefab;
-    [SerializeField] private GameObject[] summonMinionsPrefabs;
 
     [Header("Skill Cooldowns")]
     [SerializeField] private float laserInterval = 20f;
     [SerializeField] private float laserDuration = 3f;
     [SerializeField] private float fireColumnInterval = 10f;
     [SerializeField] private float meteorInterval = 12f;
-    [SerializeField] private float summonInterval = 15f;
     [SerializeField] private float buffInterval = 15f;
 
     [Header("Movement")]
@@ -40,7 +38,8 @@ public class NecromancerBoss : MonoBehaviour
     private Coroutine phaseOneAttackCoroutine;
     private Damageable damageable;
     private Animator animator;
-
+    private Vector3 initialPosition; // Vị trí ban đầu của boss
+    [SerializeField] private GameObject CutsceneEnd;
     void Start()
     {
         Arena.SetActive(true);
@@ -48,23 +47,70 @@ public class NecromancerBoss : MonoBehaviour
         spriteRenderer.flipX = false;
         damageable = GetComponent<Damageable>();
         animator = GetComponent<Animator>();
+
+        initialPosition = transform.position; // Lưu lại vị trí ban đầu
+
         StartCoroutine(MovementCycle());
 
-        // Phase 1 attack
         phaseOneAttackCoroutine = StartCoroutine(PhaseOneAttackRoutine());
     }
 
     void Update()
     {
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        GameObject PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        if (Player != null && !Player.GetComponent<Damageable>().IsAlive)
+        {
+            // Player chết -> reset boss về vị trí ban đầu
+            ResetBossPosition();
+        }
+
         if (!damageable.IsAlive)
         {
+            
+            UIOpen UI = GameObject.FindGameObjectWithTag("UI").GetComponent<UIOpen>();
             animator.SetBool(AnimationStringList.isAlive, false);
+            Player.GetComponent<PlayerController>().DisableSignal();
+            PlayerManager.GetComponent<PlayerSwitch>().DisableSignal();
+            UI.gameObject.SetActive(false);
             Arena.SetActive(false);
+            CutsceneEnd.SetActive(true);
+            this.enabled = false;
         }
+        else
+        {
             FacePlayer();
-        CheckPhaseChange();
+            CheckPhaseChange();
+        }
     }
 
+    private void ResetBossPosition()
+    {
+        // Dừng tất cả coroutine tấn công, di chuyển
+        if (phaseOneAttackCoroutine != null)
+        {
+            StopCoroutine(phaseOneAttackCoroutine);
+            phaseOneAttackCoroutine = null;
+        }
+
+        StopAllCoroutines(); // Dừng các coroutine khác như MovementCycle, PhaseTwoSkillRoutine, SummonMinions...
+
+        // Đặt boss về vị trí ban đầu
+        transform.position = initialPosition;
+
+        // Reset trạng thái boss
+        currentWaypoint = 0;
+        isMoving = true;
+        currentPhase = BossPhase.Phase1;
+        phase2Started = false;
+
+        // Reset máu boss nếu muốn (tuỳ bạn)
+        damageable.CurrentHealth = damageable.getMaxHealth();
+
+        // Bật lại coroutine tấn công và di chuyển cho boss
+        phaseOneAttackCoroutine = StartCoroutine(PhaseOneAttackRoutine());
+        StartCoroutine(MovementCycle());
+    }
     private void FacePlayer()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -77,7 +123,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator MovementCycle()
     {
-        while (true)
+        while (damageable.IsAlive)
         {
             if (isMoving)
             {
@@ -146,18 +192,20 @@ public class NecromancerBoss : MonoBehaviour
 
     private void CheckPhaseChange()
     {
-        if (!phase2Started && damageable.CurrentHealth <= damageable.getMaxHealth() / 2)
+        if (damageable.IsAlive)
         {
-            phase2Started = true;
-            currentPhase = BossPhase.Phase2;
+            if (!phase2Started && damageable.CurrentHealth <= damageable.getMaxHealth() / 2)
+            {
+                phase2Started = true;
+                currentPhase = BossPhase.Phase2;
 
-            if (phaseOneAttackCoroutine != null)
-                StopCoroutine(phaseOneAttackCoroutine);
+                if (phaseOneAttackCoroutine != null)
+                    StopCoroutine(phaseOneAttackCoroutine);
 
-            StartCoroutine(PhaseTwoSkillRoutine());
-            StartCoroutine(SummonMinions());
-            StartCoroutine(UseMeteor());
+                StartCoroutine(PhaseTwoSkillRoutine());
+                StartCoroutine(UseMeteor());
 
+            }
         }
     }
 
@@ -229,19 +277,7 @@ public class NecromancerBoss : MonoBehaviour
     }
 
 
-    private IEnumerator SummonMinions()
-    {
-        while (damageable.IsAlive)
-        {
-            Debug.Log("Use Summon");
-            animator.SetTrigger("AttackSpell2");
-            foreach (var minion in summonMinionsPrefabs)
-            {
-                Instantiate(minion, summonPos.position, Quaternion.identity);
-            }
-            yield return new WaitForSeconds(summonInterval);
-        }
-    }
+    
 
     private IEnumerator ApplyBuff()
     {

@@ -16,6 +16,7 @@ TagManager:
   - SpawnPoint
   - Door
   - OneWay
+  - UI
   layers:
   - Default
   - TransparentFX

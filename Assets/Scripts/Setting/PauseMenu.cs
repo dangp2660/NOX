@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     {
         // Tắt PauseMenu trước khi chuyển scene
         pauseMenuUI.SetActive(false);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
 
     public void Setting()

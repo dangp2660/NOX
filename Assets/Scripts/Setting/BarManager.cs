@@ -19,15 +19,7 @@ public class BarManager : MonoBehaviour
             return;
         }
 
-        // Ẩn bar nếu ở màn hình menu
-        if (currentScene.name == "Menu" || currentScene.buildIndex == 0)
-        {
-            bar.SetActive(false);
-        }
-        else
-        {
-            bar.SetActive(true);
-        }
+
     }
     private void Awake()
     {

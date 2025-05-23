@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        AudioManager.instance.playSFX(AudioManager.instance.jump);
         movement.OnJump(context);
     }
 
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        AudioManager.instance.playSFX(AudioManager.instance.dash);
         movement.OnDash(context);
     }
     public void DeathCheat(InputAction.CallbackContext context)

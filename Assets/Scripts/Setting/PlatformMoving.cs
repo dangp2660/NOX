@@ -73,6 +73,7 @@ public class PlatformMoving : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             collision.transform.parent = null;
+            player.setIsPlatform(false);
         }
     }
     private void directioCaculate()
