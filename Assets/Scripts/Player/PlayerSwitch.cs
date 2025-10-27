@@ -40,12 +40,20 @@ public class PlayerSwitch : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
-
+        // Use the scene's Cinemachine Virtual Camera, not MainCamera
+        camera = FindObjectOfType<CinemachineVirtualCamera>();
+        if (camera == null)
+        {
+            Debug.LogWarning("No CinemachineVirtualCamera found in scene.");
+        }
     }
     private void LateUpdate()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
+        // Reacquire if camera was not found yet or got destroyed
+        if (camera == null)
+        {
+            camera = FindObjectOfType<CinemachineVirtualCamera>();
+        }
     }
     private void OnDestroy()
     {
@@ -106,7 +114,10 @@ public class PlayerSwitch : MonoBehaviour
             darkHealth.healthCopy(defaultHealth);
             darkEnergy.CopyDarkEnergy(defaultEnergy);
 
-            camera.Follow = darkForm.transform;
+            if (camera != null)
+            {
+                camera.Follow = darkForm.transform;
+            }
         }
 
     }
@@ -189,7 +200,10 @@ public class PlayerSwitch : MonoBehaviour
                 defaultHealth.healthCopy(darkHealth);
                 defaultEnergy.CopyDarkEnergy(darkEnergy);
 
-                camera.Follow = defaultForm.transform;
+                if (camera != null)
+                {
+                    camera.Follow = defaultForm.transform;
+                }
             }
         }
         else

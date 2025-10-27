@@ -58,7 +58,26 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        AudioManager.instance.playSFX(AudioManager.instance.dash);
+        var audio = AudioManager.instance;
+        if (audio != null && audio.dash != null)
+        {
+            audio.playSFX(audio.dash);
+        }
+        else if (audio == null)
+        {
+            Debug.LogWarning("AudioManager.instance is null; dash SFX skipped.");
+        }
+
+        if (movement == null)
+        {
+            movement = GetComponent<PlayerMovement>();
+            if (movement == null)
+            {
+                Debug.LogError("PlayerMovement missing on PlayerController GameObject; cannot dash.");
+                return;
+            }
+        }
+
         movement.OnDash(context);
     }
     public void DeathCheat(InputAction.CallbackContext context)

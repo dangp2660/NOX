@@ -13,12 +13,25 @@ public class CutsceneTrigger : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cameraBattle;
     [SerializeField] private CinemachineVirtualCamera currentCam;
 
+    private GameObject UI;
 
 
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+    }
+    private void Start()
+    {
+        if(Player ==  null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
+        if(PlayerManager == null)
+        {
+            PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        }
+        UI = GameObject.FindGameObjectWithTag("UI");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,6 +50,7 @@ public class CutsceneTrigger : MonoBehaviour
         isActive = true;
         Player.GetComponent<PlayerInput>().enabled = false;
         PlayerManager.GetComponent<PlayerSwitch>().enabled = false;
+        UI.SetActive(false);
         if (Cutscene != null)
         {
             Cutscene.SetActive(true);
@@ -44,7 +58,6 @@ public class CutsceneTrigger : MonoBehaviour
 
     }
 
-    // ✅ Gọi hàm này từ cuối Timeline / AnimationEvent / Trigger tùy bạn
     public void EndCutscene(PlayableDirector signalDirector)
     {
         if (!isActive) return;
@@ -64,10 +77,9 @@ public class CutsceneTrigger : MonoBehaviour
         if (signalDirector != null)
         {
             signalDirector.gameObject.SetActive(true);
-            signalDirector.Play(); // ✅ Phát Timeline có SignalEmitter → Trigger UnityEvent
+            signalDirector.Play(); 
         }
-
+        UI.SetActive(true);
         this.gameObject.SetActive(false );
-        
     }
 }

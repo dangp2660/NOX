@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class HomingProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
@@ -40,8 +42,19 @@ public class HomingProjectile : MonoBehaviour
             hasHit = true;
         }
 
-        rb.velocity = Vector2.zero;
-        col.enabled = false;
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        else
+        {
+            Debug.LogWarning($"{name} missing Rigidbody2D; velocity reset skipped.");
+        }
+
+        if (col != null)
+        {
+            col.enabled = false;
+        }
 
         if (anim != null)
         {

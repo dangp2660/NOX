@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public enum BossPhase { Phase1, Phase2 }
 
@@ -18,6 +19,7 @@ public class NecromancerBoss : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private GameObject fireColumnPrefab;
     [SerializeField] private GameObject meteorPrefab;
+    [SerializeField] private CutsceneTriggerEndGame endCutscene;  // assign in Inspector
 
     [Header("Skill Cooldowns")]
     [SerializeField] private float laserInterval = 20f;
@@ -61,21 +63,28 @@ public class NecromancerBoss : MonoBehaviour
         GameObject PlayerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         if (Player != null && !Player.GetComponent<Damageable>().IsAlive)
         {
-            // Player chết -> reset boss về vị trí ban đầu
             ResetBossPosition();
         }
 
         if (!damageable.IsAlive)
         {
-            
-            UIOpen UI = GameObject.FindGameObjectWithTag("UI").GetComponent<UIOpen>();
-            animator.SetBool(AnimationStringList.isAlive, false);
-            Player.GetComponent<PlayerController>().DisableSignal();
-            PlayerManager.GetComponent<PlayerSwitch>().DisableSignal();
-            UI.gameObject.SetActive(false);
-            Arena.SetActive(false);
-            CutsceneEnd.SetActive(true);
-            this.enabled = false;
+            if (endCutscene != null)
+            {
+                endCutscene.StartCutscene();
+            }
+            else if (CutsceneTriggerEndGame.Instance != null)
+            {
+                CutsceneTriggerEndGame.Instance.StartCutscene();
+            }
+            else
+            {
+                var all = Resources.FindObjectsOfTypeAll<CutsceneTriggerEndGame>();
+                if (all != null && all.Length > 0)
+                {
+                    all[0].gameObject.SetActive(true);
+                    all[0].StartCutscene();
+                }
+            }
         }
         else
         {
@@ -211,6 +220,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator PhaseTwoSkillRoutine()
     {
+
         while (damageable.IsAlive)
         {
             yield return StartCoroutine(UseLaser());
