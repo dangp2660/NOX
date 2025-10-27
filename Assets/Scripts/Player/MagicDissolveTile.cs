@@ -50,21 +50,21 @@ public class MagicDissolveTile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("OneWay")) return;
+        if (collision.CompareTag("OneWay")) return;
         if (hasHit) return;
         hasHit = true;
 
         Damageable damageable = collision.GetComponent<Damageable>();
+        if (damageable == null) damageable = collision.GetComponentInParent<Damageable>();
+        if (damageable == null) damageable = collision.GetComponentInChildren<Damageable>();
+
         if (damageable != null && !damageable.isInvincible)
         {
             damageable.TakeDamage(damage, 1);
         }
 
-        // Dừng di chuyển & va chạm
         rb.velocity = Vector2.zero;
         col.enabled = false;
-
-        // Bắt đầu dissolve
         StartCoroutine(DissolveAndDestroy());
     }
 

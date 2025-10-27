@@ -132,7 +132,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator MovementCycle()
     {
-        while (damageable.IsAlive)
+        while (damageable.IsAlive && enabled)
         {
             if (isMoving)
             {
@@ -176,6 +176,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private void Attack()
     {
+        if (!enabled || !damageable.IsAlive) return;
         GameObject[] spells = currentPhase == BossPhase.Phase1 ? phaseOneSpells : null;
         if (spells != null && spells.Length > 0)
         {
@@ -191,7 +192,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator PhaseOneAttackRoutine()
     {
-        while (damageable.IsAlive)
+        while (damageable.IsAlive && enabled)
         {
             yield return new WaitForSeconds(phaseOneAttackInterval);
             Attack();
@@ -221,7 +222,7 @@ public class NecromancerBoss : MonoBehaviour
     private IEnumerator PhaseTwoSkillRoutine()
     {
 
-        while (damageable.IsAlive)
+        while (damageable.IsAlive && enabled)
         {
             yield return StartCoroutine(UseLaser());
             yield return new WaitForSeconds(laserInterval);
@@ -236,10 +237,12 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator UseLaser()
     {
+        if (!enabled || !damageable.IsAlive) yield break;
         Debug.Log("Use Laser 5 Shots");
 
         for (int i = 0; i < 5; i++)
         {
+            if (!enabled || !damageable.IsAlive) yield break;
             animator.SetTrigger("AttackSpell2");
             Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             ShootProjectileAtPlayer(laserPrefab, pos);
@@ -252,8 +255,10 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator UseFireColumn()
     {
+        if (!enabled || !damageable.IsAlive) yield break;
         for (int i = 0; i < 3; i++)
         {
+            if (!enabled || !damageable.IsAlive) yield break;
             Debug.Log("Use fire column");
             animator.SetTrigger("AttackSpell");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -267,6 +272,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator UseMeteor()
     {
+        if (!enabled || !damageable.IsAlive) yield break;
         while (damageable.IsAlive)
         {
             for (int i = 0; i < 3; i++)
@@ -291,6 +297,7 @@ public class NecromancerBoss : MonoBehaviour
 
     private IEnumerator ApplyBuff()
     {
+        if (!enabled || !damageable.IsAlive) yield break;
         if(damageable.IsAlive)
         {
             animator.SetTrigger("Buff");
@@ -304,8 +311,8 @@ public class NecromancerBoss : MonoBehaviour
     {
         this.enabled = true;
     }
-    public void OnDisable()
+    private void OnDisable()
     {
-        this.enabled = false;
+        StopAllCoroutines();
     }
 }

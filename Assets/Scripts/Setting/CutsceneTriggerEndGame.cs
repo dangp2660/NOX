@@ -37,12 +37,21 @@ public class CutsceneTriggerEndGame : MonoBehaviour
     public void StartCutscene()
     {
         UI = GameObject.FindGameObjectWithTag("UI");
+        UI.SetActive(false);
         if (isActive) return;
         isActive = true;
-        if (UI != null) UI.SetActive(false);
+
         if (currentCam != null) currentCam.gameObject.SetActive(false);
 
-        if (Boss != null) Boss.GetComponent<NecromancerBoss>().enabled = false;
+        if (Boss != null)
+        {
+            var necro = Boss.GetComponent<NecromancerBoss>();
+            if (necro != null)
+            {
+                necro.StopAllCoroutines();
+                necro.enabled = false;
+            }
+        }
 
         if (Player != null) Player.GetComponent<PlayerInput>().enabled = false;
         if (PlayerManager != null) PlayerManager.GetComponent<PlayerSwitch>().enabled = false;

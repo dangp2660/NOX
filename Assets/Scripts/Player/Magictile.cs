@@ -31,34 +31,30 @@ public class Magictile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground"))
         {
             OnDestroy();
+            return;
         }
-        Debug.Log(collision.GetType());
-        if (hasHit) return; // tránh trúng nhiều lần
+        if (hasHit) return;
         hasHit = true;
-        if(hasHit)
+
+        Damageable damageable = collision.GetComponent<Damageable>();
+        if (damageable == null) damageable = collision.GetComponentInParent<Damageable>();
+        if (damageable == null) damageable = collision.GetComponentInChildren<Damageable>();
+
+        if (damageable != null && !damageable.isInvincible)
         {
-            Damageable damageable = collision.GetComponent<Damageable>();
-            if (damageable == null) return; // tránh lỗi null
-
-            if (damageable.isInvincible) return;
-            damageable.TakeDamage(dame, 1);
-
             damageable.TakeDamage(dame, 1);
         }
-        
-        // Dừng chuyển động và va chạm
+
         rb.velocity = Vector2.zero;
         col.enabled = false;
 
-        // Play animation Impact
         if (anim != null)
         {
             anim.SetTrigger(AnimationStringList.Explode);
         }
-           
     }
     public void onStop()
     {
